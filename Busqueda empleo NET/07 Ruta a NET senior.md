@@ -4,6 +4,7 @@ fuente: https://claude.ai/code/artifact/c2dac5ec-cad9-4fd6-b607-ff5c7e9544a2
 transcrito: 2026-09-30
 ---
 > Transcripción del artifact en Claude Docs. Versión en PDF: [[07 Ruta a NET senior.pdf]] · Original: https://claude.ai/code/artifact/c2dac5ec-cad9-4fd6-b607-ff5c7e9544a2
+> Relacionadas: empieza al terminar [[03 Plan para huir de DiSi]] · parte del perfil y las brechas de [[02 Contexto y perfil]] · el tema 6 (Seguridad, login con Entra ID) se apoya en [[06 Clase OAuth 2.0]] · decisiones en [[01 Bitacora]]
 
 # Ruta a .NET senior
 

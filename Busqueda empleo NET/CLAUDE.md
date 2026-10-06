@@ -26,16 +26,16 @@ Empezó en una sesión de Cowork (30 sep – 5 oct 2026) y se trasladó a este r
 
 | Archivo | Qué es | Cómo se mantiene |
 | --- | --- | --- |
-| `00 Indice.md` | Árbol, reglas y datos únicos | A mano |
-| `01 Bitacora.md` | Decisiones y pendientes | A mano, en cada cambio |
-| `02 Contexto y perfil.md` | Punto de partida, proyectos en DiSí, brechas, objetivo | A mano |
-| `03 Plan para huir de DiSi.md` / `.pdf` | Plan de 12 semanas | Original en Claude Docs (ver abajo) |
-| `04 Calendario dia por dia.md` / `.pdf` | Qué hacer cada día | **Generado**: editar `calendario_datos.py` y correr `calendario_render.py` |
-| `05 Arbol de fundamentos.md` / `.pdf` | 8 niveles (0 a 7) antes de OAuth | Original en Claude Docs |
-| `06 Clase OAuth 2.0.md` / `.pdf` | Clase completa de OAuth | Original en Claude Docs |
-| `07 Ruta a NET senior.md` / `.pdf` | 12 temas después del plan | Original en Claude Docs |
-| `08 Glosario.md` | Términos de Alex | Lo llena Alex |
-| `09 Registro de aplicaciones.md` | Vacantes y procesos | Lo llena Alex |
+| [[00 Indice]] | Árbol, reglas y datos únicos | A mano |
+| [[01 Bitacora]] | Decisiones y pendientes | A mano, en cada cambio |
+| [[02 Contexto y perfil]] | Punto de partida, proyectos en DiSí, brechas, objetivo | A mano |
+| [[03 Plan para huir de DiSi]] / `.pdf` | Plan de 12 semanas | Original en Claude Docs (ver abajo) |
+| [[04 Calendario dia por dia]] / `.pdf` | Qué hacer cada día | **Generado**: editar `calendario_datos.py` y correr `calendario_render.py` |
+| [[05 Arbol de fundamentos]] / `.pdf` | 8 niveles (0 a 7) antes de OAuth | Original en Claude Docs |
+| [[06 Clase OAuth 2.0]] / `.pdf` | Clase completa de OAuth | Original en Claude Docs |
+| [[07 Ruta a NET senior]] / `.pdf` | 12 temas después del plan | Original en Claude Docs |
+| [[08 Glosario]] | Términos de Alex | Lo llena Alex |
+| [[09 Registro de aplicaciones]] | Vacantes y procesos | Lo llena Alex |
 | `calendario_datos.py` | Contenido día por día del calendario | Fuente de verdad del calendario |
 | `calendario_render.py` | Genera el PDF y el `.md` del calendario | `pip install reportlab` y `python calendario_render.py` |
 

@@ -27,7 +27,7 @@ En 12 semanas pasas de entregar con IA a poder explicar y escribir tú mismo lo 
 
 ## Vista general: 12 semanas, 3 fases
 
-Empieza el lunes 5 de octubre y termina el 27 de diciembre de 2026. La teoría sigue el [árbol de fundamentos](https://claude.ai/code/artifact/06402dff-f253-4fb4-bfcd-5a113e910c97) y el código lo aplica en la misma semana o la siguiente.
+Empieza el lunes 5 de octubre y termina el 27 de diciembre de 2026. La teoría sigue el [[05 Arbol de fundamentos|árbol de fundamentos]] y el código lo aplica en la misma semana o la siguiente.
 
 | Sem. | Inicia | Teoría (sáb. + lun.) | Código en C# (mar.–jue.) | Entregable |
 | --- | --- | --- | --- | --- |

@@ -4,6 +4,7 @@ fuente: https://claude.ai/code/artifact/4e829660-4189-4331-89b4-d2fae7c5a36b
 transcrito: 2026-09-30
 ---
 > Transcripción del artifact en Claude Docs. Versión en PDF: [[06 Clase OAuth 2.0.pdf]] · Original: https://claude.ai/code/artifact/4e829660-4189-4331-89b4-d2fae7c5a36b
+> Relacionadas: es la punta del [[05 Arbol de fundamentos]] (nivel 7 antes de esta clase) · se estudia en la semana 8 de [[03 Plan para huir de DiSi]] · se practica en el repo `GcalPlan` ([[04 Calendario dia por dia]]) · términos nuevos a [[08 Glosario]]
 
 # Clase: OAuth 2.0 desde cero
 
