@@ -1,10 +1,13 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-10-05
+actualizado: 2026-10-06
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-10-06
+- Regla nueva, la más estricta del proyecto: la memoria es un grafo. Cada actualización se escribe en la nota que le corresponde y se enlaza con `[[ ]]` a sus notas relacionadas; nunca se concentra en un solo `.md`. Esta bitácora solo registra el cambio y enlaza al nodo. Reglas en [[00 Indice]] y [[CLAUDE]].
 
 ## 2026-10-05
 - Traslado del proyecto de Cowork a un repositorio de Git para trabajarlo en sesiones de Claude Code. Se agregaron [[CLAUDE]] (reglas para Claude), README, .gitignore y el generador del calendario (`calendario_datos.py` + `calendario_render.py`). Desde ahora, el repositorio es la fuente de verdad.

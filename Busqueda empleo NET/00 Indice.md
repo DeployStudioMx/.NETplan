@@ -1,10 +1,12 @@
 ---
 tags: [busqueda-empleo, indice]
-actualizado: 2026-10-05
+actualizado: 2026-10-06
 ---
 # Búsqueda de empleo .NET — Índice
 
 Proyecto para conseguir un puesto como desarrollador .NET mid-senior y llegar a senior, reforzando fundamentos técnicos en paralelo. Instrucciones para Claude: [[CLAUDE]].
+
+**Regla más estricta — la memoria es un grafo:** la memoria del proyecto es esta bóveda completa; cada nota es un nodo y cada `[[enlace]]` una arista. Cada dato se guarda en la nota que le corresponde según la tabla de abajo y se enlaza a las notas relacionadas. Nunca se concentra la memoria en un solo `.md` (ni en [[01 Bitacora]], ni en [[CLAUDE]], ni en un resumen nuevo). Un dato sin nodo se vuelve una nota nueva, enlazada desde este índice y desde al menos una nota relacionada.
 
 **Regla de estructura:** todo vive en la raíz, sin subcarpetas. Cada documento existe **una sola vez** como nota `.md`; si viene de un artifact de Claude o del generador del calendario, tiene además **un solo** `.pdf` con el mismo nombre. Las notas 08 y 09 son tuyas y no llevan PDF. Las imágenes llevan el número de la nota que las usa.
 
@@ -38,7 +40,7 @@ Busqueda empleo NET/
 
 | Cuando pasa esto… | Se modifican estos archivos (todos, en el mismo momento) |
 | --- | --- |
-| Cualquier cambio en la memoria del proyecto | `01 Bitacora` (entrada fechada) + el archivo afectado de esta tabla |
+| Cualquier cambio en la memoria del proyecto | El dato va **en su nodo** (el archivo afectado de esta tabla), enlazado con `[[ ]]` a sus notas relacionadas; `01 Bitacora` solo lleva una entrada fechada que enlaza a ese nodo. Nunca todo en un solo `.md` |
 | Cambia un dato de perfil (salario, experiencia, CV, brechas) | `02 Contexto y perfil` + `01 Bitacora` |
 | Cambia el plan | `03 Plan para huir de DiSi.md` + `.pdf` (y el original en Claude Docs si la sesión lo permite); si cambian días, horas o tareas también el calendario; + `01 Bitacora` |
 | Cambia el calendario (días, horas, tareas) | Editar `calendario_datos.py` y correr `python calendario_render.py` (regenera `04` `.md` + `.pdf`); si cambia el resumen semanal, `03 Plan` `.md` + `.pdf`; + `01 Bitacora` |
