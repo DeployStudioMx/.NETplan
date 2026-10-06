@@ -211,7 +211,7 @@ def enlaces(t):
     return t
 L = ["---", "tags: [busqueda-empleo, calendario]", f"actualizado: {dt.date.today().isoformat()}", "---",
      "> Generado por calendario_render.py desde calendario_datos.py. No editar a mano: cambia los datos y vuelve a generar.",
-     "> Versión en PDF: [[04 Calendario dia por dia.pdf]] · Resumen semanal en [[03 Plan para huir de DiSi]]", "",
+     "> Versión en PDF: [[04 Calendario dia por dia.pdf]] · Resumen semanal en [[03 Plan para huir de DiSi]] · Vista interactiva (artifact): https://claude.ai/artifact/737Dvitbv6Eds9XijvuBJA", "",
      "# Calendario del plan .NET, día por día", "",
      "Horario: lunes teoría (1.5 h) · martes a jueves código C# (1.5 h) · viernes búsqueda (1 h) · sábado teoría a fondo (4 h) · domingo repos de GitHub + revisión semanal (45 min). Total: unas 12 horas por semana (11 h 45 min).", ""]
 MES3 = [m[:3] for m in MESES]

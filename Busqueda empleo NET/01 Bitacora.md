@@ -9,6 +9,7 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 ## 2026-10-06
 - Regla nueva, la más estricta del proyecto: la memoria es un grafo. Cada actualización se escribe en la nota que le corresponde y se enlaza con `[[ ]]` a sus notas relacionadas; nunca se concentra en un solo `.md`. Esta bitácora solo registra el cambio y enlaza al nodo. Reglas en [[00 Indice]] y [[CLAUDE]].
 - Reforzado el grafo: [[06 Clase OAuth 2.0]] y [[07 Ruta a NET senior]] ahora enlazan a sus notas relacionadas, [[03 Plan para huir de DiSi]] enlaza al [[05 Arbol de fundamentos]] con `[[ ]]` en lugar de la URL de Claude Docs, y la tabla de estructura de [[CLAUDE]] usa enlaces. Solo cambió la navegación de las notas; el texto de los PDF sigue igual, así que no se regeneraron.
+- Publicada una vista interactiva del calendario como artifact (https://claude.ai/artifact/737Dvitbv6Eds9XijvuBJA), generada desde `calendario_datos.py`. Es de solo lectura: las casillas se siguen marcando en [[04 Calendario dia por dia]], que ahora enlaza al artifact en su encabezado. El PDF no cambió.
 
 ## 2026-10-05
 - Traslado del proyecto de Cowork a un repositorio de Git para trabajarlo en sesiones de Claude Code. Se agregaron [[CLAUDE]] (reglas para Claude), README, .gitignore y el generador del calendario (`calendario_datos.py` + `calendario_render.py`). Desde ahora, el repositorio es la fuente de verdad.

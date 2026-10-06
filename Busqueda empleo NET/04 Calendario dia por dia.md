@@ -1,9 +1,9 @@
 ---
 tags: [busqueda-empleo, calendario]
-actualizado: 2026-10-05
+actualizado: 2026-10-06
 ---
 > Generado por calendario_render.py desde calendario_datos.py. No editar a mano: cambia los datos y vuelve a generar.
-> Versión en PDF: [[04 Calendario dia por dia.pdf]] · Resumen semanal en [[03 Plan para huir de DiSi]]
+> Versión en PDF: [[04 Calendario dia por dia.pdf]] · Resumen semanal en [[03 Plan para huir de DiSi]] · Vista interactiva (artifact): https://claude.ai/artifact/737Dvitbv6Eds9XijvuBJA
 
 # Calendario del plan .NET, día por día
 
