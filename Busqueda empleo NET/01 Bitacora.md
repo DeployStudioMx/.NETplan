@@ -7,7 +7,7 @@ actualizado: 2026-10-09
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-09
-- Sincronización de la bóveda con el celular vía Obsidian Git. Agregado un `.gitignore` en la raíz del repositorio para que la configuración `.obsidian/` de cada dispositivo no se suba. Pasos en [[00 Indice]] no cambian; el repo sigue siendo la fuente de verdad ([[CLAUDE]]).
+- Sincronización de la bóveda con el celular vía Obsidian Git. Agregado un `.gitignore` en la raíz del repositorio para que la configuración `.obsidian/` de cada dispositivo no se suba. El repositorio sigue siendo la fuente de verdad ([[CLAUDE]], [[00 Indice]]).
 
 ## 2026-10-06
 - Regla nueva, la más estricta del proyecto: la memoria es un grafo. Cada actualización se escribe en la nota que le corresponde y se enlaza con `[[ ]]` a sus notas relacionadas; nunca se concentra en un solo `.md`. Esta bitácora solo registra el cambio y enlaza al nodo. Reglas en [[00 Indice]] y [[CLAUDE]].
