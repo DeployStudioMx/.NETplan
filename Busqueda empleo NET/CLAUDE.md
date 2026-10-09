@@ -16,7 +16,7 @@ Empezó en una sesión de Cowork (30 sep – 5 oct 2026) y se trasladó a este r
 
 0. **LA REGLA MÁS ESTRICTA: la memoria es un grafo.** La memoria del proyecto es la bóveda completa: cada nota es un nodo y cada `[[enlace]]` es una arista. Al actualizar la memoria, cada dato se escribe en **la nota que le corresponde** según la tabla "Qué se actualiza y cuándo" de `00 Indice.md`, y se conecta con `[[enlaces]]` a las notas relacionadas. **Nunca** se concentra la memoria en un solo `.md`: ni en la bitácora, ni en este archivo, ni en una nota resumen nueva. Si un dato no tiene nodo, se crea una nota nueva (siguiente número libre) enlazada desde el índice y desde al menos una nota relacionada; no puede quedar huérfana. Esta regla está por encima de todas las demás.
 1. **`00 Indice.md` manda.** Contiene el árbol de archivos, la tabla "qué se actualiza y cuándo" y los **datos únicos del proyecto** (horario, fechas, niveles, IDE, repos, salario). Antes de cualquier cambio, consulta esa tabla y actualiza **todos** los archivos que indica, en el mismo commit.
-2. **Todo en la raíz, sin subcarpetas ni duplicados.** Cada documento existe una sola vez como `.md`; si viene de Claude Docs o del generador del calendario, tiene además un solo `.pdf` con el mismo nombre. Imágenes con el número de su nota (`05 diagrama arbol.png`). Nunca crear copias resumen.
+2. **Todo en la raíz, sin subcarpetas ni duplicados.** Cada documento existe una sola vez como `.md`; si viene de Claude Docs, del generador del calendario o es una clase (`clase_pdf.py`), tiene además un solo `.pdf` con el mismo nombre. Imágenes con el número de su nota (`05 diagrama arbol.png`). Nunca crear copias resumen.
 3. **Bitácora en cada cambio.** Toda decisión o cambio relevante se anota en `01 Bitacora.md`, con fecha, lo más reciente arriba. La bitácora solo registra *qué* cambió y enlaza con `[[ ]]` a la nota donde vive el dato; el dato en sí va en su propio nodo (regla 0).
 4. **Coherencia total.** Si cambia un dato único (por ejemplo, las horas por semana), se cambia en todos los archivos, incluidos los PDF. Verifica al final con una búsqueda de términos viejos y de `[[enlaces]]` rotos.
 5. **Idioma:** español, tono directo y cálido.
@@ -37,8 +37,10 @@ Empezó en una sesión de Cowork (30 sep – 5 oct 2026) y se trasladó a este r
 | [[08 Glosario]] | Términos de Alex | Lo llena Alex |
 | [[09 Registro de aplicaciones]] | Vacantes y procesos | Lo llena Alex |
 | [[10 Teoria de CSharp]] | Teoría de C# y .NET para los días de código (20 min de lectura al inicio) | A mano; la sección de cada semana se escribe **antes** de que empiece (semanas 2 a 5 pendientes) |
+| [[11 Clase 0.1 Datos]] / `.pdf` | Clase del lun 5 oct (bits, bytes, binario, hex) con técnicas de memorización y tarjetas de repaso | A mano; el `.pdf` se genera con `clase_pdf.py` |
 | `calendario_datos.py` | Contenido día por día del calendario | Fuente de verdad del calendario |
 | `calendario_render.py` | Genera el PDF y el `.md` del calendario | `pip install reportlab` y `python calendario_render.py` |
+| `clase_pdf.py` | Genera el `.pdf` de una nota de clase | Requiere `pandoc` y Chrome: `python clase_pdf.py "11 Clase 0.1 Datos"` |
 
 ## Originales en Claude Docs
 

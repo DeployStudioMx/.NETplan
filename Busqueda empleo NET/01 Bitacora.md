@@ -7,6 +7,7 @@ actualizado: 2026-10-09
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-09
+- Creada [[11 Clase 0.1 Datos]] (+ PDF): la clase completa del lunes 5 oct con técnicas de memorización y aprendizaje (pretest, recuperación activa, repetición espaciada, Feynman, chunking, codificación dual) y tarjetas para el plugin Spaced Repetition de Obsidian. Nuevo generador `clase_pdf.py` para el PDF de las clases. Enlazada desde el día 5 oct de [[04 Calendario dia por dia]], [[00 Indice]] y [[CLAUDE]].
 - Detectado un hueco en el plan: el carril de código no tenía teoría del lenguaje C#. Creada [[10 Teoria de CSharp]] con la teoría de la semana 1 (qué es .NET, anatomía del proyecto, tipos, control de flujo, double vs. decimal, métodos, convenciones). Se lee 20 min al inicio de cada día de código, sin cambiar las ~12 h por semana. Agregada la lectura a los días 6, 7 y 8 oct de [[04 Calendario dia por dia]] (calendario y PDF regenerados). Enlazada desde [[00 Indice]], [[CLAUDE]], [[02 Contexto y perfil]] y [[08 Glosario]].
 - Sincronización de la bóveda con el celular vía Obsidian Git. Agregado un `.gitignore` en la raíz del repositorio para que la configuración `.obsidian/` de cada dispositivo no se suba. El repositorio sigue siendo la fuente de verdad ([[CLAUDE]], [[00 Indice]]).
 

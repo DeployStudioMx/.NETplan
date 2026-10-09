@@ -34,7 +34,8 @@ d("2026-10-04", "descanso", "15 min", "Descanso",
 
 # ---------- Semana 1 ----------
 d("2026-10-05", "teoria", "1.5 h", "0.1 Datos: bits y bases",
-  ["Bit, byte y por qué un byte guarda 0 a 255",
+  ["Clase completa con técnicas de estudio: 11 Clase 0.1 Datos (nota + PDF)",
+   "Bit, byte y por qué un byte guarda 0 a 255",
    "Convertir a mano 5 números a binario: 5, 12, 100, 200, 255",
    "Hexadecimal: 0x0A, 0xFF, 0x1F4 a decimal",
    "Glosario: bit, byte, binario, hexadecimal"])

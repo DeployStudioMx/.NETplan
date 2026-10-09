@@ -8,7 +8,7 @@ Proyecto para conseguir un puesto como desarrollador .NET mid-senior y llegar a 
 
 **Regla más estricta — la memoria es un grafo:** la memoria del proyecto es esta bóveda completa; cada nota es un nodo y cada `[[enlace]]` una arista. Cada dato se guarda en la nota que le corresponde según la tabla de abajo y se enlaza a las notas relacionadas. Nunca se concentra la memoria en un solo `.md` (ni en [[01 Bitacora]], ni en [[CLAUDE]], ni en un resumen nuevo). Un dato sin nodo se vuelve una nota nueva, enlazada desde este índice y desde al menos una nota relacionada.
 
-**Regla de estructura:** todo vive en la raíz, sin subcarpetas. Cada documento existe **una sola vez** como nota `.md`; si viene de un artifact de Claude o del generador del calendario, tiene además **un solo** `.pdf` con el mismo nombre. Las notas 08 y 09 son tuyas y no llevan PDF; la 10 se escribe directo en el repo y tampoco lleva PDF. Las imágenes llevan el número de la nota que las usa.
+**Regla de estructura:** todo vive en la raíz, sin subcarpetas. Cada documento existe **una sola vez** como nota `.md`; si viene de un artifact de Claude o del generador del calendario, tiene además **un solo** `.pdf` con el mismo nombre. Las notas 08 y 09 son tuyas y no llevan PDF; la 10 se escribe directo en el repo y tampoco lleva PDF. Las **clases** (`NN Clase …`) se escriben en el repo y su `.pdf` se genera con `clase_pdf.py`. Las imágenes llevan el número de la nota que las usa.
 
 **Datos únicos del proyecto** (si cambian, se cambian en todos los archivos): ~12 h por semana (lun 1.5 h teoría, mar–jue 1.5 h código, vie 1 h búsqueda, sáb 4 h teoría, dom 45 min repos y revisión) · plan del 5 oct al 27 dic de 2026 · árbol de 8 niveles (0 a 7), ~28 h de teoría · Visual Studio 2026 + .NET 10 LTS · repos `plan-dotnet`, `SolicitudesApi` y `GcalPlan` · pretensión 30k MXN netos.
 
@@ -30,8 +30,10 @@ Busqueda empleo NET/
 ├── 08 Glosario.md                       ← tus términos (lo llenas tú; meta: 100)
 ├── 09 Registro de aplicaciones.md       ← una fila por vacante (lo llenas tú los viernes)
 ├── 10 Teoria de CSharp.md               ← teoría del lenguaje, 20 min al inicio de cada día de código
+├── 11 Clase 0.1 Datos.md / .pdf         ← clase del lun 5 oct con técnicas de estudio (PDF GENERADO por clase_pdf.py)
 ├── calendario_datos.py                  ← contenido día por día del calendario (fuente)
 ├── calendario_render.py                 ← genera 04 Calendario .md + .pdf
+├── clase_pdf.py                         ← genera el .pdf de una nota de clase (pandoc + Chrome)
 ├── CLAUDE.md                            ← reglas para cualquier sesión de Claude
 ├── README.md                            ← portada del repositorio
 └── .gitignore
@@ -48,6 +50,7 @@ Busqueda empleo NET/
 | Cambia el árbol de fundamentos | `05 Arbol de fundamentos.md` + `.pdf` (+ `05 diagrama arbol.png` si cambia el diagrama); + `01 Bitacora` |
 | Cambia la clase de OAuth | `06 Clase OAuth 2.0.md` + `.pdf` (+ su diagrama); + `01 Bitacora` |
 | Cambia o se agrega teoría de C# | `10 Teoria de CSharp.md` (la sección de cada semana se escribe antes de que empiece); si cambia qué sección toca qué día, también `calendario_datos.py` y regenerar `04`; + `01 Bitacora` |
+| Se crea o cambia una clase | `NN Clase ….md` con el siguiente número libre, enlazada a su día del calendario (`calendario_datos.py` + regenerar `04`) y a su rama del árbol; correr `python clase_pdf.py "NN Clase …"` para su `.pdf`; agregarla a este índice y a `CLAUDE.md`; + `01 Bitacora` |
 | Cambia la ruta a senior | `07 Ruta a NET senior.md` + `.pdf` (+ su diagrama); + `01 Bitacora` |
 | Se crea un documento nuevo | `NN Nombre.md` (+ `.pdf` y `NN diagrama ….png` si aplica) con el siguiente número libre; agregarlo al árbol, a las notas de este índice y a `CLAUDE.md`; + `01 Bitacora` |
 | Cambian las reglas de trabajo | Este índice + `CLAUDE.md` + `01 Bitacora` |
@@ -69,6 +72,7 @@ Busqueda empleo NET/
 - [[08 Glosario]] — tus términos
 - [[09 Registro de aplicaciones]] — vacantes y procesos
 - [[10 Teoria de CSharp]] — teoría del lenguaje para los días de código
+- [[11 Clase 0.1 Datos]] · [[11 Clase 0.1 Datos.pdf|PDF]] — clase del lunes 5 oct
 
 ## Originales en Claude Docs
 | Nota | Enlace |
