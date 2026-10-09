@@ -23,7 +23,7 @@ actualizado: 2026-10-01
 - Reportes, presentaciones y videos demostrativos de cada desarrollo
 
 ## Brechas identificadas
-- Fundamentos de C# y .NET moderno (ASP.NET Core en .NET 10 LTS)
+- Fundamentos de C# y .NET moderno (ASP.NET Core en .NET 10 LTS) → teoría en [[10 Teoria de CSharp]]
 - Vocabulario técnico
 - Integraciones de API hechas con ayuda de IA, nunca de punta a punta solo
 - Nunca ha levantado un proyecto desde cero

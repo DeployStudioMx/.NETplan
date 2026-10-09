@@ -206,7 +206,7 @@ c.save()
 ET = {"teoria":"Teoría","codigo":"Código C#","mixto":"Teoría + código","busqueda":"Búsqueda","descanso":"Descanso","prep":"Preparación","repos":"Repos de GitHub"}
 def enlaces(t):
     t = t.replace("04 Calendario", "[[04 Calendario dia por dia|04 Calendario]]")
-    for n in ["01 Bitacora", "08 Glosario", "09 Registro de aplicaciones"]:
+    for n in ["01 Bitacora", "08 Glosario", "09 Registro de aplicaciones", "10 Teoria de CSharp"]:
         t = t.replace(n, f"[[{n}]]")
     return t
 L = ["---", "tags: [busqueda-empleo, calendario]", f"actualizado: {dt.date.today().isoformat()}", "---",

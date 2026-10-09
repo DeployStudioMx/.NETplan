@@ -7,6 +7,7 @@ actualizado: 2026-10-09
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-09
+- Detectado un hueco en el plan: el carril de código no tenía teoría del lenguaje C#. Creada [[10 Teoria de CSharp]] con la teoría de la semana 1 (qué es .NET, anatomía del proyecto, tipos, control de flujo, double vs. decimal, métodos, convenciones). Se lee 20 min al inicio de cada día de código, sin cambiar las ~12 h por semana. Agregada la lectura a los días 6, 7 y 8 oct de [[04 Calendario dia por dia]] (calendario y PDF regenerados). Enlazada desde [[00 Indice]], [[CLAUDE]], [[02 Contexto y perfil]] y [[08 Glosario]].
 - Sincronización de la bóveda con el celular vía Obsidian Git. Agregado un `.gitignore` en la raíz del repositorio para que la configuración `.obsidian/` de cada dispositivo no se suba. El repositorio sigue siendo la fuente de verdad ([[CLAUDE]], [[00 Indice]]).
 
 ## 2026-10-06
@@ -46,6 +47,7 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - Creada la ruta a .NET senior (12 temas por peso, orden por trimestres de 2027, con el flujo completo de una aplicación de Program.cs a la base de datos) → [[07 Ruta a NET senior]]. Tema de mayor interés: entender el flujo y la estructura de una aplicación completa.
 
 ## Pendientes
+- [ ] Escribir en [[10 Teoria de CSharp]] la teoría de las semanas 2 a 5, cada una antes de que empiece (semana 2: antes del 13 oct)
 - [ ] Confirmar que las ~12 horas por semana son realistas
 - [ ] Reescribir CV con logros medibles
 - [ ] Preparar guion de proyectos de DiSí

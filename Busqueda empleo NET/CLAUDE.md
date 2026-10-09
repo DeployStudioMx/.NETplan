@@ -36,6 +36,7 @@ Empezó en una sesión de Cowork (30 sep – 5 oct 2026) y se trasladó a este r
 | [[07 Ruta a NET senior]] / `.pdf` | 12 temas después del plan | Original en Claude Docs |
 | [[08 Glosario]] | Términos de Alex | Lo llena Alex |
 | [[09 Registro de aplicaciones]] | Vacantes y procesos | Lo llena Alex |
+| [[10 Teoria de CSharp]] | Teoría de C# y .NET para los días de código (20 min de lectura al inicio) | A mano; la sección de cada semana se escribe **antes** de que empiece (semanas 2 a 5 pendientes) |
 | `calendario_datos.py` | Contenido día por día del calendario | Fuente de verdad del calendario |
 | `calendario_render.py` | Genera el PDF y el `.md` del calendario | `pip install reportlab` y `python calendario_render.py` |
 

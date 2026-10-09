@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, indice]
-actualizado: 2026-10-06
+actualizado: 2026-10-09
 ---
 # Búsqueda de empleo .NET — Índice
 
@@ -8,7 +8,7 @@ Proyecto para conseguir un puesto como desarrollador .NET mid-senior y llegar a 
 
 **Regla más estricta — la memoria es un grafo:** la memoria del proyecto es esta bóveda completa; cada nota es un nodo y cada `[[enlace]]` una arista. Cada dato se guarda en la nota que le corresponde según la tabla de abajo y se enlaza a las notas relacionadas. Nunca se concentra la memoria en un solo `.md` (ni en [[01 Bitacora]], ni en [[CLAUDE]], ni en un resumen nuevo). Un dato sin nodo se vuelve una nota nueva, enlazada desde este índice y desde al menos una nota relacionada.
 
-**Regla de estructura:** todo vive en la raíz, sin subcarpetas. Cada documento existe **una sola vez** como nota `.md`; si viene de un artifact de Claude o del generador del calendario, tiene además **un solo** `.pdf` con el mismo nombre. Las notas 08 y 09 son tuyas y no llevan PDF. Las imágenes llevan el número de la nota que las usa.
+**Regla de estructura:** todo vive en la raíz, sin subcarpetas. Cada documento existe **una sola vez** como nota `.md`; si viene de un artifact de Claude o del generador del calendario, tiene además **un solo** `.pdf` con el mismo nombre. Las notas 08 y 09 son tuyas y no llevan PDF; la 10 se escribe directo en el repo y tampoco lleva PDF. Las imágenes llevan el número de la nota que las usa.
 
 **Datos únicos del proyecto** (si cambian, se cambian en todos los archivos): ~12 h por semana (lun 1.5 h teoría, mar–jue 1.5 h código, vie 1 h búsqueda, sáb 4 h teoría, dom 45 min repos y revisión) · plan del 5 oct al 27 dic de 2026 · árbol de 8 niveles (0 a 7), ~28 h de teoría · Visual Studio 2026 + .NET 10 LTS · repos `plan-dotnet`, `SolicitudesApi` y `GcalPlan` · pretensión 30k MXN netos.
 
@@ -29,6 +29,7 @@ Busqueda empleo NET/
 │   └── 07 diagrama flujo aplicacion.png
 ├── 08 Glosario.md                       ← tus términos (lo llenas tú; meta: 100)
 ├── 09 Registro de aplicaciones.md       ← una fila por vacante (lo llenas tú los viernes)
+├── 10 Teoria de CSharp.md               ← teoría del lenguaje, 20 min al inicio de cada día de código
 ├── calendario_datos.py                  ← contenido día por día del calendario (fuente)
 ├── calendario_render.py                 ← genera 04 Calendario .md + .pdf
 ├── CLAUDE.md                            ← reglas para cualquier sesión de Claude
@@ -46,6 +47,7 @@ Busqueda empleo NET/
 | Cambia el calendario (días, horas, tareas) | Editar `calendario_datos.py` y correr `python calendario_render.py` (regenera `04` `.md` + `.pdf`); si cambia el resumen semanal, `03 Plan` `.md` + `.pdf`; + `01 Bitacora` |
 | Cambia el árbol de fundamentos | `05 Arbol de fundamentos.md` + `.pdf` (+ `05 diagrama arbol.png` si cambia el diagrama); + `01 Bitacora` |
 | Cambia la clase de OAuth | `06 Clase OAuth 2.0.md` + `.pdf` (+ su diagrama); + `01 Bitacora` |
+| Cambia o se agrega teoría de C# | `10 Teoria de CSharp.md` (la sección de cada semana se escribe antes de que empiece); si cambia qué sección toca qué día, también `calendario_datos.py` y regenerar `04`; + `01 Bitacora` |
 | Cambia la ruta a senior | `07 Ruta a NET senior.md` + `.pdf` (+ su diagrama); + `01 Bitacora` |
 | Se crea un documento nuevo | `NN Nombre.md` (+ `.pdf` y `NN diagrama ….png` si aplica) con el siguiente número libre; agregarlo al árbol, a las notas de este índice y a `CLAUDE.md`; + `01 Bitacora` |
 | Cambian las reglas de trabajo | Este índice + `CLAUDE.md` + `01 Bitacora` |
@@ -66,6 +68,7 @@ Busqueda empleo NET/
 - [[07 Ruta a NET senior]] · [[07 Ruta a NET senior.pdf|PDF]]
 - [[08 Glosario]] — tus términos
 - [[09 Registro de aplicaciones]] — vacantes y procesos
+- [[10 Teoria de CSharp]] — teoría del lenguaje para los días de código
 
 ## Originales en Claude Docs
 | Nota | Enlace |
