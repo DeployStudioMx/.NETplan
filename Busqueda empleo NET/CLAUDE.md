@@ -38,6 +38,7 @@ Empezó en una sesión de Cowork (30 sep – 5 oct 2026) y se trasladó a este r
 | [[09 Registro de aplicaciones]] | Vacantes y procesos | Lo llena Alex |
 | [[10 Teoria de CSharp]] | Teoría de C# y .NET para los días de código (20 min de lectura al inicio) | A mano; la sección de cada semana se escribe **antes** de que empiece (semanas 2 a 5 pendientes) |
 | [[11 Clase 0.1 Datos]] / `.pdf` | Clase del lun 5 oct (bits, bytes, binario, hex) con técnicas de memorización y tarjetas de repaso | A mano; el `.pdf` se genera con `clase_pdf.py` |
+| [[12 Clase Primer proyecto por CLI]] / `.pdf` | Laboratorio del mar 6 oct: preparar `plan-dotnet`, explorar el proyecto, ejercicios de tipos y desbordamiento (enunciados y pistas, sin soluciones) | A mano; el `.pdf` se genera con `clase_pdf.py` |
 | `calendario_datos.py` | Contenido día por día del calendario | Fuente de verdad del calendario |
 | `calendario_render.py` | Genera el PDF y el `.md` del calendario | `pip install reportlab` y `python calendario_render.py` |
 | `clase_pdf.py` | Genera el `.pdf` de una nota de clase | Requiere `pandoc` y Chrome: `python clase_pdf.py "11 Clase 0.1 Datos"` |

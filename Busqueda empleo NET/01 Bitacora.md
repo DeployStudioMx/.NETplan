@@ -1,10 +1,13 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-10-09
+actualizado: 2026-10-12
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-10-12
+- Creada [[12 Clase Primer proyecto por CLI]] (+ PDF): laboratorio guiado del martes 6 oct (preparar `plan-dotnet` con solución `.slnx`, explorar `bin`/`obj`, ficha de tipos y desbordamiento). Respeta el modo tutor: enunciados y pistas, sin código de solución. La teoría sigue en [[10 Teoria de CSharp]]. Enlazada desde el día 6 oct de [[04 Calendario dia por dia]], [[00 Indice]] y [[CLAUDE]].
 
 ## 2026-10-09
 - Creada [[11 Clase 0.1 Datos]] (+ PDF): la clase completa del lunes 5 oct con técnicas de memorización y aprendizaje (pretest, recuperación activa, repetición espaciada, Feynman, chunking, codificación dual) y tarjetas para el plugin Spaced Repetition de Obsidian. Nuevo generador `clase_pdf.py` para el PDF de las clases. Enlazada desde el día 5 oct de [[04 Calendario dia por dia]], [[00 Indice]] y [[CLAUDE]].

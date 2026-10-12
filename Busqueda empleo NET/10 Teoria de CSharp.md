@@ -14,7 +14,7 @@ El [[05 Arbol de fundamentos]] explica la computadora y la web, pero no el lengu
 
 | Día | Lectura (20 min) | Código (70 min) |
 | --- | --- | --- |
-| Mar 6 oct | 1. Qué es .NET · 2. Anatomía de un proyecto · 3. Tipos | Primer proyecto por CLI, tipos, desbordamiento |
+| Mar 6 oct | 1. Qué es .NET · 2. Anatomía de un proyecto · 3. Tipos | Primer proyecto por CLI, tipos, desbordamiento → laboratorio en [[12 Clase Primer proyecto por CLI]] |
 | Mié 7 oct | 4. Control de flujo · 5. `double` vs. `decimal` | Ciclos y tabla de pagos |
 | Jue 8 oct | 6. Métodos · 7. Convenciones | `CalcularInteres` y commit de los 5 ejercicios |
 

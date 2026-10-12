@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, indice]
-actualizado: 2026-10-09
+actualizado: 2026-10-12
 ---
 # Búsqueda de empleo .NET — Índice
 
@@ -31,6 +31,7 @@ Busqueda empleo NET/
 ├── 09 Registro de aplicaciones.md       ← una fila por vacante (lo llenas tú los viernes)
 ├── 10 Teoria de CSharp.md               ← teoría del lenguaje, 20 min al inicio de cada día de código
 ├── 11 Clase 0.1 Datos.md / .pdf         ← clase del lun 5 oct con técnicas de estudio (PDF GENERADO por clase_pdf.py)
+├── 12 Clase Primer proyecto por CLI.md / .pdf ← laboratorio del mar 6 oct: proyecto, tipos, desbordamiento
 ├── calendario_datos.py                  ← contenido día por día del calendario (fuente)
 ├── calendario_render.py                 ← genera 04 Calendario .md + .pdf
 ├── clase_pdf.py                         ← genera el .pdf de una nota de clase (pandoc + Chrome)
@@ -73,6 +74,7 @@ Busqueda empleo NET/
 - [[09 Registro de aplicaciones]] — vacantes y procesos
 - [[10 Teoria de CSharp]] — teoría del lenguaje para los días de código
 - [[11 Clase 0.1 Datos]] · [[11 Clase 0.1 Datos.pdf|PDF]] — clase del lunes 5 oct
+- [[12 Clase Primer proyecto por CLI]] · [[12 Clase Primer proyecto por CLI.pdf|PDF]] — laboratorio del martes 6 oct
 
 ## Originales en Claude Docs
 | Nota | Enlace |

@@ -40,7 +40,7 @@ d("2026-10-05", "teoria", "1.5 h", "0.1 Datos: bits y bases",
    "Hexadecimal: 0x0A, 0xFF, 0x1F4 a decimal",
    "Glosario: bit, byte, binario, hexadecimal"])
 d("2026-10-06", "codigo", "1.5 h", "Primer proyecto por CLI",
-  ["Lectura (20 min): 10 Teoria de CSharp, secciones 1 a 3 (.NET, anatomía del proyecto, tipos)",
+  ["Clase guiada: 12 Clase Primer proyecto por CLI · lectura (20 min): 10 Teoria de CSharp, secciones 1 a 3",
    "Dentro de plan-dotnet: dotnet new console -n Semana01 desde la terminal; abrir la carpeta en Visual Studio después",
    "Recorrer .csproj, Program.cs, carpetas bin y obj",
    "dotnet build y dotnet run",

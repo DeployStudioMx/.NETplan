@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, calendario]
-actualizado: 2026-10-09
+actualizado: 2026-10-12
 ---
 > Generado por calendario_render.py desde calendario_datos.py. No editar a mano: cambia los datos y vuelve a generar.
 > Versión en PDF: [[04 Calendario dia por dia.pdf]] · Resumen semanal en [[03 Plan para huir de DiSi]] · Vista interactiva (artifact): https://claude.ai/artifact/737Dvitbv6Eds9XijvuBJA
@@ -53,7 +53,7 @@ Horario: lunes teoría (1.5 h) · martes a jueves código C# (1.5 h) · viernes 
 
 ### Martes 6 oct · Código C# · 1.5 h
 **Primer proyecto por CLI**
-- [ ] Lectura (20 min): [[10 Teoria de CSharp]], secciones 1 a 3 (.NET, anatomía del proyecto, tipos)
+- [ ] Clase guiada: [[12 Clase Primer proyecto por CLI]] · lectura (20 min): [[10 Teoria de CSharp]], secciones 1 a 3
 - [ ] Dentro de plan-dotnet: dotnet new console -n Semana01 desde la terminal; abrir la carpeta en Visual Studio después
 - [ ] Recorrer .csproj, Program.cs, carpetas bin y obj
 - [ ] dotnet build y dotnet run
