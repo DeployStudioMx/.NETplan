@@ -8,7 +8,7 @@ actualizado: 2026-10-13
 - Desarrollador Mid Senior en DiSí Operaciones (fintech/SOFOM, crédito a PyMEs), ~3 años; ascenso a inicios de 2026.
 - Radica en CDMX.
 - Pretensión salarial: 30k MXN netos (aclarar siempre bruto/neto y nómina vs. honorarios).
-- Stack: ASP.NET MVC / .NET Framework sobre IIS, SQL Server; front en React/Next.js.
+- Stack: ASP.NET MVC / .NET Framework sobre IIS, SQL Server. Además, un servicio de generación de PDFs con Next.js y Puppeteer, implementado con IA (no domina esa tecnología).
 
 ## Proyectos en DiSí (para CV y guion de entrevista)
 - Reestructuración del workflow de la empresa
@@ -30,7 +30,7 @@ actualizado: 2026-10-13
 
 ## Cómo aprende Alex
 - **No asumir vocabulario.** Cada término técnico se define antes de usarlo y se desglosa hasta los fundamentos (de la CPU hacia arriba), con analogías de la vida diaria y anclas a lo que sí conoce: DiSí (.NET Framework, IIS, `web.config`) y el [[05 Arbol de fundamentos]].
-- **No conoce Node.js ni Next.js** (2026-10-13). Aunque el front de DiSí usa React/Next.js, no sirven como ancla: no usarlos para explicar nada.
+- **No conoce Node.js ni Next.js** (2026-10-13). Solo los tocó en la generación de PDFs con Puppeteer, implementada con IA; no sirven como ancla: no usarlos para explicar nada.
 - 2026-10-13, dudas sobre la sección 1 de [[10 Teoria de CSharp]]: qué son el SDK y el runtime, qué es una CLI, qué significa compilar, qué hace el CLR más allá de su definición, qué es y qué contiene una DLL. Respondidas al reescribir esa sección desde cero.
 - Usa las técnicas de estudio de [[11 Clase 0.1 Datos]]: recuperación activa, repetición espaciada y Feynman.
 
