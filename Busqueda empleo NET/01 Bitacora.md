@@ -7,6 +7,7 @@ actualizado: 2026-10-13
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-13
+- Agregadas las respuestas textuales de Alex a [[14 Evaluaciones]]. Fin de la sesión del día.
 - Primera evaluación: Alex contestó las 8 preguntas de repaso de la sección 1 de [[10 Teoria de CSharp]]; 55/80 (6.9). Detalle, correcciones y tarjetas de errores en [[14 Evaluaciones]].
 - Dudas sobre IIS, heap e IntelliSense respondidas en [[15 Dudas resueltas]] (la teoría no se toca por decisión de Alex).
 - Creado [[13 Plan de memorizacion]] (+ PDF): sistema de repaso a largo plazo con el plugin Spaced Repetition, escalera de comprensión, rutina diaria, semanal y mensual (exámenes acumulados el 31 oct, 28 nov y 26 dic) e historia "El viaje de Program.cs".
@@ -60,7 +61,7 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - Creada la ruta a .NET senior (12 temas por peso, orden por trimestres de 2027, con el flujo completo de una aplicación de Program.cs a la base de datos) → [[07 Ruta a NET senior]]. Tema de mayor interés: entender el flujo y la estructura de una aplicación completa.
 
 ## Pendientes
-- [ ] Instalar el plugin Spaced Repetition en Obsidian ([[13 Plan de memorizacion]])
+- [ ] **Próxima sesión, lo primero:** configurar y definir por completo [[13 Plan de memorizacion]] con las tarjetas de Obsidian (instalar y configurar el plugin Spaced Repetition, revisar mazos y tarjetas existentes, primer repaso). Después, seguir con la sección 2 de [[10 Teoria de CSharp]]
 - [ ] Exámenes acumulados: 31 oct, 28 nov y 26 dic ([[13 Plan de memorizacion]])
 - [ ] Escribir en [[10 Teoria de CSharp]] la teoría de las semanas 2 a 5, cada una antes de que empiece (semana 2: antes del 13 oct)
 - [ ] Confirmar que las ~12 horas por semana son realistas

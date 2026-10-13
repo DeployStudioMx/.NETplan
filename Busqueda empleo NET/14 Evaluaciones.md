@@ -20,6 +20,19 @@ Cada evaluación registra la calificación, lo que faltó y una tarjeta por cada
 
 Primera lectura, sin haber hecho todavía el laboratorio.
 
+### Respuestas de Alex (textuales)
+
+1. El codigo maquina es el lenguaje que utiliza el procesador de mi computadora para ejecutar instrucciones. es en bytes, binario.
+2. compilar es traducir un programa de un lenguaje a otro revisando si existen errores sintacticos o semanticos. La diferencia es que una surge al momento de compilar (lo veo yo como desarrollador) y el otro es en tiempo de ejecución (lo ve el usuario que utiliza la aplicacion)
+3. Compila en dos etapas porque primero lo traduce en intermediate lenguaje y despues el jit lo traduce a codigo maquina cuando se necesite en tiempo de ejecucion por el clr. gano compatibilidad y optimizacion y metadatos.
+4. runtime es el codigo necesario o software para ejecutar una aplicacion de .net. en otro contexto es el tiempo de ejecucion de una aplicacion, que puedo interpretar como el momento en el que el programa corre.
+5. el sdk trae ademas el software necesario para desarrollar aplicaciones y probarlas. trae librerias utiles y ademas un compilador para compilar el proytecto
+6. un cli es una interfaz de comandos de texto que puede ejecutar metodos de un sdk o programa y vs no lo sustituye porque la interfaz grafica ejecuta al final las instrucciones en comandos de texto
+7. el clr revisa el runtime a ejecutar, lo ejecuta, seguido del dll, mediante jit ejecuta lo que se mande a llamar, administra la memoria, expeciones e hilos
+8. una dll nativa trae instrucciones directas del sistema operativo y uno de .net trae IL para ser ejecutado por un runtime de .net. un ensamblado contiene informacion de que aplicacion lo ejecuta, codigo il, metadatos, info de version y recursos.
+
+### Calificación
+
 | # | Pregunta | Calif. | Qué estuvo bien | Qué faltó o se corrige |
 | --- | --- | --- | --- | --- |
 | 1 | Código máquina y por qué x64 no corre en ARM64 | 6/10 | Son instrucciones del procesador, en bytes | **No contestaste la segunda parte:** cada familia de procesador tiene su propio código máquina; los mismos bytes significan otra cosa en ARM64 |
