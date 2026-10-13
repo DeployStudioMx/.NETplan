@@ -1,10 +1,13 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-10-12
+actualizado: 2026-10-13
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-10-13
+- Generado el PDF de [[10 Teoria de CSharp]], que faltaba. `clase_pdf.py` ahora dibuja los diagramas Mermaid en el PDF. Regla actualizada en [[00 Indice]] y [[CLAUDE]]: la teoría de C# también lleva PDF y se regenera en cada cambio.
 
 ## 2026-10-12
 - Creada [[12 Clase Primer proyecto por CLI]] (+ PDF): laboratorio guiado del martes 6 oct (preparar `plan-dotnet` con solución `.slnx`, explorar `bin`/`obj`, ficha de tipos y desbordamiento). Respeta el modo tutor: enunciados y pistas, sin código de solución. La teoría sigue en [[10 Teoria de CSharp]]. Enlazada desde el día 6 oct de [[04 Calendario dia por dia]], [[00 Indice]] y [[CLAUDE]].

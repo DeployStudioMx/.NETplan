@@ -1,10 +1,12 @@
-"""Genera el PDF de una nota de clase (por ejemplo, 11 Clase 0.1 Datos.md).
+"""Genera el PDF de una nota de clase o de teoría (por ejemplo, 11 Clase 0.1 Datos.md).
 Uso (desde la raíz de la bóveda):  python clase_pdf.py "11 Clase 0.1 Datos"
 Requiere: pandoc y Google Chrome o Chromium (variable CHROME si no está en la ruta por defecto).
+Los diagramas ```mermaid se dibujan con mermaid.js (se descarga de jsDelivr; sin red quedan como texto).
 """
-import os, re, shutil, subprocess, sys, tempfile
+import html as html_lib, os, re, shutil, subprocess, sys, tempfile, urllib.request
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+MERMAID_URL = "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
 CHROMES = [os.environ.get("CHROME", ""), "/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
            shutil.which("chromium") or "", shutil.which("google-chrome") or "",
            r"C:\Program Files\Google\Chrome\Application\chrome.exe"]
@@ -26,6 +28,7 @@ blockquote { margin: 8pt 0; padding: 6pt 10pt; background: var(--warm); border-l
 blockquote p { margin: 0; }
 strong { font-weight: 700; }
 table.tarjetas td:first-child { width: 48%; font-weight: 600; }
+pre.mermaid { background: none; text-align: center; margin: 10pt 0; break-inside: avoid; }
 """
 
 def a_markdown_imprimible(md: str) -> str:
@@ -34,6 +37,8 @@ def a_markdown_imprimible(md: str) -> str:
     md = re.sub(r"\[\[([^\]|]+)\|([^\]]+)\]\]", r"\2", md)                 # [[nota|texto]] -> texto
     md = re.sub(r"\[\[([^\]]+)\]\]", r"\1", md)                            # [[nota]] -> nota
     md = re.sub(r"^#flashcards\S*\s*$", "", md, flags=re.M)               # etiqueta del plugin
+    md = re.sub(r"^```mermaid\n(.*?)^```", lambda m: '<pre class="mermaid">' + html_lib.escape(m.group(1)) + "</pre>",
+                md, flags=re.S | re.M)                                     # diagramas
     salida, tarjetas = [], []
     for linea in md.split("\n") + [""]:
         m = None if "`::`" in linea else re.match(r"^(?!\|)(.+?)::(.+)$", linea)
@@ -53,14 +58,21 @@ def main(nombre: str):
     html = subprocess.run(["pandoc", "-f", "gfm", "-t", "html"], input=md, capture_output=True,
                           text=True, encoding="utf-8", check=True).stdout
     html = html.replace("<!--tarjetas-->\n<table>", '<table class="tarjetas">')
-    doc = f'<!doctype html><html lang="es"><head><meta charset="utf-8"><title>{nombre}</title><style>{CSS}</style></head><body>{html}</body></html>'
+    script = ""
+    if 'class="mermaid"' in html:
+        try:
+            js = urllib.request.urlopen(MERMAID_URL, timeout=30).read().decode("utf-8")
+            script = f"<script>{js}</script><script>mermaid.initialize({{startOnLoad:true, theme:'neutral'}});</script>"
+        except Exception as e:
+            print("Aviso: no pude descargar mermaid.js; los diagramas quedan como texto.", e)
+    doc = f'<!doctype html><html lang="es"><head><meta charset="utf-8"><title>{nombre}</title><style>{CSS}</style></head><body>{html}{script}</body></html>'
     chrome = next((c for c in CHROMES if c and os.path.exists(c)), None)
     if not chrome:
         sys.exit("No encontré Chrome/Chromium; define la variable CHROME con su ruta.")
     with tempfile.TemporaryDirectory() as tmp:
         ruta_html = os.path.join(tmp, "clase.html")
         open(ruta_html, "w", encoding="utf-8").write(doc)
-        subprocess.run([chrome, "--headless", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
+        subprocess.run([chrome, "--headless", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer", "--virtual-time-budget=10000",
                         f"--print-to-pdf={destino}", "file://" + ruta_html.replace(os.sep, "/")],
                        check=True, capture_output=True)
     print("Listo:", destino)
