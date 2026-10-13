@@ -8,7 +8,7 @@ Proyecto para conseguir un puesto como desarrollador .NET mid-senior y llegar a 
 
 **Regla más estricta — la memoria es un grafo:** la memoria del proyecto es esta bóveda completa; cada nota es un nodo y cada `[[enlace]]` una arista. Cada dato se guarda en la nota que le corresponde según la tabla de abajo y se enlaza a las notas relacionadas. Nunca se concentra la memoria en un solo `.md` (ni en [[01 Bitacora]], ni en [[CLAUDE]], ni en un resumen nuevo). Un dato sin nodo se vuelve una nota nueva, enlazada desde este índice y desde al menos una nota relacionada.
 
-**Regla de profundidad:** toda teoría o clase define cada término antes de usarlo y baja hasta los fundamentos; las dudas de Alex se registran en [[02 Contexto y perfil]] ("Cómo aprende Alex") y se responden en la nota de la que salieron.
+**Regla de profundidad:** toda teoría o clase define cada término antes de usarlo y baja hasta los fundamentos; las dudas de Alex se registran en [[02 Contexto y perfil]] ("Cómo aprende Alex") y se responden en la nota de la que salieron o, si esa nota no se debe tocar, en [[15 Dudas resueltas]]. Cada vez que Alex contesta preguntas, se califica en [[14 Evaluaciones]]; todo se repasa con [[13 Plan de memorizacion]].
 
 **Regla de estructura:** todo vive en la raíz, sin subcarpetas. Cada documento existe **una sola vez** como nota `.md`; si viene de un artifact de Claude o del generador del calendario, tiene además **un solo** `.pdf` con el mismo nombre. Las notas 08 y 09 son tuyas y no llevan PDF. La teoría de C# (10) y las **clases** (`NN Clase …`) se escriben en el repo y su `.pdf` se genera con `clase_pdf.py`. Las imágenes llevan el número de la nota que las usa.
 
@@ -34,6 +34,9 @@ Busqueda empleo NET/
 ├── 10 Teoria de CSharp.md / .pdf         ← teoría del lenguaje, 20 min al inicio de cada día de código
 ├── 11 Clase 0.1 Datos.md / .pdf         ← clase del lun 5 oct con técnicas de estudio (PDF GENERADO por clase_pdf.py)
 ├── 12 Clase Primer proyecto por CLI.md / .pdf ← laboratorio del mar 6 oct: proyecto, tipos, desbordamiento
+├── 13 Plan de memorizacion.md / .pdf    ← sistema de repaso a largo plazo (tarjetas, rutina, exámenes acumulados)
+├── 14 Evaluaciones.md                   ← calificaciones, conceptos débiles y tarjetas de errores
+├── 15 Dudas resueltas.md                ← dudas fuera de clase, con respuesta y tarjetas
 ├── calendario_datos.py                  ← contenido día por día del calendario (fuente)
 ├── calendario_render.py                 ← genera 04 Calendario .md + .pdf
 ├── clase_pdf.py                         ← genera el .pdf de una nota de clase (pandoc + Chrome)
@@ -54,6 +57,9 @@ Busqueda empleo NET/
 | Cambia la clase de OAuth | `06 Clase OAuth 2.0.md` + `.pdf` (+ su diagrama); + `01 Bitacora` |
 | Cambia o se agrega teoría de C# | `10 Teoria de CSharp.md` (la sección de cada semana se escribe antes de que empiece) y regenerar su `.pdf` con `python clase_pdf.py "10 Teoria de CSharp"`; si cambia qué sección toca qué día, también `calendario_datos.py` y regenerar `04`; + `01 Bitacora` |
 | Se crea o cambia una clase | `NN Clase ….md` con el siguiente número libre, enlazada a su día del calendario (`calendario_datos.py` + regenerar `04`) y a su rama del árbol; correr `python clase_pdf.py "NN Clase …"` para su `.pdf`; agregarla a este índice y a `CLAUDE.md`; + `01 Bitacora` |
+| Alex contesta preguntas de repaso o un examen | Fila en el resumen y detalle en `14 Evaluaciones` (con tarjetas de errores); si aparece un patrón, `02 Contexto y perfil`; + `01 Bitacora` |
+| Surge una duda | Se responde en la nota de origen o, si no se debe tocar, en `15 Dudas resueltas` (con tarjetas); se registra en `02 Contexto y perfil`; + `01 Bitacora` |
+| Cambia el sistema de repaso | `13 Plan de memorizacion.md` y regenerar su `.pdf`; + `01 Bitacora` |
 | Cambia la ruta a senior | `07 Ruta a NET senior.md` + `.pdf` (+ su diagrama); + `01 Bitacora` |
 | Se crea un documento nuevo | `NN Nombre.md` (+ `.pdf` y `NN diagrama ….png` si aplica) con el siguiente número libre; agregarlo al árbol, a las notas de este índice y a `CLAUDE.md`; + `01 Bitacora` |
 | Cambian las reglas de trabajo | Este índice + `CLAUDE.md` + `01 Bitacora` |
@@ -77,6 +83,9 @@ Busqueda empleo NET/
 - [[10 Teoria de CSharp]] · [[10 Teoria de CSharp.pdf|PDF]] — teoría del lenguaje para los días de código
 - [[11 Clase 0.1 Datos]] · [[11 Clase 0.1 Datos.pdf|PDF]] — clase del lunes 5 oct
 - [[12 Clase Primer proyecto por CLI]] · [[12 Clase Primer proyecto por CLI.pdf|PDF]] — laboratorio del martes 6 oct
+- [[13 Plan de memorizacion]] · [[13 Plan de memorizacion.pdf|PDF]] — cómo repasar para no olvidar
+- [[14 Evaluaciones]] — calificaciones y conceptos débiles
+- [[15 Dudas resueltas]] — dudas fuera de clase
 
 ## Originales en Claude Docs
 | Nota | Enlace |

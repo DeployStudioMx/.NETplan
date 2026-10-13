@@ -29,10 +29,12 @@ actualizado: 2026-10-13
 - Nunca ha levantado un proyecto desde cero
 
 ## Cómo aprende Alex
-- **No asumir vocabulario.** Cada término técnico se define antes de usarlo y se desglosa hasta los fundamentos (de la CPU hacia arriba), con analogías de la vida diaria y anclas a lo que sí conoce: DiSí (.NET Framework, IIS, `web.config`) y el [[05 Arbol de fundamentos]].
+- **No asumir vocabulario.** Cada término técnico se define antes de usarlo y se desglosa hasta los fundamentos (de la CPU hacia arriba), con analogías de la vida diaria y anclas a lo que sí conoce: las apps de DiSí y el [[05 Arbol de fundamentos]]. Ojo: trabaja con IIS y `web.config` pero no conocía sus conceptos; explicarlos antes de usarlos como ancla.
 - **No conoce Node.js ni Next.js** (2026-10-13). Solo los tocó en la generación de PDFs con Puppeteer, implementada con IA; no sirven como ancla: no usarlos para explicar nada.
 - 2026-10-13, dudas sobre la sección 1 de [[10 Teoria de CSharp]]: qué son el SDK y el runtime, qué es una CLI, qué significa compilar, qué hace el CLR más allá de su definición, qué es y qué contiene una DLL. Respondidas al reescribir esa sección desde cero.
-- Usa las técnicas de estudio de [[11 Clase 0.1 Datos]]: recuperación activa, repetición espaciada y Feynman.
+- 2026-10-13, más dudas: qué es IIS, qué es el heap, qué es IntelliSense → [[15 Dudas resueltas]].
+- 2026-10-13, primera evaluación: 6.9 de 10 en la sección 1 de la teoría. Patrón: contesta solo la primera parte de las preguntas compuestas → [[14 Evaluaciones]].
+- Usa las técnicas de estudio de [[11 Clase 0.1 Datos]] y el sistema de repaso de [[13 Plan de memorizacion]] para retener a largo plazo.
 
 ## Herramientas y repos del plan
 - IDE: Visual Studio 2026 con .NET 10 LTS; sugerencias de Copilot apagadas durante el plan.

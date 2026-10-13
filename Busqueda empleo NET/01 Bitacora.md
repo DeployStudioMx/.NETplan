@@ -7,6 +7,9 @@ actualizado: 2026-10-13
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-13
+- Primera evaluación: Alex contestó las 8 preguntas de repaso de la sección 1 de [[10 Teoria de CSharp]]; 55/80 (6.9). Detalle, correcciones y tarjetas de errores en [[14 Evaluaciones]].
+- Dudas sobre IIS, heap e IntelliSense respondidas en [[15 Dudas resueltas]] (la teoría no se toca por decisión de Alex).
+- Creado [[13 Plan de memorizacion]] (+ PDF): sistema de repaso a largo plazo con el plugin Spaced Repetition, escalera de comprensión, rutina diaria, semanal y mensual (exámenes acumulados el 31 oct, 28 nov y 26 dic) e historia "El viaje de Program.cs".
 - Corregido el stack en [[02 Contexto y perfil]]: Next.js y Puppeteer solo se usaron para generar PDFs en DiSí, implementado con IA; no es su front principal.
 - Alex no conoce Node.js ni Next.js: dejan de usarse como ancla al explicar ([[02 Contexto y perfil]], regla 7 de [[CLAUDE]]). Por decisión de Alex, [[10 Teoria de CSharp]] no se modifica por ahora, aunque su sección 1 menciona Node.js y JavaScript como comparación.
 - Alex compartió sus dudas de la sección 1 de [[10 Teoria de CSharp]] (SDK, runtime, CLI, compilar, CLR, DLL). La sección se reescribió desde la CPU hacia arriba (código máquina, compilar, dos etapas IL/JIT, runtime, SDK y CLI, qué hace el CLR paso a paso, qué es y qué contiene un ensamblado), con ejercicios para comprobar en su máquina y 17 tarjetas; PDF regenerado. Registrado en [[02 Contexto y perfil]] cómo aprende y la nueva regla de profundidad en [[00 Indice]] y [[CLAUDE]].
@@ -57,6 +60,8 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - Creada la ruta a .NET senior (12 temas por peso, orden por trimestres de 2027, con el flujo completo de una aplicación de Program.cs a la base de datos) → [[07 Ruta a NET senior]]. Tema de mayor interés: entender el flujo y la estructura de una aplicación completa.
 
 ## Pendientes
+- [ ] Instalar el plugin Spaced Repetition en Obsidian ([[13 Plan de memorizacion]])
+- [ ] Exámenes acumulados: 31 oct, 28 nov y 26 dic ([[13 Plan de memorizacion]])
 - [ ] Escribir en [[10 Teoria de CSharp]] la teoría de las semanas 2 a 5, cada una antes de que empiece (semana 2: antes del 13 oct)
 - [ ] Confirmar que las ~12 horas por semana son realistas
 - [ ] Reescribir CV con logros medibles
