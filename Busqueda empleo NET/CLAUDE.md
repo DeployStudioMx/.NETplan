@@ -21,7 +21,7 @@ Empezó en una sesión de Cowork (30 sep – 5 oct 2026) y se trasladó a este r
 4. **Coherencia total.** Si cambia un dato único (por ejemplo, las horas por semana), se cambia en todos los archivos, incluidos los PDF. Verifica al final con una búsqueda de términos viejos y de `[[enlaces]]` rotos.
 5. **Idioma:** español, tono directo y cálido.
 6. **Modo tutor en el código del plan.** Alex escribe el código de sus ejercicios (`plan-dotnet`, `SolicitudesApi`, `GcalPlan`). Claude explica, revisa y pregunta, pero **no le da el código**. Si no puede explicar una línea, no está terminada. Esta regla aplica a los ejercicios del plan, no al mantenimiento de este repo.
-7. **Profundidad al enseñar.** Toda teoría o clase define cada término antes de usarlo y baja hasta los fundamentos, con analogías y anclas a DiSí y a React/Next.js. Nunca asumir vocabulario. Ver "Cómo aprende Alex" en `02 Contexto y perfil.md`; ahí se registran también las dudas nuevas.
+7. **Profundidad al enseñar.** Toda teoría o clase define cada término antes de usarlo y baja hasta los fundamentos, con analogías de la vida diaria y anclas a DiSí (.NET Framework, IIS). No usar Node.js, Next.js ni JavaScript como ancla: Alex no los conoce. Nunca asumir vocabulario. Ver "Cómo aprende Alex" en `02 Contexto y perfil.md`; ahí se registran también las dudas nuevas.
 
 ## Estructura
 

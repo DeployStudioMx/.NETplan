@@ -29,7 +29,8 @@ actualizado: 2026-10-13
 - Nunca ha levantado un proyecto desde cero
 
 ## Cómo aprende Alex
-- **No asumir vocabulario.** Cada término técnico se define antes de usarlo y se desglosa hasta los fundamentos (de la CPU hacia arriba), con analogías y anclas a lo que ya conoce: DiSí (.NET Framework, IIS, `web.config`), React/Next.js (Node.js, npm) y el [[05 Arbol de fundamentos]].
+- **No asumir vocabulario.** Cada término técnico se define antes de usarlo y se desglosa hasta los fundamentos (de la CPU hacia arriba), con analogías de la vida diaria y anclas a lo que sí conoce: DiSí (.NET Framework, IIS, `web.config`) y el [[05 Arbol de fundamentos]].
+- **No conoce Node.js ni Next.js** (2026-10-13). Aunque el front de DiSí usa React/Next.js, no sirven como ancla: no usarlos para explicar nada.
 - 2026-10-13, dudas sobre la sección 1 de [[10 Teoria de CSharp]]: qué son el SDK y el runtime, qué es una CLI, qué significa compilar, qué hace el CLR más allá de su definición, qué es y qué contiene una DLL. Respondidas al reescribir esa sección desde cero.
 - Usa las técnicas de estudio de [[11 Clase 0.1 Datos]]: recuperación activa, repetición espaciada y Feynman.
 

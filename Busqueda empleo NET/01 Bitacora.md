@@ -7,6 +7,7 @@ actualizado: 2026-10-13
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-13
+- Alex no conoce Node.js ni Next.js: dejan de usarse como ancla al explicar ([[02 Contexto y perfil]], regla 7 de [[CLAUDE]]). Por decisión de Alex, [[10 Teoria de CSharp]] no se modifica por ahora, aunque su sección 1 menciona Node.js y JavaScript como comparación.
 - Alex compartió sus dudas de la sección 1 de [[10 Teoria de CSharp]] (SDK, runtime, CLI, compilar, CLR, DLL). La sección se reescribió desde la CPU hacia arriba (código máquina, compilar, dos etapas IL/JIT, runtime, SDK y CLI, qué hace el CLR paso a paso, qué es y qué contiene un ensamblado), con ejercicios para comprobar en su máquina y 17 tarjetas; PDF regenerado. Registrado en [[02 Contexto y perfil]] cómo aprende y la nueva regla de profundidad en [[00 Indice]] y [[CLAUDE]].
 - Generado el PDF de [[10 Teoria de CSharp]], que faltaba. `clase_pdf.py` ahora dibuja los diagramas Mermaid en el PDF. Regla actualizada en [[00 Indice]] y [[CLAUDE]]: la teoría de C# también lleva PDF y se regenera en cada cambio.
 
