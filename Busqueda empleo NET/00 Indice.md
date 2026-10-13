@@ -8,6 +8,8 @@ Proyecto para conseguir un puesto como desarrollador .NET mid-senior y llegar a 
 
 **Regla más estricta — la memoria es un grafo:** la memoria del proyecto es esta bóveda completa; cada nota es un nodo y cada `[[enlace]]` una arista. Cada dato se guarda en la nota que le corresponde según la tabla de abajo y se enlaza a las notas relacionadas. Nunca se concentra la memoria en un solo `.md` (ni en [[01 Bitacora]], ni en [[CLAUDE]], ni en un resumen nuevo). Un dato sin nodo se vuelve una nota nueva, enlazada desde este índice y desde al menos una nota relacionada.
 
+**Regla de profundidad:** toda teoría o clase define cada término antes de usarlo y baja hasta los fundamentos; las dudas de Alex se registran en [[02 Contexto y perfil]] ("Cómo aprende Alex") y se responden en la nota de la que salieron.
+
 **Regla de estructura:** todo vive en la raíz, sin subcarpetas. Cada documento existe **una sola vez** como nota `.md`; si viene de un artifact de Claude o del generador del calendario, tiene además **un solo** `.pdf` con el mismo nombre. Las notas 08 y 09 son tuyas y no llevan PDF. La teoría de C# (10) y las **clases** (`NN Clase …`) se escriben en el repo y su `.pdf` se genera con `clase_pdf.py`. Las imágenes llevan el número de la nota que las usa.
 
 **Datos únicos del proyecto** (si cambian, se cambian en todos los archivos): ~12 h por semana (lun 1.5 h teoría, mar–jue 1.5 h código, vie 1 h búsqueda, sáb 4 h teoría, dom 45 min repos y revisión) · plan del 5 oct al 27 dic de 2026 · árbol de 8 niveles (0 a 7), ~28 h de teoría · Visual Studio 2026 + .NET 10 LTS · repos `plan-dotnet`, `SolicitudesApi` y `GcalPlan` · pretensión 30k MXN netos.
@@ -45,7 +47,7 @@ Busqueda empleo NET/
 | Cuando pasa esto… | Se modifican estos archivos (todos, en el mismo momento) |
 | --- | --- |
 | Cualquier cambio en la memoria del proyecto | El dato va **en su nodo** (el archivo afectado de esta tabla), enlazado con `[[ ]]` a sus notas relacionadas; `01 Bitacora` solo lleva una entrada fechada que enlaza a ese nodo. Nunca todo en un solo `.md` |
-| Cambia un dato de perfil (salario, experiencia, CV, brechas) | `02 Contexto y perfil` + `01 Bitacora` |
+| Cambia un dato de perfil (salario, experiencia, CV, brechas, cómo aprende, dudas nuevas) | `02 Contexto y perfil` + `01 Bitacora` |
 | Cambia el plan | `03 Plan para huir de DiSi.md` + `.pdf` (y el original en Claude Docs si la sesión lo permite); si cambian días, horas o tareas también el calendario; + `01 Bitacora` |
 | Cambia el calendario (días, horas, tareas) | Editar `calendario_datos.py` y correr `python calendario_render.py` (regenera `04` `.md` + `.pdf`); si cambia el resumen semanal, `03 Plan` `.md` + `.pdf`; + `01 Bitacora` |
 | Cambia el árbol de fundamentos | `05 Arbol de fundamentos.md` + `.pdf` (+ `05 diagrama arbol.png` si cambia el diagrama); + `01 Bitacora` |

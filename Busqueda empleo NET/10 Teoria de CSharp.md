@@ -14,7 +14,7 @@ El [[05 Arbol de fundamentos]] explica la computadora y la web, pero no el lengu
 
 | Día | Lectura (20 min) | Código (70 min) |
 | --- | --- | --- |
-| Mar 6 oct | 1. Qué es .NET · 2. Anatomía de un proyecto · 3. Tipos | Primer proyecto por CLI, tipos, desbordamiento → laboratorio en [[12 Clase Primer proyecto por CLI]] |
+| Mar 6 oct | 1. Qué es .NET (ampliada, ~35 min; si no alcanza, termínala antes del miércoles) · 2. Anatomía de un proyecto · 3. Tipos | Primer proyecto por CLI, tipos, desbordamiento → laboratorio en [[12 Clase Primer proyecto por CLI]] |
 | Mié 7 oct | 4. Control de flujo · 5. `double` vs. `decimal` | Ciclos y tabla de pagos |
 | Jue 8 oct | 6. Métodos · 7. Convenciones | `CalcularInteres` y commit de los 5 ejercicios |
 
@@ -24,47 +24,270 @@ Al terminar cada sección, contesta en voz alta sus preguntas de repaso sin mira
 
 ## 1. Qué es .NET y cómo corre tu código
 
-Tres cosas distintas que se confunden en entrevistas:
+Esta sección va de abajo hacia arriba: primero qué entiende la CPU, después cómo llega tu código hasta ahí, y al final cada pieza de .NET (compilador, runtime, SDK, CLI, CLR y DLL) con lo que hace en concreto. Ningún término se usa antes de explicarlo. Puede tomarte más de 20 minutos; está bien, esta sección es la base de todo lo demás.
+
+### 1.1 Lo único que entiende la CPU: código máquina
+
+La CPU no entiende C#, ni texto, ni palabras. Solo entiende **instrucciones**: números guardados en bytes, cada uno con un significado fijo para ese tipo de procesador. A eso se le llama **código máquina**.
+
+Por ejemplo, en un procesador Intel o AMD (arquitectura **x64**), los dos bytes `01 D8` significan "suma el registro B al registro A". Así de pequeño es cada paso: mover un número, sumar, comparar, saltar a otra instrucción. Un programa es una lista de millones de esas instrucciones.
+
+Dos consecuencias importantes:
+
+1. **Cada familia de procesadores tiene su propio código máquina.** Los bytes de x64 (tu PC) no significan lo mismo en **ARM64** (un celular, una Mac reciente). Un programa en código máquina para x64 no corre en ARM64.
+2. **Nadie escribe código máquina a mano.** Escribimos **código fuente** (texto en un lenguaje como C#) y algo tiene que traducirlo a código máquina.
+
+### 1.2 Qué significa compilar
+
+**Compilar** es traducir un programa completo de un lenguaje a otro **antes** de ejecutarlo, revisando que no tenga errores. El programa que hace eso se llama **compilador**.
+
+**Analogía:** compilar es como traducir un libro completo antes de publicarlo. Un **intérprete**, en cambio, es como un traductor simultáneo que va traduciendo frase por frase mientras el orador habla.
+
+Un compilador trabaja en cuatro pasos:
+
+| Paso | Qué hace | Ejemplo con `int plazo = 12;` |
+| --- | --- | --- |
+| 1. Análisis léxico | Corta el texto en piezas con significado (**tokens**) | `int` · `plazo` · `=` · `12` · `;` |
+| 2. Análisis sintáctico | Revisa que las piezas formen frases válidas del lenguaje | "tipo, nombre, igual, valor, punto y coma" es una declaración válida |
+| 3. Análisis semántico | Revisa que tengan sentido: tipos, nombres que existan | `12` sí cabe en un `int` |
+| 4. Generación de código | Escribe el resultado en el lenguaje destino | Instrucciones que guardan 12 en `plazo` |
+
+Si escribes `int plazo = "doce";`, el paso 3 falla: no se puede guardar texto en un `int`. El compilador te da el error **CS0029** y **no genera nada**: tu programa nunca llega a correr. Esa es la gran ventaja de un lenguaje compilado:
+
+- **Error en tiempo de compilación:** lo detecta el compilador, antes de ejecutar. Lo ves tú en Visual Studio.
+- **Error en tiempo de ejecución:** aparece mientras el programa corre. Lo ve el usuario, o el cliente en producción.
+
+**Comparación que ya conoces:** en JavaScript (tu React y Next.js) no hay un paso de compilación que revise tipos. `let plazo = "doce"; plazo * 2` corre y te da `NaN` en el navegador. En C# ese error no sale de tu máquina. TypeScript existe justamente para agregarle a JavaScript ese paso de revisión.
+
+### 1.3 La particularidad de C#: compila dos veces
+
+C# no compila directo a código máquina. Lo hace en **dos etapas**:
+
+```mermaid
+flowchart LR
+  A["Program.cs<br/>(texto C#)"] -->|"Etapa 1: Roslyn<br/>dotnet build"| B["Semana01.dll<br/>IL + metadatos"]
+  B -->|"Etapa 2: JIT al ejecutar<br/>dentro del CLR"| D["Código máquina<br/>x64 / ARM64"]
+  D --> E["CPU"]
+```
+
+1. **Al compilar (`dotnet build`):** el compilador de C#, llamado **Roslyn**, traduce tu código a **IL** (*Intermediate Language*, lenguaje intermedio). El IL es parecido al código máquina, pero no es de ningún procesador real: es de un procesador imaginario que define .NET. Se guarda en un archivo `.dll`.
+2. **Al ejecutar (`dotnet run`):** el **JIT** (*Just-In-Time compiler*, compilador "justo a tiempo") traduce el IL al código máquina del procesador donde estás corriendo, en ese momento, método por método.
+
+**¿Por qué dos etapas y no una?**
+- **Portabilidad:** la misma `.dll` corre en Windows x64, en un Linux ARM64 o en una Mac. El JIT de cada máquina hace la última traducción.
+- **Optimización para la máquina real:** el JIT sabe exactamente qué CPU tienes y puede usar sus instrucciones más nuevas.
+- **Metadatos:** la `.dll` guarda la descripción completa de tu código (clases, métodos, tipos). Eso permite cosas como `GetType()`, IntelliSense o la inyección de dependencias de ASP.NET Core (sección 1.7).
+
+El costo: la primera vez que se llama cada método hay que esperar al JIT. Por eso la primera petición a una API .NET recién arrancada es más lenta que las siguientes.
+
+### 1.4 Qué es un runtime
+
+"Runtime" significa "tiempo de ejecución" y se usa con dos sentidos:
+
+1. **El momento** en que el programa corre ("error en runtime" = error en tiempo de ejecución).
+2. **El software que tiene que estar instalado para que un programa pueda correr.** Este es el sentido de "el runtime de .NET".
+
+**Analogía:** un archivo `.mp4` no se reproduce solo; necesitas un reproductor de video. Tu `Semana01.dll` tampoco corre sola: tiene IL, que ninguna CPU entiende, así que necesita al runtime de .NET para traducirla y ejecutarla.
+
+**Ancla que ya conoces:** **Node.js** es el runtime de JavaScript fuera del navegador. Cuando corres `npm run dev` en Next.js, Node.js es quien ejecuta tu código. El runtime de .NET cumple el mismo papel para C#.
+
+**Qué contiene el runtime de .NET:**
+
+| Pieza | Qué es | Archivo real |
+| --- | --- | --- |
+| El **CLR** | El motor que ejecuta tu programa (sección 1.6) | `coreclr.dll` |
+| La **biblioteca base (BCL)** | Código ya escrito que tu programa usa: `Console`, `Math`, `string`, `List<T>`, `DateTime`… | Cientos de `.dll`: `System.Console.dll`, `System.Private.CoreLib.dll`… |
+| El **host** | El programa que arranca todo y busca el runtime correcto | `dotnet.exe` |
+
+**Míralo en tu máquina:** abre `C:\Program Files\dotnet\shared\Microsoft.NETCore.App\` y entra a la carpeta `10.0.x`. Vas a ver unos 200 archivos `.dll`: eso *es* el runtime. Ahí está `coreclr.dll` (el CLR) y `System.Console.dll` (donde vive el `Console.WriteLine` que usaste). En la misma carpeta `shared` hay otra llamada `Microsoft.AspNetCore.App`: el runtime extra que necesitan las APIs web. `dotnet --list-runtimes` te lista todo.
+
+**Por qué en DiSí nunca instalaste un runtime:** las apps de DiSí usan **.NET Framework 4.x**, que viene integrado en Windows. El **.NET moderno** (5, 6, 8, 10) se instala aparte y corre también en Linux y Mac. Para publicar una API .NET 10 en IIS se instala el **Hosting Bundle**, que es el runtime más el módulo que conecta IIS con .NET.
+
+### 1.5 Qué es el SDK y qué es una CLI
+
+**SDK** (*Software Development Kit*, kit de desarrollo) es la caja de herramientas para **construir** programas, no solo correrlos.
+
+**Analogía:** el runtime es el reproductor de video; el SDK es el estudio de edición completo, que además trae su propio reproductor para probar lo que editas.
+
+| El SDK trae | Para qué |
+| --- | --- |
+| **Roslyn** (`csc.dll`) | Compilar C# a IL |
+| **MSBuild** | El organizador de la compilación: lee tu `.csproj`, decide qué compilar, en qué orden y con qué paquetes. Visual Studio lo usa por debajo cuando presionas "Compilar" |
+| **Plantillas** | Los proyectos que crea `dotnet new console` |
+| **Cliente de NuGet** | Descargar paquetes (sección 1.8) |
+| **La CLI `dotnet`** | Los comandos para usar todo lo anterior |
+| **Un runtime** | Para correr lo que compilas |
+
+Se instala en `C:\Program Files\dotnet\sdk\`. Ojo con los números: el SDK `10.0.100` trae el runtime `10.0.0`; numeran distinto. `dotnet --info` te muestra los dos.
+
+**En resumen:** en tu máquina de desarrollo instalas el **SDK**; en un servidor de producción basta con el **runtime**.
+
+#### Qué es una CLI
+
+Hay dos formas de darle órdenes a un programa:
+
+- **GUI** (*Graphical User Interface*): con ventanas, botones y clics. Visual Studio es una GUI.
+- **CLI** (*Command Line Interface*, interfaz de línea de comandos): escribiendo comandos de texto.
+
+La **terminal** (PowerShell) es la ventana donde escribes; la **CLI** es el programa que recibe y ejecuta lo que escribes. `dotnet` es una CLI, igual que `git` y que `npm`, que ya usas.
+
+**Anatomía de un comando:**
+
+| `dotnet` | `new` | `console` | `-n Semana01` |
+| --- | --- | --- | --- |
+| El programa (`dotnet.exe`) | El subcomando: qué acción | El argumento: sobre qué | Una opción: cómo; `-n` es la forma corta de `--name` |
+
+**¿Para qué la CLI si existe Visual Studio?**
+- **Visual Studio la usa por debajo.** El botón "Compilar" hace lo mismo que `dotnet build`. Si entiendes la CLI, entiendes qué hace el IDE por ti.
+- **Se puede automatizar.** Un servidor de integración continua, como GitHub Actions en la semana 11, no tiene ventanas ni botones: solo ejecuta comandos.
+- **Es igual en todos lados:** Windows, Linux, Mac, Docker.
+
+Para explorar: `dotnet --help`, y `dotnet new --help` para ver las opciones de un subcomando.
+
+### 1.6 El CLR: qué hace en concreto
+
+**CLR** significa *Common Language Runtime*. Es el motor del runtime, el archivo `coreclr.dll`. Piensa en él como **el sistema operativo de tu programa**: Windows administra los programas de tu PC; el CLR administra todo lo que pasa dentro de tu programa .NET.
+
+Esto es lo que pasa, en orden, cuando ejecutas `dotnet run` o das doble clic a `Semana01.exe`:
+
+1. **Arranque.** El host lee `Semana01.runtimeconfig.json` para saber qué versión de runtime necesitas, la busca en `C:\Program Files\dotnet\shared\` y carga `coreclr.dll` dentro de tu proceso.
+2. **Preparación de la memoria.** El CLR reserva el **heap administrado**, la zona de memoria donde vivirán tus objetos, y arranca el **recolector de basura**.
+3. **Carga de ensamblados.** Abre `Semana01.dll`, lee sus metadatos y encuentra el **punto de entrada** (`Main`). Las demás `.dll` las carga hasta que las necesita: `System.Console.dll` se carga la primera vez que tu código usa `Console`.
+4. **Verificación de tipos.** Revisa que el código no haga operaciones ilegales, como tratar un número como si fuera la dirección de un objeto. Por eso en C# no hay los errores de memoria corrupta típicos de C y C++.
+5. **JIT.** Cada método se traduce a código máquina la primera vez que se llama, y esa traducción se reutiliza. Si un método se llama muchas veces (más de 30), el CLR lo vuelve a compilar con más optimizaciones. A esto se le llama **compilación por niveles** (*tiered compilation*).
+6. **Administración de memoria.** Cada vez que creas un objeto, el CLR le da espacio en el heap. Cuando ya nadie lo usa, el **recolector de basura** (GC) lo libera. Tú nunca liberas memoria a mano. Lo verás a fondo en la semana 2.
+7. **Excepciones.** Cuando algo falla (por ejemplo, la `OverflowException` del laboratorio), el CLR busca hacia atrás un `catch` que la maneje. Si no lo encuentra, termina el programa e imprime la **pila de llamadas** (*stack trace*): el camino exacto de métodos donde ocurrió.
+8. **Reflexión.** Como guarda los metadatos en memoria, tu código puede preguntar "¿de qué tipo es esto?". Eso es `GetType()`, que usas en el laboratorio del martes.
+9. **Hilos y código nativo.** Administra los hilos (semana 5, `async`) y permite llamar a `.dll` nativas de Windows cuando hace falta.
+
+**En DiSí:** tus apps de .NET Framework corren dentro de `w3wp.exe`, el proceso de IIS. Ahí adentro está cargado el CLR viejo (el de .NET Framework, archivo `clr.dll`). Es el mismo concepto, otra versión del motor.
+
+### 1.7 Qué es una DLL
+
+**DLL** significa *Dynamic-Link Library*, biblioteca de enlace dinámico. Es una idea de Windows de los años 80:
+
+- Una **biblioteca** es código ya escrito que otros programas reutilizan.
+- **Enlace estático:** copiar ese código dentro de cada programa que lo usa. Si 50 programas lo usan, hay 50 copias, y corregir un error obliga a recompilar los 50.
+- **Enlace dinámico:** el código vive en un archivo aparte (la `.dll`) y cada programa lo **carga al ejecutarse**. Una sola copia, compartida y actualizable por separado.
+
+#### Dos tipos de DLL con la misma extensión
+
+| | DLL nativa | DLL de .NET (ensamblado) |
+| --- | --- | --- |
+| Ejemplos | `kernel32.dll`, `coreclr.dll` | `Semana01.dll`, `System.Console.dll`, `Newtonsoft.Json.dll` |
+| Contiene | Código máquina de un procesador | **IL + metadatos** |
+| Quién la ejecuta | La CPU, directamente | El CLR, a través del JIT |
+| Corre en otro sistema operativo | No | Sí, si ahí hay runtime de .NET |
+
+A una DLL de .NET se le llama **ensamblado** (*assembly*). Las dos usan el mismo formato de archivo de Windows: **PE** (*Portable Executable*), el mismo de los `.exe`.
+
+**Compruébalo con lo que aprendiste el lunes:** todo archivo PE empieza con los bytes `4D 5A`, que en ASCII son las letras **MZ** (las iniciales de Mark Zbikowski, el ingeniero de Microsoft que diseñó el formato en los 80). En PowerShell, desde `Semana01`:
+
+```powershell
+Format-Hex .\bin\Debug\net10.0\Semana01.dll | Select-Object -First 3
+```
+
+Vas a ver `4D 5A` al principio. Estás leyendo tu propio programa en hexadecimal.
+
+#### Qué hay dentro de un ensamblado
+
+| Parte | Qué guarda | Para qué sirve |
+| --- | --- | --- |
+| **Encabezado PE** | Que es un archivo ejecutable de Windows | Que el sistema operativo lo reconozca |
+| **Encabezado CLI** | Que es código **administrado** (de .NET) | Que se sepa que lo debe ejecutar el CLR, no la CPU directo |
+| **Código IL** | Tus métodos traducidos a IL | Lo que el JIT convierte en código máquina |
+| **Metadatos** | Tablas con todas tus clases, métodos, parámetros y tipos, y todo lo que usas de otras `.dll` | Reflexión, IntelliSense, verificación de tipos |
+| **Manifiesto** | La identidad del ensamblado: nombre, versión, cultura, firma; y la lista de ensamblados de los que depende | Que el CLR sepa qué más cargar y qué versión |
+| **Recursos** | Archivos incrustados: imágenes, textos, traducciones | Llevar datos dentro del mismo archivo |
+
+Así se ve en IL tu `Console.WriteLine("Hola")`:
+
+```
+ldstr  "Hola"                                                  // pon el texto "Hola" en la pila
+call   void [System.Console]System.Console::WriteLine(string)  // llama a WriteLine, que está en System.Console.dll
+ret                                                            // regresa
+```
+
+Fíjate en `[System.Console]`: el IL dice exactamente en qué ensamblado está el método. Así sabe el CLR qué `.dll` cargar. En la semana 2 abrirás tu propia `.dll` con **ILSpy** y verás esto en tu código.
+
+#### Lo que caracteriza a un ensamblado de .NET
+
+- **Se describe a sí mismo:** con los metadatos no necesita archivos extra para que otro programa sepa qué contiene. Por eso al agregar una referencia, Visual Studio te muestra sus clases en IntelliSense.
+- **Tiene identidad con versión:** nombre + versión + cultura + firma. Dos versiones de la misma biblioteca son ensamblados distintos.
+- **Es portable:** el mismo archivo sirve para cualquier sistema operativo y procesador que tenga el runtime.
+- **Se carga por demanda:** el CLR lo carga hasta que se necesita, no al arrancar.
+- **Tu app también es una `.dll`:** en .NET moderno, `Semana01.exe` es solo un lanzador pequeño; tu programa real es `Semana01.dll`. Prueba `dotnet bin\Debug\net10.0\Semana01.dll`: corre igual, sin el `.exe`.
+
+**En DiSí:** la carpeta `bin` de tus apps MVC está llena de ensamblados: los tuyos y los de NuGet (`Newtonsoft.Json.dll`, etc.). ¿Has visto `<bindingRedirect>` en el `web.config`? Existe porque dos bibliotecas pedían versiones distintas del mismo ensamblado y había que decirle al CLR cuál cargar. En .NET Framework eso se llamaba el "infierno de las DLL"; el .NET moderno lo resuelve casi siempre solo.
+
+### 1.8 Cómo encajan todas las piezas
+
+```mermaid
+flowchart TB
+  subgraph SDK["SDK (tu máquina de desarrollo)"]
+    CLI["CLI dotnet"] --> MSB["MSBuild"] --> ROS["Roslyn"]
+  end
+  subgraph RT["Runtime (desarrollo y producción)"]
+    CLR["CLR: JIT, GC, excepciones"]
+    BCL["BCL: System.*.dll"]
+  end
+  SRC["Program.cs"] --> ROS --> DLL["Semana01.dll (ensamblado: IL + metadatos)"]
+  DLL --> CLR
+  BCL --> CLR
+  CLR --> CPU["Código máquina en la CPU"]
+```
+
+Y las tres palabras que se confunden en entrevistas:
 
 | Término | Qué es | Analogía |
 | --- | --- | --- |
 | **C#** | El lenguaje: la sintaxis y las reglas que escribes | El idioma |
-| **.NET** | La plataforma: runtime + bibliotecas + herramientas | El país donde se habla |
-| **CLR** (Common Language Runtime) | El motor que ejecuta tu programa: carga el código, administra la memoria, maneja excepciones | El intérprete en tiempo real |
+| **.NET** | La plataforma completa: runtime + bibliotecas + SDK | El país donde se habla |
+| **CLR** | El motor que ejecuta tu programa | El intérprete en tiempo real |
 
-En el plan usas **.NET 10 (LTS)**, que trae **C# 14**. LTS significa soporte de 3 años; las versiones pares son LTS y las impares duran 18 meses.
+En el plan usas **.NET 10 (LTS)**, que trae **C# 14**. LTS (*Long Term Support*) significa 3 años de soporte; las versiones pares son LTS y las impares duran menos.
 
-### SDK vs. runtime
+**NuGet** es el gestor de paquetes de .NET, como npm en JavaScript: descarga ensamblados de otros (por ejemplo, `Google.Apis.Calendar.v3` en la semana 8) y los deja disponibles para tu proyecto.
 
-- **Runtime:** lo mínimo para *ejecutar* apps .NET. Es lo que tendría un servidor de producción.
-- **SDK:** runtime + compilador + el comando `dotnet` + plantillas. Es lo que necesitas para *desarrollar*. `dotnet --list-sdks` muestra los que tienes.
+### Para comprobar en tu máquina (10 min)
 
-### De texto a instrucciones de CPU
-
-```mermaid
-flowchart LR
-  A["Program.cs<br/>(texto C#)"] -->|"Roslyn<br/>dotnet build"| B["Semana01.dll<br/>IL + metadatos"]
-  B -->|"dotnet run<br/>el CLR la carga"| C["JIT"]
-  C --> D["Código máquina<br/>x64 / ARM64"]
-  D --> E["CPU"]
-```
-
-1. **Compilación (`dotnet build`):** el compilador de C#, llamado **Roslyn**, revisa tipos y sintaxis y traduce tu código a **IL** (Intermediate Language), un lenguaje intermedio que no depende del procesador. El resultado es un **ensamblado** (`.dll`) con el IL y **metadatos** (qué clases y métodos existen).
-2. **Ejecución:** el CLR carga el ensamblado. La primera vez que se llama cada método, el **JIT** (Just-In-Time compiler) lo traduce de IL a código máquina del procesador real. Las siguientes llamadas usan ese código ya traducido.
-3. Mientras corre, el CLR administra la memoria: el **recolector de basura** (GC) libera los objetos que ya nadie usa. Por eso a C# se le llama **código administrado** (managed code).
-
-**Por qué importa:** el IL es la razón por la que la misma `.dll` corre en Windows, Linux y Mac. Y explica por qué la primera petición a una API .NET es más lenta que las demás (el JIT está trabajando). La semana 2 (nivel 0.4 del árbol) profundiza en stack, heap y GC.
-
-### Bibliotecas
-
-- **BCL** (Base Class Library): lo que ya viene con .NET: `Console`, `Math`, `string`, `List<T>`, `DateTime`, `HttpClient`…
-- **NuGet:** el gestor de paquetes de .NET, como npm en JavaScript. Lo usarás en la semana 8 con `Google.Apis.Calendar.v3`.
+1. `dotnet --info`: ubica la versión del SDK y la del runtime. ¿Son el mismo número?
+2. `dotnet --list-runtimes`: ¿cuántos runtimes tienes y de qué tipo?
+3. Abre `C:\Program Files\dotnet\shared\Microsoft.NETCore.App\10.0.x\` y encuentra `coreclr.dll` y `System.Console.dll`.
+4. Después del laboratorio del martes: `Format-Hex` sobre tu `Semana01.dll` y encuentra `4D 5A`.
+5. Ejecuta tu programa con `dotnet bin\Debug\net10.0\Semana01.dll`, sin el `.exe`.
 
 **Preguntas de repaso**
-- ¿Qué diferencia hay entre C#, .NET y el CLR?
-- ¿Qué contiene una `.dll` de .NET y por qué no es código máquina?
-- ¿Qué hace el JIT y cuándo?
-- ¿Para qué necesitas el SDK si ya tienes el runtime?
+- ¿Qué es el código máquina y por qué un programa para x64 no corre en ARM64?
+- ¿Qué significa compilar? ¿Qué diferencia hay entre un error de compilación y uno de ejecución?
+- ¿Por qué C# compila en dos etapas? ¿Qué ganas y qué pagas?
+- ¿Qué es un runtime? Dame un ejemplo fuera de .NET.
+- ¿Qué trae el SDK que no trae el runtime? ¿Qué instalas en un servidor de producción?
+- ¿Qué es una CLI y por qué Visual Studio no la reemplaza?
+- Cuenta qué hace el CLR desde que ejecutas tu programa hasta que imprime algo.
+- ¿Qué diferencia hay entre una DLL nativa y un ensamblado de .NET? ¿Qué contiene un ensamblado?
+
+**Tarjetas de repaso**
+
+#flashcards/csharp
+
+¿Qué es el código máquina?::Instrucciones en bytes que una familia de CPU entiende directamente; cada arquitectura (x64, ARM64) tiene el suyo
+¿Qué significa compilar?::Traducir el programa completo a otro lenguaje antes de ejecutarlo, revisando errores
+¿Error de compilación vs. de ejecución?::El de compilación lo detecta el compilador antes de correr; el de ejecución aparece mientras el programa corre
+¿Qué es el IL?::Intermediate Language: el lenguaje intermedio al que Roslyn compila C#; no es de ningún procesador real
+¿Qué es el JIT?::El compilador del CLR que traduce IL a código máquina al ejecutar, método por método, la primera vez que se llama
+¿Qué es un runtime?::El software que debe estar instalado para que un programa corra; en .NET: CLR + BCL + host
+¿Ejemplo de runtime fuera de .NET?::Node.js para JavaScript, la JVM para Java
+¿Qué trae el SDK?::Roslyn, MSBuild, plantillas, NuGet, la CLI dotnet y un runtime
+¿Qué se instala en producción, SDK o runtime?::Solo el runtime (en IIS, el Hosting Bundle)
+¿Qué es una CLI?::Command Line Interface: un programa que se usa con comandos de texto, como dotnet, git o npm
+¿Qué es MSBuild?::El organizador de la compilación: lee el .csproj y coordina compilar, resolver paquetes y copiar archivos
+¿Qué archivo es el CLR?::coreclr.dll (en .NET Framework, clr.dll)
+¿Qué es una DLL?::Dynamic-Link Library: código en un archivo aparte que los programas cargan al ejecutarse
+¿DLL nativa vs. ensamblado .NET?::La nativa tiene código máquina y la ejecuta la CPU; el ensamblado tiene IL + metadatos y lo ejecuta el CLR
+¿Qué contiene un ensamblado?::Encabezado PE, encabezado CLI, código IL, metadatos, manifiesto y recursos
+¿Con qué bytes empieza un .exe o .dll de Windows?::4D 5A, "MZ" en ASCII
+¿Qué es el manifiesto de un ensamblado?::Su identidad (nombre, versión, cultura, firma) y la lista de ensamblados de los que depende
 
 ---
 

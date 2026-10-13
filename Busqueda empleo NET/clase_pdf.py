@@ -39,9 +39,11 @@ def a_markdown_imprimible(md: str) -> str:
     md = re.sub(r"^#flashcards\S*\s*$", "", md, flags=re.M)               # etiqueta del plugin
     md = re.sub(r"^```mermaid\n(.*?)^```", lambda m: '<pre class="mermaid">' + html_lib.escape(m.group(1)) + "</pre>",
                 md, flags=re.S | re.M)                                     # diagramas
-    salida, tarjetas = [], []
+    salida, tarjetas, en_codigo = [], [], False
     for linea in md.split("\n") + [""]:
-        m = None if "`::`" in linea else re.match(r"^(?!\|)(.+?)::(.+)$", linea)
+        if linea.startswith("```"):
+            en_codigo = not en_codigo
+        m = None if en_codigo or "`::`" in linea else re.match(r"^(?!\|)(.+?)::(.+)$", linea)
         if m:
             tarjetas.append(m.groups()); continue
         if tarjetas:
