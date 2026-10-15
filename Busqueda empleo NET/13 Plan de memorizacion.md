@@ -102,12 +102,14 @@ Nombres de las unidades que siguen: `csharp/s2-anatomia-proyecto`, `csharp/s3-ti
 2. Lee la pregunta y **contesta en voz alta, completa**, antes de mostrar la respuesta. Si la pregunta tiene dos partes, contesta las dos.
 3. Muestra la respuesta y califícate con honestidad:
 
-| Botón | Cuándo usarlo |
-| --- | --- |
-| **Again** | No salió, o salió mal. La vuelve a mostrar en la misma sesión |
-| **Hard / Difícil** | Salió incompleta o te costó mucho |
-| **Good / Bien** | Salió completa, con algo de esfuerzo. Debe ser tu respuesta más común |
-| **Easy / Fácil** | Salió completa e inmediata |
+En el celular los botones no muestran el nombre, sino **en cuánto tiempo volverá la tarjeta**, por ejemplo `1m · 1d · 3d · 4d`. Van siempre en este orden, de izquierda a derecha:
+
+| Botón | Color | Cuándo usarlo |
+| --- | --- | --- |
+| **Again** | Rojo (el de minutos) | No salió, o salió mal. La vuelve a mostrar en la misma sesión |
+| **Hard / Difícil** | Naranja | Salió incompleta o te costó mucho |
+| **Good / Bien** | Azul | Salió completa, con algo de esfuerzo. Debe ser tu respuesta más común |
+| **Easy / Fácil** | Verde | Salió completa e inmediata |
 
 4. Al calificar, el plugin escribe al final de la línea de la tarjeta un comentario invisible como `<!--SR:!2026-10-18,3,250-->`: fecha del siguiente repaso, intervalo en días y facilidad. **No lo borres:** es la memoria del plugin.
 
