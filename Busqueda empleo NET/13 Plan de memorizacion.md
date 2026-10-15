@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, aprendizaje, memoria]
-actualizado: 2026-10-13
+actualizado: 2026-10-15
 ---
 > Sistema para recordar a largo plazo todo lo que estudias en el [[03 Plan para huir de DiSi]] · se aplica en cada día del [[04 Calendario dia por dia]] · técnicas explicadas en [[11 Clase 0.1 Datos]] · las tarjetas viven en cada nota: [[10 Teoria de CSharp]], [[11 Clase 0.1 Datos]], [[12 Clase Primer proyecto por CLI]], [[14 Evaluaciones]], [[15 Dudas resueltas]] · perfil en [[02 Contexto y perfil]] · Versión en PDF: [[13 Plan de memorizacion.pdf]]
 
@@ -33,14 +33,89 @@ Las calificaciones de [[14 Evaluaciones]] te dicen en qué nivel está cada conc
 
 ## El sistema: tarjetas en Obsidian
 
-### Instalación (una sola vez, 10 min)
+### Paso 1. Instalar el plugin (5 min, en la PC y en el celular)
 
-1. En Obsidian: Configuración → Plugins de la comunidad → Explorar → busca **Spaced Repetition** (autor: st3v3nmw) → Instalar → Activar.
-2. En la configuración del plugin, deja la etiqueta de tarjetas como `#flashcards`. Tus notas usan `#flashcards/fundamentos`, `#flashcards/csharp`, `#flashcards/errores` y `#flashcards/dudas`: el plugin las agrupa como mazos.
-3. Para repasar: paleta de comandos → **Spaced Repetition: Review flashcards in all notes**.
-4. Por cada tarjeta, piensa la respuesta **en voz alta** antes de voltearla y luego califícate con honestidad: **Hard** (no salió o salió a medias), **Good** (salió con esfuerzo), **Easy** (salió inmediato). El plugin calcula cuándo volver a mostrártela.
+1. En Obsidian: **Configuración → Plugins de la comunidad**. Si dice "Modo restringido", desactívalo.
+2. **Explorar** → busca **Spaced Repetition** (autor: Stephen Mwangi, versión 1.15 o mayor) → **Instalar** → **Activar**.
+3. Repite lo mismo en el celular. La configuración de los plugins no viaja por Git (la carpeta `.obsidian/` está excluida a propósito), así que cada dispositivo se configura una vez.
 
-El plugin agrega a la nota un comentario con la fecha del siguiente repaso de cada tarjeta. Así se sincroniza solo entre tu PC y tu celular con Git.
+### Paso 2. Configurar (5 min, en cada dispositivo)
+
+Configuración → Spaced Repetition. Solo cambia lo que dice **Cambiar**; lo demás déjalo como viene. Si tu Obsidian está en español, el plugin también lo estará: te pongo los dos nombres.
+
+| Opción (inglés / español) | Valor | Por qué |
+| --- | --- | --- |
+| Flashcard tags / Etiquetas de las tarjetas de memorización | `#flashcards` | Ya viene así. Encuentra todas tus notas con `#flashcards/…` |
+| Convert folders to decks / ¿Convertir directorios a mazos? | Desactivado | Ya viene así. Los mazos salen de las etiquetas, no de carpetas |
+| **Convert ==highlights== to clozes / ¿Convertir ==resaltados== a deletreo de huecos?** | **Cambiar: desactivado** | Si queda activo, cualquier texto entre `==` se vuelve tarjeta. En la teoría hay una tabla con el operador `==` de C# que crearía una tarjeta falsa |
+| Convert \*\*bolded text\*\* to clozes / ¿Convertir texto en negrita…? | Desactivado | Ya viene así. Tus notas usan muchas negritas; si se activa, cada una sería una tarjeta |
+| Separator for inline flashcards / Separador de tarjetas en línea | `::` | Ya viene así. Es el formato de todas tus tarjetas |
+| Algorithm / Algoritmo | **SM-2-OSR** | Ya viene así. Es el algoritmo clásico de repetición espaciada (el de Anki), probado por años. El plugin también ofrece **FSRS**, más moderno, pero el propio plugin advierte que todavía está poco probado y puede perder datos al cambiar: **no lo actives** |
+| **Save scheduling comment on the same line / ¿Guardar el comentario de programación en la última línea?** | **Cambiar: activado** | Así la fecha de repaso queda al final de la misma línea de la tarjeta: cada tarjeta sigue ocupando una sola línea y las notas se ven más limpias |
+| Show context in cards | Activado | Ya viene así. Muestra de qué nota y sección sale la tarjeta |
+| Show interval in review buttons | Activado | Ya viene así. Ves en cuántos días volverá la tarjeta según el botón que elijas |
+| Status bar | Activado | Ya viene así. Abajo a la derecha verás cuántas tarjetas te tocan hoy |
+
+### Paso 3. Comprobar que lee tus tarjetas (2 min)
+
+Abre la paleta de comandos → **Spaced Repetition: Review flashcards from all notes** (en español: **Revisar tarjetas de todas las notas**). Debe aparecer este árbol de mazos:
+
+| Mazo | Nota de origen | Tarjetas |
+| --- | --- | --- |
+| `flashcards/csharp` | [[10 Teoria de CSharp]] (17) y [[12 Clase Primer proyecto por CLI]] (11) | 28 |
+| `flashcards/dudas` | [[15 Dudas resueltas]] | 12 |
+| `flashcards/errores` | [[14 Evaluaciones]] | 9 |
+| `flashcards/fundamentos` | [[11 Clase 0.1 Datos]] | 17 |
+| **Total** | | **66** |
+
+Si los números no coinciden, avísame con una captura antes de repasar.
+
+### Los mazos
+
+Cada nota con tarjetas lleva **una sola** etiqueta de mazo, en su propia línea, justo antes de sus tarjetas. Los mazos son por área, no por fecha:
+
+| Etiqueta | Qué va ahí |
+| --- | --- |
+| `#flashcards/fundamentos` | Árbol de fundamentos: datos, hardware, sistema operativo, redes, HTTP, criptografía… |
+| `#flashcards/csharp` | Lenguaje C# y plataforma .NET |
+| `#flashcards/errores` | Lo que fallaste en [[14 Evaluaciones]]. Es el mazo más importante |
+| `#flashcards/dudas` | Lo que preguntaste fuera de clase ([[15 Dudas resueltas]]) |
+
+Cuando lleguen temas nuevos (ASP.NET Core, SQL, OAuth) se agrega un mazo por área, por ejemplo `#flashcards/aspnet`, y se registra en esta tabla.
+
+### Cómo repasar
+
+1. Paleta de comandos → **Review flashcards from all notes** (**Revisar tarjetas de todas las notas**), o el ícono de tarjetas en la barra lateral.
+2. Lee la pregunta y **contesta en voz alta, completa**, antes de mostrar la respuesta. Si la pregunta tiene dos partes, contesta las dos.
+3. Muestra la respuesta y califícate con honestidad:
+
+| Botón | Cuándo usarlo |
+| --- | --- |
+| **Again** | No salió, o salió mal. La vuelve a mostrar en la misma sesión |
+| **Hard / Difícil** | Salió incompleta o te costó mucho |
+| **Good / Bien** | Salió completa, con algo de esfuerzo. Debe ser tu respuesta más común |
+| **Easy / Fácil** | Salió completa e inmediata |
+
+4. Al calificar, el plugin escribe al final de la línea de la tarjeta un comentario invisible como `<!--SR:!2026-10-18,3,250-->`: fecha del siguiente repaso, intervalo en días y facilidad. **No lo borres:** es la memoria del plugin.
+
+### El repaso y Git (importante)
+
+Como las fechas de repaso se guardan **dentro de las notas**, si repasas en el celular y en la PC el mismo día sin sincronizar, Git puede marcar un conflicto. Para evitarlo:
+
+1. **Antes de repasar:** paleta de comandos → **Git: Pull**.
+2. **Repasa en un solo dispositivo por día.**
+3. **Al terminar:** paleta de comandos → **Git: Commit-and-sync**.
+
+Si aun así aparece un conflicto, no lo resuelvas a mano: avísame y lo arreglo desde el repositorio.
+
+### Primer repaso (hoy, 15 min)
+
+Las 66 tarjetas son nuevas, así que el primer día te las mostrará todas. Después de hoy, cada día verás solo las que te toquen.
+
+1. Haz `Git: Pull`.
+2. Empieza por el mazo **errores**, luego **dudas**, **fundamentos** y **csharp**.
+3. Si una respuesta no la entiendes (no solo que no la recuerdes), márcala **Again** y anótala para preguntarme.
+4. Termina con `Git: Commit-and-sync`.
 
 ### Cómo escribir tus propias tarjetas
 
@@ -102,8 +177,8 @@ Los conceptos aislados se olvidan; una historia se recuerda. Esta une todo lo de
 
 | Señal | Qué significa | Qué hacer |
 | --- | --- | --- |
-| Más del 85% de tarjetas en Good o Easy | El sistema funciona | Seguir igual |
-| Muchas tarjetas en Hard | Estás memorizando sin entender | Volver a la nota y explicarla en voz alta antes de seguir |
+| Más del 85% de tarjetas en Good o Easy (Bien o Fácil) | El sistema funciona | Seguir igual |
+| Muchas tarjetas en Again o Hard | Estás memorizando sin entender | Volver a la nota y explicarla en voz alta antes de seguir |
 | La misma tarjeta falla 3 veces | La tarjeta está mal hecha | Reescribirla o dividirla |
 | El repaso diario pasa de 15 min | Agregas tarjetas más rápido de lo que las aprendes | Una semana sin tarjetas nuevas |
 | Las calificaciones de [[14 Evaluaciones]] suben mes con mes | Retención a largo plazo | Ese es el objetivo |

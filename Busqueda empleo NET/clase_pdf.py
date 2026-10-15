@@ -37,6 +37,7 @@ def a_markdown_imprimible(md: str) -> str:
     md = re.sub(r"\[\[([^\]|]+)\|([^\]]+)\]\]", r"\2", md)                 # [[nota|texto]] -> texto
     md = re.sub(r"\[\[([^\]]+)\]\]", r"\1", md)                            # [[nota]] -> nota
     md = re.sub(r"^#flashcards\S*\s*$", "", md, flags=re.M)               # etiqueta del plugin
+    md = re.sub(r"\s?<!--SR:.*?-->", "", md)                             # fechas de repaso del plugin
     md = re.sub(r"^```mermaid\n(.*?)^```", lambda m: '<pre class="mermaid">' + html_lib.escape(m.group(1)) + "</pre>",
                 md, flags=re.S | re.M)                                     # diagramas
     salida, tarjetas, en_codigo = [], [], False

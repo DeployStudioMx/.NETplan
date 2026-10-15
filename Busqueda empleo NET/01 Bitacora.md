@@ -1,10 +1,13 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-10-13
+actualizado: 2026-10-15
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-10-15
+- Definida la configuración completa del plugin Spaced Repetition en [[13 Plan de memorizacion]], verificada contra el código del plugin (v1.15.4): desactivar "Convert highlights to clozes" (el operador `==` de una tabla de [[10 Teoria de CSharp]] crearía una tarjeta falsa), activar el comentario de programación en la misma línea, quedarse con el algoritmo SM-2-OSR (FSRS lo marca el propio plugin como experimental). Definidos los 4 mazos (66 tarjetas), cómo repasar, cómo evitar conflictos de Git y el primer repaso. `clase_pdf.py` ahora oculta las fechas de repaso del plugin en los PDF.
 
 ## 2026-10-13
 - Agregadas las respuestas textuales de Alex a [[14 Evaluaciones]]. Fin de la sesión del día.
@@ -61,7 +64,9 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - Creada la ruta a .NET senior (12 temas por peso, orden por trimestres de 2027, con el flujo completo de una aplicación de Program.cs a la base de datos) → [[07 Ruta a NET senior]]. Tema de mayor interés: entender el flujo y la estructura de una aplicación completa.
 
 ## Pendientes
-- [ ] **Próxima sesión, lo primero:** configurar y definir por completo [[13 Plan de memorizacion]] con las tarjetas de Obsidian (instalar y configurar el plugin Spaced Repetition, revisar mazos y tarjetas existentes, primer repaso). Después, seguir con la sección 2 de [[10 Teoria de CSharp]]
+- [x] Definir por completo la configuración de las tarjetas en [[13 Plan de memorizacion]] (2026-10-15)
+- [ ] Instalar y configurar el plugin Spaced Repetition en la PC y en el celular, comprobar los 4 mazos (66 tarjetas) y hacer el primer repaso ([[13 Plan de memorizacion]], pasos 1 a 3)
+- [ ] Después: seguir con la sección 2 de [[10 Teoria de CSharp]]
 - [ ] Exámenes acumulados: 31 oct, 28 nov y 26 dic ([[13 Plan de memorizacion]])
 - [ ] Escribir en [[10 Teoria de CSharp]] la teoría de las semanas 2 a 5, cada una antes de que empiece (semana 2: antes del 13 oct)
 - [ ] Confirmar que las ~12 horas por semana son realistas
