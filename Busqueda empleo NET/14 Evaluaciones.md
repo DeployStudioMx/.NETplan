@@ -52,14 +52,13 @@ Primera lectura, sin haber hecho todavía el laboratorio.
 
 ### Tarjetas de los errores
 
-#flashcards/errores
 
-¿Por qué un programa compilado para x64 no corre en ARM64?::Cada familia de procesador tiene su propio código máquina; los mismos bytes significan otra cosa
-¿Qué pagas por compilar en dos etapas (IL + JIT)?::Un arranque más lento: la primera llamada a cada método espera al JIT
-¿Cómo se llama la ventaja de que la misma .dll corra en cualquier sistema?::Portabilidad
-¿Qué piezas distinguen al SDK del runtime?::Roslyn, MSBuild, plantillas, cliente de NuGet y la CLI dotnet
-¿Qué se instala en un servidor de producción?::Solo el runtime (en IIS, el Hosting Bundle)
-¿Quién lee runtimeconfig.json y carga el CLR?::El host (dotnet.exe o el .exe lanzador), no el CLR
-¿Qué contiene una DLL nativa?::Código máquina para una CPU específica
-¿Qué dice el manifiesto de un ensamblado?::Su propia identidad (nombre, versión, cultura, firma) y de qué ensamblados depende
-¿Cuál es la mejor razón para usar la CLI aunque exista Visual Studio?::Se puede automatizar en servidores sin pantalla (CI) y es igual en todos los sistemas
+#flashcards/csharp/s1-plataforma-net/errores ¿Por qué un programa compilado para x64 no corre en ARM64?::Cada familia de procesador tiene su propio código máquina; los mismos bytes significan otra cosa
+#flashcards/csharp/s1-plataforma-net/errores ¿Qué pagas por compilar en dos etapas (IL + JIT)?::Un arranque más lento: la primera llamada a cada método espera al JIT
+#flashcards/csharp/s1-plataforma-net/errores ¿Cómo se llama la ventaja de que la misma .dll corra en cualquier sistema?::Portabilidad
+#flashcards/csharp/s1-plataforma-net/errores ¿Qué piezas distinguen al SDK del runtime?::Roslyn, MSBuild, plantillas, cliente de NuGet y la CLI dotnet
+#flashcards/csharp/s1-plataforma-net/errores ¿Qué se instala en un servidor de producción?::Solo el runtime (en IIS, el Hosting Bundle)
+#flashcards/csharp/s1-plataforma-net/errores ¿Quién lee runtimeconfig.json y carga el CLR?::El host (dotnet.exe o el .exe lanzador), no el CLR
+#flashcards/csharp/s1-plataforma-net/errores ¿Qué contiene una DLL nativa?::Código máquina para una CPU específica
+#flashcards/csharp/s1-plataforma-net/errores ¿Qué dice el manifiesto de un ensamblado?::Su propia identidad (nombre, versión, cultura, firma) y de qué ensamblados depende
+#flashcards/csharp/s1-plataforma-net/errores ¿Cuál es la mejor razón para usar la CLI aunque exista Visual Studio?::Se puede automatizar en servidores sin pantalla (CI) y es igual en todos los sistemas

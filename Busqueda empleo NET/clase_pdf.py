@@ -49,7 +49,7 @@ def a_markdown_imprimible(md: str) -> str:
             tarjetas.append(m.groups()); continue
         if tarjetas:
             salida += ["", "<!--tarjetas-->", "| Pregunta | Respuesta |", "| --- | --- |"]
-            salida += [f"| {q.strip()} | {a.strip()} |" for q, a in tarjetas] + [""]
+            salida += [f"| {re.sub(r'^#\S+\s+', '', q.strip())} | {a.strip()} |" for q, a in tarjetas] + [""]
             tarjetas = []
         salida.append(linea)
     return "\n".join(salida)

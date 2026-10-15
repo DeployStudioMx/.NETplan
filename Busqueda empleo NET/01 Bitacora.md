@@ -7,6 +7,7 @@ actualizado: 2026-10-15
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-15
+- Mazos reorganizados **por unidad de estudio** para repasar solo lo ya estudiado: cada tarjeta empieza con su etiqueta (`#flashcards/csharp/s1-plataforma-net`, `…/errores`, `…/dudas`, `csharp/lab-primer-proyecto`, `fundamentos/0-1-datos`). Agregados a [[13 Plan de memorizacion]] el protocolo de cada unidad (día 0, 1, 2, 4, 8, 21), la respuesta a "¿releer o no?", el plan concreto para la sección 1 estudiada el 14 oct y el registro de unidades. Retiquetadas las tarjetas de [[10 Teoria de CSharp]], [[11 Clase 0.1 Datos]], [[12 Clase Primer proyecto por CLI]], [[14 Evaluaciones]] y [[15 Dudas resueltas]] (solo la etiqueta, sin cambiar contenido); PDFs regenerados.
 - Definida la configuración completa del plugin Spaced Repetition en [[13 Plan de memorizacion]], verificada contra el código del plugin (v1.15.4): desactivar "Convert highlights to clozes" (el operador `==` de una tabla de [[10 Teoria de CSharp]] crearía una tarjeta falsa), activar el comentario de programación en la misma línea, quedarse con el algoritmo SM-2-OSR (FSRS lo marca el propio plugin como experimental). Definidos los 4 mazos (66 tarjetas), cómo repasar, cómo evitar conflictos de Git y el primer repaso. `clase_pdf.py` ahora oculta las fechas de repaso del plugin en los PDF.
 
 ## 2026-10-13
@@ -65,7 +66,10 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 
 ## Pendientes
 - [x] Definir por completo la configuración de las tarjetas en [[13 Plan de memorizacion]] (2026-10-15)
-- [ ] Instalar y configurar el plugin Spaced Repetition en la PC y en el celular, comprobar los 4 mazos (66 tarjetas) y hacer el primer repaso ([[13 Plan de memorizacion]], pasos 1 a 3)
+- [ ] Instalar y configurar el plugin Spaced Repetition en la PC y en el celular y comprobar el árbol de mazos (66 tarjetas) ([[13 Plan de memorizacion]], pasos 1 a 3)
+- [ ] Hoy 15 oct: día 1 de la sección 1 (volcado de memoria, comparar, releer lo que faltó, primer repaso del mazo `s1-plataforma-net`) ([[13 Plan de memorizacion]])
+- [ ] Jue 22 oct: segunda evaluación de la sección 1 en [[14 Evaluaciones]]
+- [ ] Confirmar si Alex ya estudió la clase de 0.1 Datos ([[11 Clase 0.1 Datos]]) para activar su mazo
 - [ ] Después: seguir con la sección 2 de [[10 Teoria de CSharp]]
 - [ ] Exámenes acumulados: 31 oct, 28 nov y 26 dic ([[13 Plan de memorizacion]])
 - [ ] Escribir en [[10 Teoria de CSharp]] la teoría de las semanas 2 a 5, cada una antes de que empiece (semana 2: antes del 13 oct)

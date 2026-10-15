@@ -58,30 +58,43 @@ Configuración → Spaced Repetition. Solo cambia lo que dice **Cambiar**; lo de
 
 ### Paso 3. Comprobar que lee tus tarjetas (2 min)
 
-Abre la paleta de comandos → **Spaced Repetition: Review flashcards from all notes** (en español: **Revisar tarjetas de todas las notas**). Debe aparecer este árbol de mazos:
+Abre la paleta de comandos → **Spaced Repetition: Review flashcards from all notes** (en español: **Revisar tarjetas de todas las notas**). **No empieces a repasar todavía.** Primero revisa que aparezca este árbol de mazos:
 
-| Mazo | Nota de origen | Tarjetas |
-| --- | --- | --- |
-| `flashcards/csharp` | [[10 Teoria de CSharp]] (17) y [[12 Clase Primer proyecto por CLI]] (11) | 28 |
-| `flashcards/dudas` | [[15 Dudas resueltas]] | 12 |
-| `flashcards/errores` | [[14 Evaluaciones]] | 9 |
-| `flashcards/fundamentos` | [[11 Clase 0.1 Datos]] | 17 |
-| **Total** | | **66** |
+```
+flashcards
+├── csharp
+│   ├── s1-plataforma-net          17  (+ sus submazos = 38)
+│   │   ├── errores                 9
+│   │   └── dudas                  12
+│   └── lab-primer-proyecto        11
+└── fundamentos
+    └── 0-1-datos                  17
+                         Total:    66
+```
 
 Si los números no coinciden, avísame con una captura antes de repasar.
 
-### Los mazos
+### Los mazos: uno por unidad de estudio
 
-Cada nota con tarjetas lleva **una sola** etiqueta de mazo, en su propia línea, justo antes de sus tarjetas. Los mazos son por área, no por fecha:
+**Regla de oro: solo repasas los mazos de lo que ya estudiaste.** Por eso los mazos no son por área en general, sino por **unidad**: lo que estudias en una sesión (una sección de la teoría, una clase, un laboratorio).
 
-| Etiqueta | Qué va ahí |
-| --- | --- |
-| `#flashcards/fundamentos` | Árbol de fundamentos: datos, hardware, sistema operativo, redes, HTTP, criptografía… |
-| `#flashcards/csharp` | Lenguaje C# y plataforma .NET |
-| `#flashcards/errores` | Lo que fallaste en [[14 Evaluaciones]]. Es el mazo más importante |
-| `#flashcards/dudas` | Lo que preguntaste fuera de clase ([[15 Dudas resueltas]]) |
+Cada tarjeta empieza con la etiqueta de su mazo, en la misma línea:
 
-Cuando lleguen temas nuevos (ASP.NET Core, SQL, OAuth) se agrega un mazo por área, por ejemplo `#flashcards/aspnet`, y se registra en esta tabla.
+```
+#flashcards/csharp/s1-plataforma-net ¿Qué es el JIT?::El compilador del CLR que traduce IL a código máquina…
+```
+
+Al repasar, la etiqueta no se ve: solo la pregunta. Los errores y las dudas de una unidad son **submazos** de esa unidad (`…/errores`, `…/dudas`): cuando abres la unidad, el plugin incluye sus submazos.
+
+| Mazo | Unidad | Tarjetas en |
+| --- | --- | --- |
+| `flashcards/fundamentos/0-1-datos` | Clase 0.1 Datos | [[11 Clase 0.1 Datos]] |
+| `flashcards/csharp/s1-plataforma-net` | Teoría de C#, sección 1 | [[10 Teoria de CSharp]] |
+| `flashcards/csharp/s1-plataforma-net/errores` | Lo que fallaste de la sección 1 | [[14 Evaluaciones]] |
+| `flashcards/csharp/s1-plataforma-net/dudas` | Lo que preguntaste al leer la sección 1 | [[15 Dudas resueltas]] |
+| `flashcards/csharp/lab-primer-proyecto` | Laboratorio del 6 oct | [[12 Clase Primer proyecto por CLI]] |
+
+Nombres de las unidades que siguen: `csharp/s2-anatomia-proyecto`, `csharp/s3-tipos`, `fundamentos/0-1-texto`, `fundamentos/0-2-hardware`, etc. Cada unidad nueva se agrega a esta tabla y al [[#Registro de unidades|registro de unidades]].
 
 ### Cómo repasar
 
@@ -108,14 +121,11 @@ Como las fechas de repaso se guardan **dentro de las notas**, si repasas en el c
 
 Si aun así aparece un conflicto, no lo resuelvas a mano: avísame y lo arreglo desde el repositorio.
 
-### Primer repaso (hoy, 15 min)
+### Cómo elegir qué mazo repasar
 
-Las 66 tarjetas son nuevas, así que el primer día te las mostrará todas. Después de hoy, cada día verás solo las que te toquen.
+En la ventana de repaso aparece el árbol de mazos con el número de tarjetas pendientes. **Haz clic en el mazo de la unidad**, no en "flashcards", para repasar solo esa unidad. Cuando ya estudiaste varias unidades, haz clic en el mazo de arriba (`flashcards`) y repasas todo lo que te toque ese día.
 
-1. Haz `Git: Pull`.
-2. Empieza por el mazo **errores**, luego **dudas**, **fundamentos** y **csharp**.
-3. Si una respuesta no la entiendes (no solo que no la recuerdes), márcala **Again** y anótala para preguntarme.
-4. Termina con `Git: Commit-and-sync`.
+Las tarjetas de una unidad que todavía no estudias se quedan quietas: el plugin no las cuenta como atrasadas hasta que las repases por primera vez.
 
 ### Cómo escribir tus propias tarjetas
 
@@ -127,7 +137,49 @@ Las mejores tarjetas son las que escribes tú. Reglas:
 - **Cada error se vuelve tarjeta.** Lo que fallaste en una evaluación es exactamente lo que más necesitas repasar.
 - **Si una tarjeta te falla tres veces seguidas, no la repitas más: reescríbela** o divídela. El problema es la tarjeta o que falta entender algo.
 
-Formato: `pregunta::respuesta`, una por línea, debajo de una etiqueta `#flashcards/…`.
+Formato: `#flashcards/<área>/<unidad> pregunta::respuesta`, una tarjeta por línea.
+
+## Cada unidad nueva: el protocolo
+
+Así se trata **cada** cosa que estudias, desde el día en que la estudias. Las tarjetas las maneja el plugin; lo demás lo haces tú.
+
+| Día | Qué haces | Tiempo |
+| --- | --- | --- |
+| **Día 0** (estudias) | Estudias la unidad. Al final, 2 minutos de Feynman en voz alta | La sesión |
+| **Día 1** | 1. **Volcado de memoria** sin mirar. 2. Comparas con la nota y marcas lo que faltó. 3. Relees **solo** lo que faltó. 4. **Primer repaso** del mazo de la unidad | 30–40 min |
+| **Día 2** | Tarjetas que te toquen (el plugin decide) + cuentas la unidad en voz alta 3 min | 10 min |
+| **Día 4** aprox. | Tarjetas + Feynman de los 2 conceptos que más te cuesten | 10 min |
+| **Día 8** aprox. | **Evaluación:** contestas por escrito las preguntas de repaso de la unidad, sin mirar. Claude te califica en [[14 Evaluaciones]] y compara con la anterior | 20 min |
+| **Día 21** en adelante | Solo tarjetas (el plugin espacia cada vez más) + el examen acumulado del mes | — |
+
+### ¿Releer o no releer?
+
+**Al día siguiente, primero intenta recordar y solo después relee.** Releer de entrada se siente útil porque todo te suena conocido, pero "me suena" no es "lo sé explicar". Si primero intentas sacar la información y fallas, el esfuerzo marca exactamente qué te falta, y la relectura posterior de *solo esas partes* se queda mucho mejor.
+
+Y que al día siguiente "casi no recuerdes nada" es **normal**: es la curva del olvido funcionando. No significa que estudiaste mal. Significa que hoy toca el primer repaso.
+
+## Ejemplo: la sección 1 de C#, estudiada el 14 oct
+
+Este es el plan concreto para lo que estudiaste ayer. Unidad: **sección 1 de [[10 Teoria de CSharp]]**, mazo `csharp/s1-plataforma-net` (38 tarjetas con errores y dudas).
+
+### Hoy, jueves 15 oct (día 1, unos 40 min)
+
+1. **Volcado de memoria (10 min), sin mirar nada.** En una hoja en blanco dibuja el recorrido de tu código, de `Program.cs` hasta la CPU, y escribe junto a cada paso lo que recuerdes. Usa como guía estas 8 palabras: *compilar, IL, JIT, runtime, SDK, CLI, CLR, DLL*. Si de una no recuerdas nada, déjala en blanco: está bien.
+2. **Comparar (5 min).** Abre la sección 1 y marca con otro color lo que te faltó o tenías mal.
+3. **Releer solo lo marcado (10 min).** No toda la sección: solo esas partes.
+4. **Primer repaso del mazo (15 min).** `Git: Pull` → **Review flashcards from all notes** → haz clic en `s1-plataforma-net`. Te salen las 38 (17 de la teoría, 9 de errores, 12 de dudas). Contesta en voz alta cada una antes de voltearla. `Git: Commit-and-sync` al terminar.
+
+**No abras** `lab-primer-proyecto`: todavía no haces ese laboratorio. Y `0-1-datos` ábrelo solo si ya estudiaste la clase de 0.1 Datos.
+
+### Los días siguientes
+
+| Fecha | Día | Qué haces |
+| --- | --- | --- |
+| Vie 16 oct | 2 | Tarjetas que te toquen + cuenta en voz alta "El viaje de Program.cs" (3 min) |
+| Dom 18 oct | 4 | En la revisión semanal: tarjetas + Feynman de los 2 conceptos que más te cuesten |
+| Jue 22 oct | 8 | **Segunda evaluación:** las 8 preguntas de repaso de la sección 1, por escrito y sin mirar. Meta: pasar de 6.9 a 8 o más |
+| Sáb 31 oct | 17 | Entra en el primer examen acumulado |
+| Desde ahí | — | Solo tarjetas, cuando el plugin te las muestre |
 
 ## La rutina
 
@@ -156,6 +208,16 @@ Al inicio de la sesión del último sábado del mes: **31 oct, 28 nov y 26 dic**
 
 - **10 minutos diarios de tarjetas**, aunque ya no estudies temas nuevos. Las tarjetas que ya dominas aparecerán cada varios meses; casi no cuesta tiempo.
 - **Un examen acumulado al mes** hasta tener empleo nuevo. En la semana previa a cada entrevista, uno extra.
+
+## Registro de unidades
+
+Una fila por unidad. Se actualiza cuando estudias una unidad nueva y después de cada evaluación.
+
+| Unidad | Mazo | Tarjetas | Estudiada | Primer repaso | Evaluaciones | Estado |
+| --- | --- | --- | --- | --- | --- | --- |
+| Teoría C#, sección 1 | `csharp/s1-plataforma-net` | 38 | 13 y 14 oct | 15 oct (planeado) | 13 oct: 6.9 · 22 oct: pendiente | En repaso |
+| Clase 0.1 Datos | `fundamentos/0-1-datos` | 17 | Por confirmar | — | — | Por confirmar si ya se estudió |
+| Laboratorio 6 oct | `csharp/lab-primer-proyecto` | 11 | — | — | — | Sin estudiar |
 
 ## Historia para recordar el recorrido completo
 

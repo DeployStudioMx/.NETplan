@@ -269,25 +269,24 @@ En el plan usas **.NET 10 (LTS)**, que trae **C# 14**. LTS (*Long Term Support*)
 
 **Tarjetas de repaso**
 
-#flashcards/csharp
 
-¿Qué es el código máquina?::Instrucciones en bytes que una familia de CPU entiende directamente; cada arquitectura (x64, ARM64) tiene el suyo
-¿Qué significa compilar?::Traducir el programa completo a otro lenguaje antes de ejecutarlo, revisando errores
-¿Error de compilación vs. de ejecución?::El de compilación lo detecta el compilador antes de correr; el de ejecución aparece mientras el programa corre
-¿Qué es el IL?::Intermediate Language: el lenguaje intermedio al que Roslyn compila C#; no es de ningún procesador real
-¿Qué es el JIT?::El compilador del CLR que traduce IL a código máquina al ejecutar, método por método, la primera vez que se llama
-¿Qué es un runtime?::El software que debe estar instalado para que un programa corra; en .NET: CLR + BCL + host
-¿Ejemplo de runtime fuera de .NET?::Node.js para JavaScript, la JVM para Java
-¿Qué trae el SDK?::Roslyn, MSBuild, plantillas, NuGet, la CLI dotnet y un runtime
-¿Qué se instala en producción, SDK o runtime?::Solo el runtime (en IIS, el Hosting Bundle)
-¿Qué es una CLI?::Command Line Interface: un programa que se usa con comandos de texto, como dotnet, git o npm
-¿Qué es MSBuild?::El organizador de la compilación: lee el .csproj y coordina compilar, resolver paquetes y copiar archivos
-¿Qué archivo es el CLR?::coreclr.dll (en .NET Framework, clr.dll)
-¿Qué es una DLL?::Dynamic-Link Library: código en un archivo aparte que los programas cargan al ejecutarse
-¿DLL nativa vs. ensamblado .NET?::La nativa tiene código máquina y la ejecuta la CPU; el ensamblado tiene IL + metadatos y lo ejecuta el CLR
-¿Qué contiene un ensamblado?::Encabezado PE, encabezado CLI, código IL, metadatos, manifiesto y recursos
-¿Con qué bytes empieza un .exe o .dll de Windows?::4D 5A, "MZ" en ASCII
-¿Qué es el manifiesto de un ensamblado?::Su identidad (nombre, versión, cultura, firma) y la lista de ensamblados de los que depende
+#flashcards/csharp/s1-plataforma-net ¿Qué es el código máquina?::Instrucciones en bytes que una familia de CPU entiende directamente; cada arquitectura (x64, ARM64) tiene el suyo
+#flashcards/csharp/s1-plataforma-net ¿Qué significa compilar?::Traducir el programa completo a otro lenguaje antes de ejecutarlo, revisando errores
+#flashcards/csharp/s1-plataforma-net ¿Error de compilación vs. de ejecución?::El de compilación lo detecta el compilador antes de correr; el de ejecución aparece mientras el programa corre
+#flashcards/csharp/s1-plataforma-net ¿Qué es el IL?::Intermediate Language: el lenguaje intermedio al que Roslyn compila C#; no es de ningún procesador real
+#flashcards/csharp/s1-plataforma-net ¿Qué es el JIT?::El compilador del CLR que traduce IL a código máquina al ejecutar, método por método, la primera vez que se llama
+#flashcards/csharp/s1-plataforma-net ¿Qué es un runtime?::El software que debe estar instalado para que un programa corra; en .NET: CLR + BCL + host
+#flashcards/csharp/s1-plataforma-net ¿Ejemplo de runtime fuera de .NET?::Node.js para JavaScript, la JVM para Java
+#flashcards/csharp/s1-plataforma-net ¿Qué trae el SDK?::Roslyn, MSBuild, plantillas, NuGet, la CLI dotnet y un runtime
+#flashcards/csharp/s1-plataforma-net ¿Qué se instala en producción, SDK o runtime?::Solo el runtime (en IIS, el Hosting Bundle)
+#flashcards/csharp/s1-plataforma-net ¿Qué es una CLI?::Command Line Interface: un programa que se usa con comandos de texto, como dotnet, git o npm
+#flashcards/csharp/s1-plataforma-net ¿Qué es MSBuild?::El organizador de la compilación: lee el .csproj y coordina compilar, resolver paquetes y copiar archivos
+#flashcards/csharp/s1-plataforma-net ¿Qué archivo es el CLR?::coreclr.dll (en .NET Framework, clr.dll)
+#flashcards/csharp/s1-plataforma-net ¿Qué es una DLL?::Dynamic-Link Library: código en un archivo aparte que los programas cargan al ejecutarse
+#flashcards/csharp/s1-plataforma-net ¿DLL nativa vs. ensamblado .NET?::La nativa tiene código máquina y la ejecuta la CPU; el ensamblado tiene IL + metadatos y lo ejecuta el CLR
+#flashcards/csharp/s1-plataforma-net ¿Qué contiene un ensamblado?::Encabezado PE, encabezado CLI, código IL, metadatos, manifiesto y recursos
+#flashcards/csharp/s1-plataforma-net ¿Con qué bytes empieza un .exe o .dll de Windows?::4D 5A, "MZ" en ASCII
+#flashcards/csharp/s1-plataforma-net ¿Qué es el manifiesto de un ensamblado?::Su identidad (nombre, versión, cultura, firma) y la lista de ensamblados de los que depende
 
 ---
 

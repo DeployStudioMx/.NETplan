@@ -60,6 +60,7 @@ Busqueda empleo NET/
 | Alex contesta preguntas de repaso o un examen | Fila en el resumen y detalle en `14 Evaluaciones` (con tarjetas de errores); si aparece un patrón, `02 Contexto y perfil`; + `01 Bitacora` |
 | Surge una duda | Se responde en la nota de origen o, si no se debe tocar, en `15 Dudas resueltas` (con tarjetas); se registra en `02 Contexto y perfil`; + `01 Bitacora` |
 | Cambia el sistema de repaso | `13 Plan de memorizacion.md` y regenerar su `.pdf`; + `01 Bitacora` |
+| Alex estudia una unidad nueva (sección, clase o laboratorio) | Sus tarjetas llevan al inicio de cada línea la etiqueta de su mazo `#flashcards/<área>/<unidad>`; se agrega a la tabla de mazos y al registro de unidades de `13 Plan de memorizacion` (y su `.pdf`); errores y dudas de esa unidad van en sus submazos `…/errores` y `…/dudas`; + `01 Bitacora` |
 | Cambia la ruta a senior | `07 Ruta a NET senior.md` + `.pdf` (+ su diagrama); + `01 Bitacora` |
 | Se crea un documento nuevo | `NN Nombre.md` (+ `.pdf` y `NN diagrama ….png` si aplica) con el siguiente número libre; agregarlo al árbol, a las notas de este índice y a `CLAUDE.md`; + `01 Bitacora` |
 | Cambian las reglas de trabajo | Este índice + `CLAUDE.md` + `01 Bitacora` |

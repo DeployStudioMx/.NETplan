@@ -176,16 +176,15 @@ Haz lo mismo del ejercicio 2 con `byte`: guarda 255 y súmale 1. ¿Qué número 
 
 Formato del plugin Spaced Repetition de Obsidian.
 
-#flashcards/csharp
 
-¿Qué comando crea un proyecto de consola?::dotnet new console -n Nombre
-¿Qué comando crea el .gitignore de .NET?::dotnet new gitignore
-¿Qué formato de solución crea .NET 10 por defecto?::.slnx (XML), en lugar del .sln clásico
-¿Diferencia entre dotnet build y dotnet run?::build compila a IL en bin/; run compila si hace falta y ejecuta
-¿Qué hay en obj/?::Archivos intermedios de la compilación; no se tocan ni se suben a Git
-¿Qué devuelve 5.GetType()?::System.Int32
-¿Cuánto vale sizeof(decimal)?::16 bytes
-¿Qué pasa al sumar 1 a int.MaxValue sin checked?::Se desborda en silencio y da int.MinValue (−2,147,483,648)
-¿Qué excepción lanza un desbordamiento dentro de checked?::System.OverflowException
-¿Por qué checked(int.MaxValue + 1) no compila?::Son constantes: el compilador detecta el desbordamiento al compilar (error CS0220)
-¿Por qué sizeof(string) no compila?::string es un tipo por referencia y su tamaño no es fijo
+#flashcards/csharp/lab-primer-proyecto ¿Qué comando crea un proyecto de consola?::dotnet new console -n Nombre
+#flashcards/csharp/lab-primer-proyecto ¿Qué comando crea el .gitignore de .NET?::dotnet new gitignore
+#flashcards/csharp/lab-primer-proyecto ¿Qué formato de solución crea .NET 10 por defecto?::.slnx (XML), en lugar del .sln clásico
+#flashcards/csharp/lab-primer-proyecto ¿Diferencia entre dotnet build y dotnet run?::build compila a IL en bin/; run compila si hace falta y ejecuta
+#flashcards/csharp/lab-primer-proyecto ¿Qué hay en obj/?::Archivos intermedios de la compilación; no se tocan ni se suben a Git
+#flashcards/csharp/lab-primer-proyecto ¿Qué devuelve 5.GetType()?::System.Int32
+#flashcards/csharp/lab-primer-proyecto ¿Cuánto vale sizeof(decimal)?::16 bytes
+#flashcards/csharp/lab-primer-proyecto ¿Qué pasa al sumar 1 a int.MaxValue sin checked?::Se desborda en silencio y da int.MinValue (−2,147,483,648)
+#flashcards/csharp/lab-primer-proyecto ¿Qué excepción lanza un desbordamiento dentro de checked?::System.OverflowException
+#flashcards/csharp/lab-primer-proyecto ¿Por qué checked(int.MaxValue + 1) no compila?::Son constantes: el compilador detecta el desbordamiento al compilar (error CS0220)
+#flashcards/csharp/lab-primer-proyecto ¿Por qué sizeof(string) no compila?::string es un tipo por referencia y su tamaño no es fijo

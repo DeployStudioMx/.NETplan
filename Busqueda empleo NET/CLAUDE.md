@@ -40,7 +40,7 @@ Empezó en una sesión de Cowork (30 sep – 5 oct 2026) y se trasladó a este r
 | [[10 Teoria de CSharp]] / `.pdf` | Teoría de C# y .NET para los días de código (20 min de lectura al inicio) | A mano; la sección de cada semana se escribe **antes** de que empiece (semanas 2 a 5 pendientes); el `.pdf` se regenera con `clase_pdf.py` en cada cambio |
 | [[11 Clase 0.1 Datos]] / `.pdf` | Clase del lun 5 oct (bits, bytes, binario, hex) con técnicas de memorización y tarjetas de repaso | A mano; el `.pdf` se genera con `clase_pdf.py` |
 | [[12 Clase Primer proyecto por CLI]] / `.pdf` | Laboratorio del mar 6 oct: preparar `plan-dotnet`, explorar el proyecto, ejercicios de tipos y desbordamiento (enunciados y pistas, sin soluciones) | A mano; el `.pdf` se genera con `clase_pdf.py` |
-| [[13 Plan de memorizacion]] / `.pdf` | Sistema de repaso a largo plazo: curva del olvido, escalera de comprensión, plugin Spaced Repetition, rutina diaria/semanal/mensual, historia "El viaje de Program.cs" | A mano; el `.pdf` se genera con `clase_pdf.py` |
+| [[13 Plan de memorizacion]] / `.pdf` | Sistema de repaso a largo plazo: configuración del plugin Spaced Repetition, **mazos por unidad de estudio** (cada tarjeta empieza con `#flashcards/<área>/<unidad>`), protocolo día 0/1/2/4/8/21, registro de unidades, rutina, historia "El viaje de Program.cs" | A mano; el `.pdf` se genera con `clase_pdf.py` |
 | [[14 Evaluaciones]] | Calificaciones de Alex por pregunta, conceptos débiles y tarjetas de errores | En cada evaluación (resumen + detalle) |
 | [[15 Dudas resueltas]] | Dudas fuera de clase o de notas que no se deben tocar, con su respuesta y tarjetas | En cada duda nueva |
 | `calendario_datos.py` | Contenido día por día del calendario | Fuente de verdad del calendario |

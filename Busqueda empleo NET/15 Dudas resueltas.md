@@ -69,17 +69,16 @@ Correcto. `Semana01.dll` se crea hasta que corres `dotnet build` en el laborator
 
 ## Tarjetas de repaso
 
-#flashcards/dudas
 
-¿Qué es IIS?::El servidor web de Microsoft para Windows: recibe peticiones HTTP en un puerto y las entrega a la aplicación correcta
-¿Qué es un servidor web?::Un programa que escucha en un puerto (80 o 443) y responde peticiones HTTP
-¿Qué es un application pool de IIS?::Un grupo aislado de aplicaciones con su propio proceso de trabajo (w3wp.exe)
-¿Qué es w3wp.exe?::El proceso de trabajo de IIS donde corre tu app y está cargado el CLR
-¿Cuál es el servidor web interno de ASP.NET Core?::Kestrel
-¿Qué guarda el stack?::Las llamadas a métodos y sus variables locales; se libera sola al terminar el método
-¿Qué guarda el heap?::Los objetos que pueden vivir más que el método que los creó; los libera el GC
-¿Qué es el heap administrado?::El heap controlado por el CLR: aparta espacio con new y lo libera el recolector de basura
-En string nombre = "Alex", ¿dónde vive cada parte?::El texto en el heap; la variable en el stack, con la dirección (referencia) del texto
-¿Qué es IntelliSense?::La ayuda de Visual Studio al escribir: lista de miembros, parámetros, información rápida y errores
-¿Cómo sabe IntelliSense qué tiene una clase?::Roslyn lee los metadatos de las DLL que usa el proyecto
-¿IntelliSense es IA?::No; lo que se apaga en el plan es Copilot e IntelliCode de línea completa
+#flashcards/csharp/s1-plataforma-net/dudas ¿Qué es IIS?::El servidor web de Microsoft para Windows: recibe peticiones HTTP en un puerto y las entrega a la aplicación correcta
+#flashcards/csharp/s1-plataforma-net/dudas ¿Qué es un servidor web?::Un programa que escucha en un puerto (80 o 443) y responde peticiones HTTP
+#flashcards/csharp/s1-plataforma-net/dudas ¿Qué es un application pool de IIS?::Un grupo aislado de aplicaciones con su propio proceso de trabajo (w3wp.exe)
+#flashcards/csharp/s1-plataforma-net/dudas ¿Qué es w3wp.exe?::El proceso de trabajo de IIS donde corre tu app y está cargado el CLR
+#flashcards/csharp/s1-plataforma-net/dudas ¿Cuál es el servidor web interno de ASP.NET Core?::Kestrel
+#flashcards/csharp/s1-plataforma-net/dudas ¿Qué guarda el stack?::Las llamadas a métodos y sus variables locales; se libera sola al terminar el método
+#flashcards/csharp/s1-plataforma-net/dudas ¿Qué guarda el heap?::Los objetos que pueden vivir más que el método que los creó; los libera el GC
+#flashcards/csharp/s1-plataforma-net/dudas ¿Qué es el heap administrado?::El heap controlado por el CLR: aparta espacio con new y lo libera el recolector de basura
+#flashcards/csharp/s1-plataforma-net/dudas En string nombre = "Alex", ¿dónde vive cada parte?::El texto en el heap; la variable en el stack, con la dirección (referencia) del texto
+#flashcards/csharp/s1-plataforma-net/dudas ¿Qué es IntelliSense?::La ayuda de Visual Studio al escribir: lista de miembros, parámetros, información rápida y errores
+#flashcards/csharp/s1-plataforma-net/dudas ¿Cómo sabe IntelliSense qué tiene una clase?::Roslyn lee los metadatos de las DLL que usa el proyecto
+#flashcards/csharp/s1-plataforma-net/dudas ¿IntelliSense es IA?::No; lo que se apaga en el plan es Copilot e IntelliCode de línea completa
