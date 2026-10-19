@@ -1,10 +1,14 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-10-15
+actualizado: 2026-10-19
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-10-19
+- Un respaldo automático del celular (`vault backup` 07:46) subió versiones viejas de [[01 Bitacora]], [[02 Contexto y perfil]], [[13 Plan de memorizacion]], [[14 Evaluaciones]] y [[15 Dudas resueltas]] encima de las nuevas. Restauradas desde el commit anterior conservando las fechas de repaso de las 55 tarjetas repasadas. Agregada a [[13 Plan de memorizacion]] la regla para el celular: sin auto commit-and-sync y reiniciar Obsidian después de cada pull.
+- Alex estudió la sección 2 de [[10 Teoria de CSharp]]. Dudas (Program.cs, método, Main y punto de entrada, solución vs. proyecto, paquetes resueltos, .pdb) respondidas en [[15 Dudas resueltas]]; evaluación 16/30 (5.3) en [[14 Evaluaciones]]. Nueva unidad `csharp/s2-anatomia-proyecto` (17 tarjetas) en el registro de [[13 Plan de memorizacion]].
 
 ## 2026-10-15
 - Mazos reorganizados **por unidad de estudio** para repasar solo lo ya estudiado: cada tarjeta empieza con su etiqueta (`#flashcards/csharp/s1-plataforma-net`, `…/errores`, `…/dudas`, `csharp/lab-primer-proyecto`, `fundamentos/0-1-datos`). Agregados a [[13 Plan de memorizacion]] el protocolo de cada unidad (día 0, 1, 2, 4, 8, 21), la respuesta a "¿releer o no?", el plan concreto para la sección 1 estudiada el 14 oct y el registro de unidades. Retiquetadas las tarjetas de [[10 Teoria de CSharp]], [[11 Clase 0.1 Datos]], [[12 Clase Primer proyecto por CLI]], [[14 Evaluaciones]] y [[15 Dudas resueltas]] (solo la etiqueta, sin cambiar contenido); PDFs regenerados.
@@ -65,6 +69,7 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - Creada la ruta a .NET senior (12 temas por peso, orden por trimestres de 2027, con el flujo completo de una aplicación de Program.cs a la base de datos) → [[07 Ruta a NET senior]]. Tema de mayor interés: entender el flujo y la estructura de una aplicación completa.
 
 ## Pendientes
+- [ ] Sección 2: día 1 el 20 oct (volcado de memoria + primer repaso del mazo `s2-anatomia-proyecto`), evaluación el 27 oct ([[13 Plan de memorizacion]])
 - [x] Definir por completo la configuración de las tarjetas en [[13 Plan de memorizacion]] (2026-10-15)
 - [ ] Instalar y configurar el plugin Spaced Repetition en la PC y en el celular y comprobar el árbol de mazos (66 tarjetas) ([[13 Plan de memorizacion]], pasos 1 a 3)
 - [ ] Hoy 15 oct: día 1 de la sección 1 (volcado de memoria, comparar, releer lo que faltó, primer repaso del mazo `s1-plataforma-net`) ([[13 Plan de memorizacion]])

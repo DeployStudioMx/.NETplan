@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, evaluaciones]
-actualizado: 2026-10-13
+actualizado: 2026-10-19
 ---
 > Registro de cada vez que Alex contesta preguntas de repaso o de entrevista y Claude lo califica · los conceptos débiles entran al [[13 Plan de memorizacion]] · dudas en [[15 Dudas resueltas]] · perfil en [[02 Contexto y perfil]] · avance en [[01 Bitacora]]
 
@@ -12,7 +12,43 @@ Cada evaluación registra la calificación, lo que faltó y una tarjeta por cada
 
 | Fecha | Tema | Calificación | Conceptos débiles |
 | --- | --- | --- | --- |
+| 2026-10-19 | [[10 Teoria de CSharp]], sección 2 (repaso) | **16 / 30 (5.3)** | Qué genera el compilador (no es `Program.cs`), qué hay en `obj`, por qué `bin` y `obj` no van a Git |
 | 2026-10-13 | [[10 Teoria de CSharp]], sección 1 (repaso) | **55 / 80 (6.9)** | Código máquina por arquitectura, qué trae el SDK y qué va en producción, qué hace el host vs. el CLR, qué contiene una DLL nativa y el manifiesto |
+
+---
+
+## 2026-10-19 · Sección 2 de la teoría de C#
+
+Primera lectura de la sección 2 (anatomía de un proyecto), antes del laboratorio.
+
+### Respuestas de Alex (textuales)
+
+1. genera el programa.cs y el método main
+2. en bin está el programa en IL, un lanzador un json con la especificación de la versión a utilizar
+3. en . Net framework se listan todos los archivos y en core no
+
+### Calificación
+
+| # | Pregunta | Calif. | Qué estuvo bien | Qué faltó o se corrige |
+| --- | --- | --- | --- | --- |
+| 1 | ¿Qué genera el compilador a partir de los top-level statements? | 5/10 | El método `Main` | **Corrección:** `Program.cs` no lo genera el compilador; lo crea la plantilla de `dotnet new console` y es tu código fuente. El compilador genera la **clase `Program`** y el método **`Main`** que envuelven tus líneas, y eso queda dentro del IL de la `.dll` |
+| 2 | ¿Qué hay en `bin` y qué en `obj`? ¿Por qué no se suben a Git? | 4/10 | `bin`: la `.dll` con IL, el `.exe` lanzador y el `.runtimeconfig.json` con la versión del runtime | Faltó el `.pdb`. **No contestaste las otras dos partes:** `obj` tiene los archivos intermedios de la compilación (por ejemplo, `project.assets.json` con los paquetes resueltos); y no se suben a Git porque **se regeneran solos en cada build**: subirlos solo agrega peso y conflictos |
+| 3 | ¿Qué cambia entre un `.csproj` de .NET Framework y uno de .NET 10? | 7/10 | En .NET Framework se listan todos los archivos y en el moderno no | Faltó decir por qué: el formato **estilo SDK** incluye automáticamente todos los `.cs` de la carpeta, así que el archivo queda en unas pocas líneas. Ojo con el nombre: desde .NET 5 ya no se llama "Core", sino **.NET** a secas |
+
+**Total: 16 / 30 → 5.3 de 10.**
+
+**Lo bueno:** el contenido de `bin` y la diferencia del `.csproj` los tienes claros.
+
+**Patrón que se repite:** otra vez contestaste solo la primera parte de una pregunta compuesta. La pregunta 2 tenía tres partes (`bin`, `obj` y Git) y contestaste una. Es el mismo patrón de la evaluación del 13 oct ([[02 Contexto y perfil]]). Antes de responder, numera las partes de la pregunta en tu hoja.
+
+### Tarjetas de los errores
+
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Quién crea Program.cs?::La plantilla de dotnet new console; el compilador no lo genera
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Qué genera el compilador a partir de los top-level statements?::La clase Program y el método Main, dentro del IL de la .dll
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Qué hay en la carpeta obj?::Archivos intermedios de la compilación, como project.assets.json con los paquetes resueltos
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Por qué bin y obj no se suben a Git?::Porque se regeneran en cada build; subirlos solo agrega peso y conflictos
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Por qué el .csproj moderno es tan corto?::Es estilo SDK: incluye automáticamente todos los .cs de la carpeta
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Cómo se llama hoy .NET Core?::Desde .NET 5, simplemente .NET
 
 ---
 
