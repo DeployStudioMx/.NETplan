@@ -34,6 +34,7 @@ actualizado: 2026-10-13
 - 2026-10-13, dudas sobre la sección 1 de [[10 Teoria de CSharp]]: qué son el SDK y el runtime, qué es una CLI, qué significa compilar, qué hace el CLR más allá de su definición, qué es y qué contiene una DLL. Respondidas al reescribir esa sección desde cero.
 - 2026-10-13, más dudas: qué es IIS, qué es el heap, qué es IntelliSense → [[15 Dudas resueltas]].
 - 2026-10-13, primera evaluación: 6.9 de 10 en la sección 1 de la teoría. Patrón: contesta solo la primera parte de las preguntas compuestas → [[14 Evaluaciones]].
+- 2026-10-19, dudas de la sección 2: si `Program.cs` lo genera el compilador, qué es un método, qué es `Main` y el punto de entrada, solución vs. proyecto, paquetes resueltos, el `.pdb` → [[15 Dudas resueltas]]. Evaluación: 5.3; el patrón de contestar solo la primera parte se repite ([[14 Evaluaciones]]).
 - Usa las técnicas de estudio de [[11 Clase 0.1 Datos]] y el sistema de repaso de [[13 Plan de memorizacion]] para retener a largo plazo.
 
 ## Herramientas y repos del plan

@@ -66,10 +66,13 @@ flashcards
 │   ├── s1-plataforma-net          17  (+ sus submazos = 38)
 │   │   ├── errores                 9
 │   │   └── dudas                  12
+│   ├── s2-anatomia-proyecto        0  (+ sus submazos = 17)
+│   │   ├── errores                 6
+│   │   └── dudas                  11
 │   └── lab-primer-proyecto        11
 └── fundamentos
     └── 0-1-datos                  17
-                         Total:    66
+                         Total:    83
 ```
 
 Si los números no coinciden, avísame con una captura antes de repasar.
@@ -92,6 +95,9 @@ Al repasar, la etiqueta no se ve: solo la pregunta. Los errores y las dudas de u
 | `flashcards/csharp/s1-plataforma-net` | Teoría de C#, sección 1 | [[10 Teoria de CSharp]] |
 | `flashcards/csharp/s1-plataforma-net/errores` | Lo que fallaste de la sección 1 | [[14 Evaluaciones]] |
 | `flashcards/csharp/s1-plataforma-net/dudas` | Lo que preguntaste al leer la sección 1 | [[15 Dudas resueltas]] |
+| `flashcards/csharp/s2-anatomia-proyecto` | Teoría de C#, sección 2 (por ahora solo sus submazos) | — |
+| `flashcards/csharp/s2-anatomia-proyecto/errores` | Lo que fallaste de la sección 2 | [[14 Evaluaciones]] |
+| `flashcards/csharp/s2-anatomia-proyecto/dudas` | Lo que preguntaste al leer la sección 2 | [[15 Dudas resueltas]] |
 | `flashcards/csharp/lab-primer-proyecto` | Laboratorio del 6 oct | [[12 Clase Primer proyecto por CLI]] |
 
 Nombres de las unidades que siguen: `csharp/s2-anatomia-proyecto`, `csharp/s3-tipos`, `fundamentos/0-1-texto`, `fundamentos/0-2-hardware`, etc. Cada unidad nueva se agrega a esta tabla y al [[#Registro de unidades|registro de unidades]].
@@ -218,6 +224,7 @@ Una fila por unidad. Se actualiza cuando estudias una unidad nueva y después de
 | Unidad | Mazo | Tarjetas | Estudiada | Primer repaso | Evaluaciones | Estado |
 | --- | --- | --- | --- | --- | --- | --- |
 | Teoría C#, sección 1 | `csharp/s1-plataforma-net` | 38 | 13 y 14 oct | 15 oct (planeado) | 13 oct: 6.9 · 22 oct: pendiente | En repaso |
+| Teoría C#, sección 2 | `csharp/s2-anatomia-proyecto` | 17 (11 dudas + 6 errores) | 19 oct | 20 oct | 19 oct: 5.3 · 27 oct: pendiente | Día 0. Siguen: 20, 21, 23 y 27 oct |
 | Clase 0.1 Datos | `fundamentos/0-1-datos` | 17 | Por confirmar | — | — | Por confirmar si ya se estudió |
 | Laboratorio 6 oct | `csharp/lab-primer-proyecto` | 11 | — | — | — | Sin estudiar |
 
