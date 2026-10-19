@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, teoria, csharp]
-actualizado: 2026-10-13
+actualizado: 2026-10-19
 ---
 > Relacionadas: cubre la brecha "Fundamentos de C# y .NET" de [[02 Contexto y perfil]] · se lee al inicio de cada día de código del [[04 Calendario dia por dia]] · se apoya en el nivel 0 del [[05 Arbol de fundamentos]] (bits, bytes, memoria) · términos nuevos a [[08 Glosario]] · decisiones en [[01 Bitacora]] · Versión en PDF: [[10 Teoria de CSharp.pdf]]
 
@@ -14,7 +14,7 @@ El [[05 Arbol de fundamentos]] explica la computadora y la web, pero no el lengu
 
 | Día | Lectura (20 min) | Código (70 min) |
 | --- | --- | --- |
-| Mar 6 oct | 1. Qué es .NET (ampliada, ~35 min; si no alcanza, termínala antes del miércoles) · 2. Anatomía de un proyecto · 3. Tipos | Primer proyecto por CLI, tipos, desbordamiento → laboratorio en [[12 Clase Primer proyecto por CLI]] |
+| Mar 6 oct | 1. Qué es .NET (ampliada, ~35 min; si no alcanza, termínala antes del miércoles) · 2. Anatomía de un proyecto · 3. Tipos (ampliada, ~35 min) | Primer proyecto por CLI, tipos, desbordamiento → laboratorio en [[12 Clase Primer proyecto por CLI]] |
 | Mié 7 oct | 4. Control de flujo · 5. `double` vs. `decimal` | Ciclos y tabla de pagos |
 | Jue 8 oct | 6. Métodos · 7. Convenciones | `CalcularInteres` y commit de los 5 ejercicios |
 
@@ -352,77 +352,277 @@ En .NET Framework (lo que usas en DiSí) el `.csproj` listaba cada archivo y ten
 
 ## 3. Variables y el sistema de tipos
 
-C# es **estáticamente tipado**: cada variable tiene un tipo fijo que el compilador conoce antes de ejecutar. Y es **fuertemente tipado**: no mezcla tipos sin que se lo pidas. Muchos errores que en JavaScript aparecen en producción, en C# no compilan.
+Esta sección va de abajo hacia arriba: primero dónde vive un dato, después qué es una variable y un tipo, y al final cada tipo básico, cómo se convierten entre sí, qué pasa cuando un número no cabe y cómo se muestra un dato en pantalla. Ningún término se usa antes de explicarlo. Si no has estudiado [[11 Clase 0.1 Datos]], léela antes: aquí se usan bits, bytes y binario.
+
+### 3.1 Dónde vive un dato: la memoria
+
+Mientras tu programa corre, sus datos viven en la **RAM**. Imagina la RAM como una calle larguísima de casillas, todas del mismo tamaño: **cada casilla guarda 1 byte** (8 bits) y tiene un número propio, su **dirección** (casilla 1000, casilla 1001…).
+
+Un byte solo guarda números del 0 al 255. Para guardar algo más grande (un monto de 50,000, un texto), se usan **varias casillas seguidas**.
+
+Esto deja dos preguntas para cada dato:
+1. **¿En qué casillas está?**
+2. **¿Cómo se leen esos bytes?** ¿Son un número, una letra, un sí o no?
+
+Las dos las responde la combinación de **variable** y **tipo**.
+
+### 3.2 Qué es una variable
+
+Una **variable** es un **nombre** que tu código le pone a un grupo de casillas de memoria, para guardar ahí un dato y usarlo después.
+
+**Analogía:** una caja con etiqueta. La etiqueta es el nombre (`plazo`); dentro está el dato (`12`). Tú no necesitas saber en qué casilla está la caja: la buscas por su etiqueta.
 
 ```csharp
-int plazo = 12;          // declaración con tipo explícito
-var tasa = 0.24m;        // var: el compilador infiere decimal; sigue siendo estático
-const int MesesPorAnio = 12;   // constante: se resuelve al compilar
+int plazo;        // 1. declarar: "reserva una caja para un número entero y llámala plazo"
+plazo = 12;       // 2. asignar: "guarda 12 en la caja plazo"
+int meses = 24;   // declarar y asignar en una sola línea (se llama inicializar)
+plazo = meses;    // copiar: ahora plazo también vale 24
 ```
 
-`var` no es "tipo dinámico": el tipo se fija en la primera asignación y ya no cambia.
+Tres detalles de escritura que verás en todo el código:
+- Cada **instrucción** (una orden completa) termina con **punto y coma** `;`.
+- Todo lo que va después de `//` es un **comentario**: una nota para personas que el compilador ignora.
+- **El `=` no significa "es igual a".** Significa "guarda en la caja de la izquierda el valor de la derecha". Para *comparar* si dos cosas son iguales se usa `==` (sección 4).
 
-### Tipos básicos
+### 3.3 Qué es un tipo
 
-Conecta con el lunes (0.1 Datos): cada tipo es una cantidad fija de bytes.
+Los mismos bytes pueden significar cosas distintas. El byte `0100 0001` vale **65** si lo lees como número, y es la letra **A** si lo lees como letra (cada letra tiene asignado un número; lo verás en la clase 0.1 Texto). La memoria solo guarda bits: **no sabe** qué significan.
 
-| Tipo C# | Tipo .NET | Tamaño | Rango o precisión | Uso típico |
-| --- | --- | --- | --- | --- |
-| `int` | `System.Int32` | 4 bytes | −2,147,483,648 a 2,147,483,647 | Contadores, plazos, IDs |
-| `long` | `System.Int64` | 8 bytes | ±9.2 × 10¹⁸ | IDs grandes, ticks de tiempo |
-| `double` | `System.Double` | 8 bytes | ~15–17 dígitos, binario | Ciencia, gráficas, `Math.Pow` |
-| `decimal` | `System.Decimal` | 16 bytes | 28–29 dígitos, base 10 | **Dinero** |
-| `bool` | `System.Boolean` | 1 byte | `true` / `false` | Condiciones |
-| `char` | `System.Char` | 2 bytes | Un carácter UTF-16 | Letras sueltas |
-| `string` | `System.String` | Variable | Texto inmutable | Texto |
+El **tipo** de una variable dice tres cosas:
 
-`int` es solo un **alias** de `System.Int32`: son exactamente el mismo tipo. Por eso existe `int.MaxValue` (es `Int32.MaxValue`).
-
-Todos son **tipos por valor** (la variable guarda el dato) excepto `string`, que es **por referencia** (la variable guarda la dirección del texto). La semana 2 explica la diferencia en memoria. `string` además es **inmutable**: cada "modificación" crea un string nuevo.
-
-### Literales
-
-| Escribes | Tipo |
+| El tipo dice… | Ejemplo con `int` |
 | --- | --- |
-| `100` | `int` |
-| `100L` | `long` |
-| `1.5` | `double` (sin sufijo, un decimal es `double`) |
-| `1.5m` | `decimal` (la `m` es de *money*) |
-| `1_000_000` | `int`; el guion bajo solo ayuda a leer |
-| `0xFF`, `0b1010` | Hexadecimal y binario, como en tu clase del lunes |
-| `'A'` / `"A"` | `char` / `string` |
+| **Cuántos bytes** ocupa | 4 bytes |
+| **Cómo se leen** esos bytes | Como un número entero, con signo |
+| **Qué operaciones** se permiten | Sumar, restar, comparar… pero no, por ejemplo, ponerlo en mayúsculas |
 
-### Conversiones
+Por eso al declarar una variable siempre va primero su tipo: `int plazo` se lee "una caja de tipo `int` llamada `plazo`".
 
-- **Implícita** (segura, sin perder datos): de `int` a `long`, de `int` a `double`. El compilador la hace solo.
-- **Explícita o cast** (puede perder datos): de `double` a `int` corta los decimales; de `long` a `int` puede no caber. Tienes que pedirla: `(int)valor`.
-- **Desde texto:** `int.Parse("12")` lanza una excepción si el texto no es número. `int.TryParse(texto, out int n)` devuelve `true` o `false` sin lanzar nada; es lo correcto para datos que escribe un usuario.
+### 3.4 Estático y fuerte: el compilador vigila los tipos
 
-### Desbordamiento (overflow)
+C# tiene dos reglas sobre los tipos:
 
-Si sumas 1 a `int.MaxValue`, el valor no cabe en 4 bytes. Por defecto C# **no avisa**: los bits "dan la vuelta" y obtienes el número más negativo. Se llama **complemento a dos** y es la misma aritmética binaria del lunes.
+- **Tipado estático:** el tipo de cada variable se decide **al compilar** y **nunca cambia**. Si `plazo` es `int`, será `int` toda su vida.
+- **Tipado fuerte:** no puedes guardar un dato de un tipo en una variable de otro tipo, salvo que la conversión sea segura o la pidas tú (sección 3.10).
 
-- Dentro de un bloque o expresión `checked`, el mismo desbordamiento lanza una `OverflowException`.
-- `unchecked` es el comportamiento por defecto.
-- **Trampa:** si toda la operación son constantes conocidas al compilar, el compilador detecta el desbordamiento y **no compila**. Para verlo en ejecución, el valor tiene que pasar por una variable.
+Como el compilador conoce todos los tipos antes de ejecutar, revisa que los uses bien. Esto no compila:
 
-En DiSí esto importa: un monto que desborda en silencio es un error de cartera que nadie ve.
+```csharp
+int plazo = "doce";   // error CS0029: no se puede convertir texto en int
+```
 
-### Texto con formato
+Es el **error de compilación** de la sección 1.2: el programa ni siquiera se genera, así que ese error nunca llega a un cliente.
+
+**Comparación:** una celda de Excel acepta lo que escribas; si un día pones "doce" donde iba un número, la fórmula falla después, cuando alguien abre el archivo. En C#, el error aparece en tu máquina, antes de que exista el programa.
+
+### 3.5 `var` y `const`
+
+```csharp
+var tasa = 0.24m;              // var: el compilador deduce el tipo (decimal) por el valor
+const int MesesPorAnio = 12;   // const: un valor fijo que nunca cambia
+```
+
+- **`var`** le pide al compilador que **deduzca** el tipo a partir del valor que asignas. A eso se le llama **inferencia de tipos**. **`var` no hace que la variable pueda cambiar de tipo:** el tipo se deduce una vez, al compilar, y queda fijo igual que si lo hubieras escrito. Por eso `var x;` sin valor no compila: el compilador no tendría de dónde deducirlo.
+- **`const`** declara una **constante**: un valor que se conoce al escribir el código y que nunca cambia. El compilador sustituye el nombre por su valor en todos lados. Si intentas `MesesPorAnio = 13;`, no compila.
+
+### 3.6 Los tipos básicos
+
+Antes de la tabla, tres palabras:
+
+- **Con signo / sin signo.** Un tipo **sin signo** usa todas sus combinaciones para números positivos: un byte va de 0 a 255. Un tipo **con signo** reserva la mitad para negativos: con 8 bits, de −128 a 127. Siguen siendo 256 combinaciones ([[11 Clase 0.1 Datos]], bloque 1).
+- **Entero vs. decimal.** Un **entero** no tiene parte fraccionaria (12, −3). Un número con **decimales** sí (0.24, 15250.50).
+- **Exacto vs. aproximado.** Hay tipos con decimales que guardan el valor exacto y otros que guardan una aproximación muy cercana. Por qué pasa eso y por qué importa en dinero es la sección 5; por ahora quédate con cuál es cuál.
+
+| Tipo C# | Tipo .NET | Bytes | Qué guarda | Rango | Ejemplo en DiSí |
+| --- | --- | --- | --- | --- | --- |
+| `int` | `System.Int32` | 4 | Entero con signo | −2,147,483,648 a 2,147,483,647 | Plazo en meses, número de cliente |
+| `long` | `System.Int64` | 8 | Entero con signo | ±9.2 × 10¹⁸ | IDs muy grandes |
+| `double` | `System.Double` | 8 | Número con decimales, **aproximado** | ~15 a 17 dígitos | Cálculos científicos y gráficas |
+| `decimal` | `System.Decimal` | 16 | Número con decimales, **exacto** | 28 a 29 dígitos | **Montos, tasas, intereses** |
+| `bool` | `System.Boolean` | 1 | Verdadero o falso | `true` o `false` | ¿El crédito está aprobado? |
+| `char` | `System.Char` | 2 | **Una** letra o símbolo | Una letra | La inicial de un nombre |
+| `string` | `System.String` | Variable | Un texto: una cadena de `char` | Lo que quepa en memoria | Nombre del cliente, RFC |
+
+**¿Por qué el máximo de `int` es 2,147,483,647?** Son 4 bytes = 32 bits = 2³² = 4,294,967,296 combinaciones. Como tiene signo, la mitad son negativas: el rango queda de −2,147,483,648 a 2,147,483,647 (2³¹ − 1; el −1 es porque el cero ocupa una de las combinaciones positivas).
+
+**¿Por qué `char` ocupa 2 bytes y no 1?** Porque con 1 byte solo caben 256 símbolos: no alcanzan para la ñ, los acentos y los alfabetos de otros idiomas. Con 2 bytes caben 65,536. A esta forma de numerar las letras con 2 bytes se le llama **UTF-16**; la verás el sábado en la clase 0.1 Texto.
+
+### 3.7 Nombre corto y nombre completo: el alias
+
+Fíjate en la segunda columna de la tabla: `int` y `System.Int32` son **el mismo tipo** con dos nombres.
+
+- **`System.Int32`** es el nombre completo del tipo, tal como existe en la biblioteca base de .NET (la BCL de la sección 1.4). La primera parte, `System`, es un **espacio de nombres** (*namespace*): una especie de **apellido** que agrupa tipos relacionados para que no se confundan con otros del mismo nombre. Es como decir "Juan Pérez" en lugar de solo "Juan".
+- **`int`** es el **alias**: el apodo corto que el lenguaje C# le da a ese tipo. Es puramente de escritura: compilado, es exactamente igual.
+
+Los tipos traen consigo datos y operaciones propias, llamados **miembros**. Se usan con un **punto**, que se lee como "de":
+
+- `int.MaxValue` → "el valor máximo **de** `int`" → 2,147,483,647.
+- `int.MinValue` → "el valor mínimo **de** `int`" → −2,147,483,648.
+
+Como `int` es un alias de `System.Int32`, `int.MaxValue` y `Int32.MaxValue` son lo mismo.
+
+### 3.8 Valor y referencia; texto que no cambia
+
+La memoria de tu programa tiene dos zonas principales ([[15 Dudas resueltas]], "¿Qué es el heap?"):
+
+- El **stack** (pila): rápido y ordenado, para las variables de cada método mientras el método corre.
+- El **heap** (montón): una bodega grande para datos que pueden vivir más tiempo o cuyo tamaño no se sabe de antemano.
+
+Eso da dos formas de guardar un dato:
+
+| | **Tipo por valor** | **Tipo por referencia** |
+| --- | --- | --- |
+| Qué guarda la variable | **El dato mismo** | **La dirección** de donde está el dato, en el heap |
+| Analogía | La caja contiene el objeto | La caja contiene un papelito con la dirección de una bodega |
+| Tipos de la tabla | `int`, `long`, `double`, `decimal`, `bool`, `char` | `string` |
+
+`string` es por referencia porque su tamaño es **variable**: el nombre de un cliente puede tener 4 letras o 60, y no se sabe al compilar cuánto espacio reservar.
+
+Además, `string` es **inmutable**: una vez creado, un texto **no se modifica nunca**. Cuando "cambias" un texto, en realidad se crea uno nuevo y la variable pasa a apuntar al nuevo:
+
+```csharp
+string nombre = "alex";
+nombre = nombre.ToUpper();   // no cambia "alex": crea un texto nuevo, "ALEX", y nombre apunta a él
+```
+
+La diferencia entre valor y referencia es el tema central de la semana 2.
+
+### 3.9 Literales: valores escritos directo en el código
+
+Un **literal** es un valor escrito tal cual en el código: el `12` de `int plazo = 12;`. El compilador decide el tipo del literal por **cómo lo escribes**:
+
+| Escribes | Tipo del literal | Por qué |
+| --- | --- | --- |
+| `100` | `int` | Un entero sin nada más es `int` |
+| `100L` | `long` | La `L` de *long* |
+| `1.5` | `double` | Un número con punto, sin letra, es `double` |
+| `1.5m` | `decimal` | La `m` de *money* (dinero). **Sin la `m`, `decimal tasa = 0.24;` no compila**, porque `0.24` es `double` |
+| `1_000_000` | `int` | El guion bajo solo ayuda a leer; vale un millón |
+| `0xFF` | `int` | `0x` = hexadecimal → 255 ([[11 Clase 0.1 Datos]], bloque 3) |
+| `0b1010` | `int` | `0b` = binario → 10 ([[11 Clase 0.1 Datos]], bloque 2) |
+| `'A'` | `char` | Comillas **simples**: una sola letra |
+| `"A"` | `string` | Comillas **dobles**: un texto (aunque tenga una sola letra) |
+| `true` | `bool` | Las dos únicas palabras de `bool`: `true` y `false` |
+
+### 3.10 Convertir de un tipo a otro
+
+A veces tienes un dato de un tipo y lo necesitas en otro. Hay tres casos.
+
+**1. Conversión implícita (automática y segura).** Cuando el tipo destino **siempre** puede guardar el valor, el compilador convierte solo:
+
+```csharp
+int plazo = 12;
+long plazoLargo = plazo;   // de int (4 bytes) a long (8 bytes): siempre cabe
+```
+
+**2. Conversión explícita o *cast* (la pides tú).** Cuando **puede perderse información**, el compilador no lo hace solo: tienes que pedirlo escribiendo el tipo destino entre paréntesis. Con eso le dices "sé que puedo perder algo, hazlo":
+
+```csharp
+double promedio = 3.99;
+int entero = (int)promedio;   // 3: el cast corta los decimales, no redondea
+```
+
+**3. De texto a número.** Lo que escribe un usuario en una pantalla o en la terminal siempre llega como **texto** (`string`), aunque sean dígitos. Para convertirlo hay dos **métodos** (bloques de código con nombre que hacen una tarea; [[15 Dudas resueltas]]):
+
+| Método | Si el texto es un número | Si no lo es (por ejemplo "doce") |
+| --- | --- | --- |
+| `int.Parse("12")` | Devuelve `12` | **Lanza una excepción** |
+| `int.TryParse("12", out int n)` | Devuelve `true` y deja `12` en `n` | Devuelve `false` y deja `0` en `n`. No truena |
+
+Dos palabras de esa tabla:
+- **Lanzar una excepción** es la forma en que .NET avisa de un error **mientras el programa corre**. Si ninguna parte del código la atiende, el CLR detiene el programa y muestra el error (sección 1.6, paso 7). `int.Parse("doce")` lanza una `FormatException`: "el texto no tiene el formato de un número".
+- **`out`**: un método normalmente regresa **un** resultado. `TryParse` necesita regresar dos: si pudo convertir (`true` o `false`) y el número. El resultado principal es el `true` o `false`; el número sale por el **parámetro `out`**, que es como una caja vacía que le prestas al método para que la llene.
+
+**Regla:** usa `Parse` cuando el texto **ya sabes** que es un número válido (por ejemplo, uno que tu propio sistema guardó). Usa `TryParse` cuando viene de una persona, porque las personas se equivocan.
+
+### 3.11 Desbordamiento: cuando un número no cabe
+
+Un `int` tiene 4 bytes. ¿Qué pasa si el resultado de una suma necesita más? Para verlo en pequeño, piensa en un tipo de **1 byte con signo** (`sbyte`, de −128 a 127):
+
+| Valor | Bits |
+| --- | --- |
+| 127 (el máximo) | `0111 1111` |
+| 127 + 1 | `1000 0000` |
+
+Sumar 1 a `0111 1111` da `1000 0000`: la suma binaria funciona igual que siempre. Pero en un tipo con signo, el bit de la izquierda indica el signo, y `1000 0000` **se lee como −128**. El número "dio la vuelta" del máximo al mínimo, como el odómetro de un auto que pasa de 999999 a 000000. A esta forma de representar negativos se le llama **complemento a dos**, y es la que usan casi todas las computadoras.
+
+Con `int` pasa lo mismo, a otra escala: `int.MaxValue + 1` da **−2,147,483,648**. Esto se llama **desbordamiento** (*overflow*), y **por defecto C# no avisa**: el programa sigue con un número equivocado.
+
+Para que sí avise, se usa la palabra **`checked`** ("revisado"):
+
+```csharp
+int maximo = int.MaxValue;
+int a = maximo + 1;            // sin checked: a vale −2,147,483,648, sin aviso
+int b = checked(maximo + 1);   // con checked: lanza OverflowException
+```
+
+- `checked(…)` revisa **una expresión**. Una **expresión** es cualquier combinación que produce un valor: `maximo + 1`, `plazo * 2`, `12`.
+- `checked { … }` revisa **un bloque**: todas las instrucciones entre las llaves.
+- **`unchecked`** es lo contrario y es el comportamiento normal: no revisar.
+
+**La trampa de las constantes:** si escribes `int x = int.MaxValue + 1;`, sin variable de por medio, **no compila** (error CS0220). Como los dos valores son constantes conocidas al escribir el código, el compilador hace la suma él mismo, descubre que no cabe y te detiene. Para ver el desbordamiento **al ejecutar**, el valor tiene que pasar por una variable, como `maximo` en el ejemplo.
+
+**En DiSí:** un desbordamiento silencioso en un cálculo de cartera es un monto negativo que nadie ve hasta que cuadran los números. Por eso, en cálculos donde un número podría crecer mucho, conviene usar `checked`: es preferible que el programa se detenga con un error a que siga con un dato falso.
+
+### 3.12 Mostrar datos en pantalla con formato
+
+En la terminal se escribe con **`Console.WriteLine`**. `Console` es un tipo de la biblioteca base que representa la ventana de la terminal, y `WriteLine` es uno de sus métodos: escribe un texto y salta a la siguiente línea.
+
+Para meter datos dentro de un texto se usa la **interpolación**: un texto que empieza con **`$`** y lleva entre llaves `{ }` las variables que quieres mostrar:
 
 ```csharp
 string nombre = "Alex";
 decimal saldo = 15250.5m;
-Console.WriteLine($"Hola {nombre}, tu saldo es {saldo:N2}");   // interpolación con formato
+Console.WriteLine($"Hola {nombre}, tu saldo es {saldo:N2}");
+// Hola Alex, tu saldo es 15,250.50
 ```
 
-`:N2` agrega separador de miles y 2 decimales; `:C` usa el símbolo de moneda de la **cultura** de la máquina. La cultura cambia comas y puntos según el país, así que no la des por hecha.
+Después de la variable, dentro de las llaves, puedes poner un **formato** con dos puntos:
 
-**Preguntas de repaso**
+| Formato | Qué hace | `15250.5m` se ve como (en México) |
+| --- | --- | --- |
+| `{saldo}` | Sin formato | `15250.5` |
+| `{saldo:N2}` | **N**úmero con separador de miles y 2 decimales | `15,250.50` |
+| `{saldo:C}` | Moneda (*currency*) | `$15,250.50` |
+
+**La cultura.** ¿Por qué dice "en México"? Porque los separadores y el símbolo de moneda dependen de la **cultura**: la configuración regional del sistema operativo (en Windows: Configuración → Hora e idioma → Región). Con cultura de México, `{saldo:C}` muestra `$15,250.50`; con cultura de España, el mismo código muestra `15.250,50 €`. Tu programa usa la cultura de la máquina donde corre, así que **no la des por hecha**: un servidor configurado en inglés de Estados Unidos o en España muestra los montos distinto.
+
+### Preguntas de repaso
+
+Antes de contestar, cuenta cuántas partes tiene cada pregunta.
+
 - ¿`var` hace que C# sea dinámico? ¿Por qué no?
 - ¿Cuántos bytes ocupa un `int` y por qué su máximo es 2,147,483,647?
 - ¿Qué pasa al sumar 1 a `int.MaxValue` con y sin `checked`?
 - ¿Cuándo usarías `Parse` y cuándo `TryParse`?
+
+### Tarjetas de repaso
+
+#flashcards/csharp/s3-tipos ¿Qué es una variable?::Un nombre para un grupo de casillas de memoria donde se guarda un dato
+#flashcards/csharp/s3-tipos ¿Qué significa el = en C#?::Asignar: guarda en la variable de la izquierda el valor de la derecha. Para comparar se usa ==
+#flashcards/csharp/s3-tipos ¿Qué dice el tipo de una variable?::Cuántos bytes ocupa, cómo se leen esos bytes y qué operaciones se permiten
+#flashcards/csharp/s3-tipos ¿Qué es el tipado estático?::El tipo de cada variable se decide al compilar y nunca cambia
+#flashcards/csharp/s3-tipos ¿Qué es el tipado fuerte?::No se guarda un dato de un tipo en otro, salvo conversión segura o pedida explícitamente
+#flashcards/csharp/s3-tipos ¿var hace que la variable pueda cambiar de tipo?::No; el compilador deduce el tipo una vez, al compilar, y queda fijo
+#flashcards/csharp/s3-tipos ¿Qué es una constante (const)?::Un valor conocido al escribir el código que nunca cambia; el compilador lo sustituye
+#flashcards/csharp/s3-tipos ¿Por qué el máximo de int es 2,147,483,647?::32 bits = 2³² combinaciones; con signo, la mitad son negativas: el máximo es 2³¹ − 1
+#flashcards/csharp/s3-tipos ¿Qué tipo se usa para dinero y por qué?::decimal, porque guarda los decimales de forma exacta
+#flashcards/csharp/s3-tipos ¿Por qué char ocupa 2 bytes?::Con 1 byte solo caben 256 símbolos; con 2 caben 65,536 (UTF-16)
+#flashcards/csharp/s3-tipos ¿Qué es un alias como int?::El nombre corto que C# da a un tipo de .NET: int es System.Int32
+#flashcards/csharp/s3-tipos ¿Qué es un espacio de nombres (namespace)?::Un "apellido" que agrupa tipos relacionados, como System en System.Int32
+#flashcards/csharp/s3-tipos ¿Tipo por valor vs. por referencia?::Por valor la variable guarda el dato; por referencia guarda la dirección del dato en el heap
+#flashcards/csharp/s3-tipos ¿Qué significa que string es inmutable?::Un texto nunca se modifica; cada "cambio" crea un texto nuevo
+#flashcards/csharp/s3-tipos ¿Qué es un literal?::Un valor escrito tal cual en el código, como 12, 1.5m o "Alex"
+#flashcards/csharp/s3-tipos ¿Por qué decimal tasa = 0.24; no compila?::0.24 es un literal double; para decimal hay que escribir 0.24m
+#flashcards/csharp/s3-tipos ¿Conversión implícita vs. cast?::Implícita: automática porque siempre cabe; cast: la pides tú porque puede perderse información
+#flashcards/csharp/s3-tipos ¿Cuánto da (int)3.99?::3; el cast corta los decimales, no redondea
+#flashcards/csharp/s3-tipos ¿Parse vs. TryParse?::Parse lanza excepción si el texto no es número; TryParse devuelve true o false y el número por out
+#flashcards/csharp/s3-tipos ¿Qué es lanzar una excepción?::La forma en que .NET avisa de un error al ejecutar; si nadie la atiende, el programa se detiene
+#flashcards/csharp/s3-tipos ¿Qué es un desbordamiento (overflow)?::Cuando el resultado no cabe en el tipo y "da la vuelta" al otro extremo, por complemento a dos
+#flashcards/csharp/s3-tipos ¿Qué hace checked?::Revisa una expresión o bloque y lanza OverflowException si hay desbordamiento
+#flashcards/csharp/s3-tipos ¿Por qué int.MaxValue + 1 escrito directo no compila?::Son constantes: el compilador hace la suma, ve que no cabe y da el error CS0220
+#flashcards/csharp/s3-tipos ¿Qué es la interpolación de texto?::Un texto que empieza con $ y lleva variables entre llaves: $"Hola {nombre}"
+#flashcards/csharp/s3-tipos ¿Qué es la cultura en .NET?::La configuración regional que define separadores y moneda; cambia cómo se ven los montos
 
 ---
 
