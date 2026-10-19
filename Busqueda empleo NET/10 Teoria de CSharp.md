@@ -14,7 +14,7 @@ El [[05 Arbol de fundamentos]] explica la computadora y la web, pero no el lengu
 
 | Día | Lectura (20 min) | Código (70 min) |
 | --- | --- | --- |
-| Mar 6 oct | 1. Qué es .NET (ampliada, ~35 min; si no alcanza, termínala antes del miércoles) · 2. Anatomía de un proyecto · 3. Tipos (ampliada, ~35 min) | Primer proyecto por CLI, tipos, desbordamiento → laboratorio en [[12 Clase Primer proyecto por CLI]] |
+| Mar 6 oct | 1. Qué es .NET (ampliada, ~35 min; si no alcanza, termínala antes del miércoles) · 2. Anatomía de un proyecto (ampliada) · 3. Tipos (ampliada) | Primer proyecto por CLI, tipos, desbordamiento → laboratorio en [[12 Clase Primer proyecto por CLI]] |
 | Mié 7 oct | 4. Control de flujo · 5. `double` vs. `decimal` | Ciclos y tabla de pagos |
 | Jue 8 oct | 6. Métodos · 7. Convenciones | `CalcularInteres` y commit de los 5 ejercicios |
 
@@ -292,9 +292,34 @@ En el plan usas **.NET 10 (LTS)**, que trae **C# 14**. LTS (*Long Term Support*)
 
 ## 2. Anatomía de un proyecto
 
-`dotnet new console -n Semana01` crea una carpeta con dos archivos:
+Esta sección recorre, en orden, lo que pasa desde que creas un proyecto hasta que tienes un programa listo en la carpeta `bin`: qué es un proyecto, qué dice cada línea de su archivo de configuración, qué es `Program.cs`, de dónde salen los paquetes, qué hay en `obj` y `bin`, y qué es una solución. Ningún término se usa antes de explicarlo; los de la sección 1 (compilar, IL, runtime, SDK, CLI, CLR, DLL) se dan por vistos.
 
-**`Semana01.csproj`**: la receta del proyecto, en XML.
+### 2.1 Qué es un proyecto
+
+Un **proyecto** es una **carpeta** con tu código fuente y **un archivo de configuración** que le dice al SDK cómo compilarlo. Cada proyecto, al compilarse, produce **un** ensamblado: una `.dll` (sección 1.7).
+
+**Analogía:** un proyecto es una **receta con sus ingredientes**. Los ingredientes son tus archivos de código (`.cs`, la extensión de los archivos de C#); la receta es el archivo de configuración, que dice qué platillo sale, para qué cocina y con qué ingredientes comprados aparte.
+
+Los proyectos no se crean desde cero: se crean a partir de una **plantilla**, un proyecto de ejemplo que trae el SDK y que la CLI copia por ti. Este comando:
+
+```powershell
+dotnet new console -n Semana01
+```
+
+se lee "crea un proyecto nuevo (`new`) a partir de la plantilla de **consola** (`console`, un programa que corre en la terminal) y llámalo (`-n`) `Semana01`". Crea la carpeta `Semana01` con dos archivos:
+
+| Archivo | Qué es |
+| --- | --- |
+| `Semana01.csproj` | La receta: el archivo de configuración del proyecto |
+| `Program.cs` | Tu código fuente, con una línea de ejemplo |
+
+Además, `dotnet new` descarga en ese momento lo que el proyecto necesita (sección 2.5), y por eso también aparece una carpeta `obj`.
+
+### 2.2 El `.csproj`: la receta del proyecto
+
+El `.csproj` está escrito en **XML**, un formato de texto que organiza información con **etiquetas**: una etiqueta se abre con `<Nombre>` y se cierra con `</Nombre>`, y lo que va en medio es su contenido. Una etiqueta también puede llevar **atributos**, datos extra dentro de la etiqueta de apertura: en `<Project Sdk="Microsoft.NET.Sdk">`, `Sdk` es un atributo con el valor `"Microsoft.NET.Sdk"`. Si has abierto el `web.config` de una app de DiSí, ya viste XML.
+
+Este es el `.csproj` completo que crea la plantilla:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
@@ -307,46 +332,228 @@ En el plan usas **.NET 10 (LTS)**, que trae **C# 14**. LTS (*Long Term Support*)
 </Project>
 ```
 
-| Línea | Qué significa |
+Línea por línea:
+
+**`<Project Sdk="Microsoft.NET.Sdk">`**: abre el proyecto y dice de qué **tipo** es. `Microsoft.NET.Sdk` es el tipo para programas de consola y bibliotecas. Trae ya definidas, por dentro, cientos de reglas de compilación, para que tú no tengas que escribirlas. Una API web usa otro tipo, `Microsoft.NET.Sdk.Web`, que agrega las reglas de la web (semana 6).
+
+**`<PropertyGroup>`**: un grupo de **propiedades**, es decir, de ajustes del proyecto. Cada etiqueta de adentro es un ajuste con su valor.
+
+**`<OutputType>Exe</OutputType>`**: qué tipo de resultado produce el proyecto.
+- `Exe` (**ejecutable**): un programa que se puede arrancar. Tiene punto de entrada (sección 2.3).
+- `Library` (**biblioteca**): código que otros proyectos usan, pero que no se arranca por sí solo. No tiene punto de entrada.
+
+**`<TargetFramework>net10.0</TargetFramework>`**: la **versión de .NET** para la que compilas. Ese texto corto, `net10.0`, se llama **TFM** (*Target Framework Moniker*, "apodo de la plataforma destino"). Decide qué bibliotecas de la BCL tienes disponibles y qué runtime necesitará el programa. Una app de .NET Framework 4.8, como las de DiSí, tendría `net48`.
+
+**`<ImplicitUsings>enable</ImplicitUsings>`**: aquí hacen falta dos palabras.
+- Un **espacio de nombres** (*namespace*) es un "apellido" que agrupa tipos relacionados de la biblioteca base. Por ejemplo, `Console` vive en el espacio de nombres `System`; su nombre completo es `System.Console` (lo verás a fondo en la sección 3.7).
+- Una línea **`using`** al inicio de un archivo, como `using System;`, le dice al compilador: "en este archivo, cuando escriba `Console`, me refiero a `System.Console`". Así no tienes que escribir el apellido cada vez.
+
+`ImplicitUsings` activado significa: **agrega por mí los `using` más comunes** (`System`, `System.IO`, `System.Linq` y unos pocos más) en todos los archivos del proyecto. Por eso tu `Program.cs` puede usar `Console` sin una sola línea `using`. El compilador escribe esa lista en un archivo dentro de `obj` llamado `Semana01.GlobalUsings.g.cs`; puedes abrirlo y verla.
+
+**`<Nullable>enable</Nullable>`**: **`null`** significa "aquí no hay ningún valor", como una caja vacía. Usar algo que vale `null` como si tuviera un valor es uno de los errores más comunes al ejecutar. Con este ajuste, el compilador te da **advertencias** (avisos en amarillo que no impiden compilar, a diferencia de los errores) cuando algo podría valer `null` sin que lo estés revisando. Lo verás a fondo en la semana 4.
+
+#### El `.csproj` de .NET Framework vs. el de .NET moderno
+
+| | .NET Framework (DiSí) | .NET moderno (.NET 5 en adelante) |
+| --- | --- | --- |
+| Formato | Antiguo, de cientos de líneas | **Estilo SDK**: unas 10 líneas |
+| Archivos de código | **Uno por uno**: `<Compile Include="Controllers\HomeController.cs" />` por cada archivo | **Automático**: incluye todos los `.cs` de la carpeta y subcarpetas |
+| Reglas de compilación | Escritas dentro del archivo | Heredadas del SDK con `Sdk="…"` |
+| Paquetes NuGet | En otro archivo, `packages.config` | Dentro del mismo `.csproj`, con `<PackageReference>` |
+
+Por eso, en DiSí, agregar un archivo a mano en el Explorador de Windows no basta: si no está listado en el `.csproj`, no se compila. En .NET moderno, basta con que el archivo esté en la carpeta.
+
+Ojo con el nombre: entre 2016 y 2019 el .NET moderno se llamó **.NET Core**. Desde la versión 5 (2020) se llama simplemente **.NET**.
+
+### 2.3 `Program.cs`, el método `Main` y el punto de entrada
+
+**`Program.cs` es tu código fuente.** Lo creó la plantilla, no el compilador, y es el archivo donde escribes. Trae una sola línea:
+
+```csharp
+Console.WriteLine("Hello, World!");
+```
+
+Para entender qué pasa con esa línea al compilar hacen falta tres conceptos.
+
+**1. Método.** Un **método** es un bloque de instrucciones **con nombre** que hace una tarea; puede recibir datos y devolver un resultado. Es como una receta con nombre: en lugar de repetir los pasos, la "llamas" por su nombre. `Console.WriteLine("Hello, World!")` es una **llamada** al método `WriteLine`, que recibe un texto y lo escribe en la terminal. En tus apps MVC de DiSí, cada acción de un controlador (`public ActionResult Index()`) es un método. Lo verás a fondo en la sección 6.
+
+**2. Clase.** En C#, todo método tiene que vivir dentro de una **clase**: un contenedor con nombre que agrupa métodos y datos relacionados. `Console` es una clase de la biblioteca base, y `WriteLine` es uno de sus métodos. Las clases son el tema de la semana 2.
+
+**3. Punto de entrada.** Cuando arranca un programa, el CLR necesita saber **cuál es la primera instrucción** que debe ejecutar. Ese lugar se llama **punto de entrada**, y en C# es un método con un nombre especial: **`Main`** ("principal"). Es la puerta principal de un edificio con muchas oficinas: todos entran por ahí, y de ahí `Main` llama a los demás métodos.
+
+Hasta 2020, todo programa de consola se escribía completo, así:
+
+```csharp
+class Program                        // la clase que contiene todo
+{
+    static void Main(string[] args)  // el método Main: el punto de entrada
+    {
+        Console.WriteLine("Hello, World!");
+    }
+}
+```
+
+Desde C# 9 existen los **top-level statements** ("instrucciones de nivel superior"): escribes solo las instrucciones de adentro, y **el compilador agrega por su cuenta la clase `Program` y el método `Main`** que las envuelven. Eso no aparece como archivo en ningún lado: queda dentro del IL de `Semana01.dll`.
+
+Dos reglas que salen de ahí:
+- **Solo un archivo por proyecto** puede tener top-level statements, porque un programa solo puede tener una puerta principal.
+- Una **biblioteca** (`Library`) no los usa, porque no tiene punto de entrada.
+
+**En DiSí:** en tus apps web de .NET Framework no hay un `Main` visible. El proceso lo arranca IIS (`w3wp.exe`), y tu código empieza a ejecutarse en `Global.asax`, en el método `Application_Start`.
+
+### 2.4 Compilar y ejecutar desde la CLI
+
+| Comando | Qué hace |
 | --- | --- |
-| `Sdk="Microsoft.NET.Sdk"` | Tipo de proyecto. Una API usa `Microsoft.NET.Sdk.Web` |
-| `OutputType` `Exe` | Genera un ejecutable; una biblioteca sería `Library` |
-| `TargetFramework` `net10.0` | Versión de .NET contra la que compila (el TFM) |
-| `ImplicitUsings` | Agrega solo los `using` comunes (`System`, `System.IO`, `System.Linq`…) |
-| `Nullable` | Activa las advertencias de nulos; lo verás a fondo en la semana 4 |
+| `dotnet build` | **Compila**: Roslyn traduce tus `.cs` a IL y deja el resultado en `bin` |
+| `dotnet run` | Compila si hubo cambios y **ejecuta** el programa |
+| `dotnet clean` | Borra lo compilado de `bin` y `obj` |
 
-En .NET Framework (lo que usas en DiSí) el `.csproj` listaba cada archivo y tenía cientos de líneas. En .NET moderno es "estilo SDK": incluye todos los `.cs` de la carpeta automáticamente.
+Antes de compilar, `dotnet build` hace siempre un paso previo: **restaurar los paquetes**. Es la siguiente sección.
 
-**`Program.cs`**: una sola línea, `Console.WriteLine("Hello, World!");`. Son **top-level statements** (instrucciones de nivel superior): el compilador genera por ti la clase `Program` y el método `Main`, que es el **punto de entrada**. Un proyecto solo puede tener un archivo con top-level statements.
+### 2.5 Paquetes NuGet: qué es "resolverlos"
 
-### Carpetas `bin` y `obj`
+Un **paquete NuGet** es una biblioteca hecha por otros (una o varias `.dll`) que tu proyecto puede usar (sección 1.8). En el `.csproj` solo escribes **qué** paquete y **qué versión** quieres:
 
-- **`obj/`**: archivos intermedios de la compilación (por ejemplo, `project.assets.json` con los paquetes resueltos). No se toca.
-- **`bin/Debug/net10.0/`**: el resultado:
-  - `Semana01.dll`: tu programa en IL.
-  - `Semana01.exe`: un lanzador pequeño (apphost) que arranca el runtime y carga la `.dll`.
-  - `Semana01.runtimeconfig.json`: qué versión del runtime necesita.
-  - `Semana01.pdb`: símbolos de depuración (une el IL con tus líneas de código).
+```xml
+<ItemGroup>
+  <PackageReference Include="Google.Apis.Calendar.v3" Version="1.68.0" />
+</ItemGroup>
+```
 
-`bin` y `obj` **nunca van a Git**: se regeneran con cada build. `dotnet new gitignore` crea el `.gitignore` correcto en la raíz del repo.
+**Resolver los paquetes** es averiguar y conseguir todo lo necesario para cumplir esa lista:
 
-**Debug vs. Release:** `dotnet build` compila en Debug (sin optimizar, fácil de depurar). `dotnet build -c Release` optimiza; es lo que va a producción.
+1. **Calcular la versión exacta** de cada paquete.
+2. **Encontrar sus dependencias:** `Google.Apis.Calendar.v3` necesita otros paquetes de Google, y esos necesitan otros. A los paquetes que tu proyecto usa sin haberlos pedido directamente se les llama **dependencias transitivas**.
+3. **Descargarlos** a una carpeta de tu PC (`C:\Users\<tú>\.nuget\packages`), para no volver a bajarlos en cada proyecto.
+4. **Anotar el resultado** completo en `obj/project.assets.json`: la lista final de todos los paquetes, con su versión y ubicación.
+
+A todo eso se le llama **restaurar** (`dotnet restore`). Corre solo con `dotnet new`, `dotnet build` y `dotnet run`.
+
+**Analogía:** tu receta dice "harina". Resolver es ir a la tienda, elegir la marca y el peso exactos, y además conseguir lo que esa harina necesita. La lista de compras completa y ya surtida es `project.assets.json`.
+
+### 2.6 La carpeta `obj`: el taller
+
+`obj` (de *object*) guarda los **archivos intermedios**: todo lo que el SDK necesita a medio camino para compilar.
+
+| Lo que verás en `obj` | Qué es |
+| --- | --- |
+| `project.assets.json` | El resultado de resolver los paquetes (sección 2.5) |
+| `Semana01.GlobalUsings.g.cs` | Los `using` que agrega `ImplicitUsings` (sección 2.2) |
+| `Debug/net10.0/Semana01.dll` | La `.dll` recién compilada, antes de copiarse a `bin` |
+
+No se toca a mano: el SDK la crea y la mantiene. Si la borras, se regenera en el siguiente build.
+
+### 2.7 La carpeta `bin`: el resultado
+
+`bin` (de *binary*) guarda el **programa terminado**. La ruta tiene dos niveles:
+
+- **`Debug`**: la **configuración** con que compilaste (sección 2.8).
+- **`net10.0`**: el **TFM** del `.csproj`.
+
+Dentro de `bin/Debug/net10.0/`:
+
+| Archivo | Qué es |
+| --- | --- |
+| `Semana01.dll` | **Tu programa**, en IL. Es el ensamblado de la sección 1.7 |
+| `Semana01.exe` | Un **lanzador** pequeño (*apphost*): arranca el runtime y le pasa la `.dll`. Tu programa no está aquí |
+| `Semana01.runtimeconfig.json` | Qué **versión del runtime** necesita. El host lo lee al arrancar (sección 1.6, paso 1) |
+| `Semana01.deps.json` | La lista de **dependencias**: qué otras `.dll` usa tu programa y dónde encontrarlas |
+| `Semana01.pdb` | Los **símbolos de depuración** (abajo) |
+
+#### Qué es el `.pdb`
+
+**PDB** significa *Program Database*. La `.dll` tiene tu código traducido a IL, pero **no** sabe en qué archivo ni en qué línea de tu código fuente estaba cada instrucción. El `.pdb` guarda esa correspondencia: "esta instrucción del IL viene de `Program.cs`, línea 12", y también los nombres de tus variables.
+
+**Analogía:** la `.dll` es un libro traducido; el `.pdb` es el índice que dice "este párrafo corresponde a la página 12 del original".
+
+Sirve para dos cosas:
+- **Depurar** (*debug*): ejecutar el programa paso a paso en Visual Studio, detenerlo en una línea elegida (un **punto de interrupción** o *breakpoint*) y ver cuánto vale cada variable. Sin `.pdb`, Visual Studio no sabe en qué línea estás.
+- **Errores con número de línea:** cuando el programa falla, el mensaje de error dice `en Program.cs:línea 12` gracias al `.pdb`. Sin él, solo verías el nombre del método.
+
+Para **ejecutar** el programa no hace falta.
+
+### 2.8 Debug vs. Release
+
+Una **configuración de compilación** es un juego de ajustes con que se compila. Hay dos:
+
+| | **Debug** (depuración) | **Release** (publicación) |
+| --- | --- | --- |
+| Cómo se usa | `dotnet build` (es la de siempre) | `dotnet build -c Release` |
+| Optimización | No | Sí |
+| Para qué | Desarrollar y depurar en tu máquina | Lo que va a producción |
+| Carpeta | `bin/Debug/net10.0/` | `bin/Release/net10.0/` |
+
+**Optimizar** es que el compilador reacomode y simplifique tu código para que corra más rápido: por ejemplo, quitar instrucciones que no cambian el resultado. El programa hace lo mismo, pero ya no corresponde línea por línea con lo que escribiste, y por eso es más difícil depurarlo. Por eso se desarrolla en Debug y se publica en Release.
+
+### 2.9 Por qué `bin` y `obj` no van a Git
+
+Git guarda la **historia de tu código fuente**: lo que tú escribiste. `bin` y `obj` no son código fuente: son **resultados** que cualquiera puede volver a generar con `dotnet build`. Subirlos:
+- hace el repositorio mucho más pesado;
+- provoca **conflictos** constantes, porque cambian en cada compilación;
+- no sirve de nada, porque se regeneran solos.
+
+Para que Git los ignore existe el archivo **`.gitignore`**: una lista de archivos y carpetas que Git no debe registrar. `dotnet new gitignore` crea uno ya preparado para .NET, que incluye `bin/` y `obj/`.
+
+### 2.10 Proyecto vs. solución
+
+| | **Proyecto** (`.csproj`) | **Solución** (`.sln` o `.slnx`) |
+| --- | --- | --- |
+| Qué es | Una carpeta de código que se compila a **un** ensamblado | Un archivo que **agrupa varios proyectos** |
+| Qué produce al compilar | Su propia `.dll` | Nada propio: compila cada proyecto que contiene |
+| Para qué sirve | Definir qué se compila y con qué paquetes | Abrir y compilar varios proyectos juntos en Visual Studio |
+
+**Analogía:** cada proyecto es un **libro**; la solución es el **estante** donde los acomodas juntos. El estante no es un libro.
+
+**En DiSí:** al abrir el `.sln` en Visual Studio, el Explorador de soluciones muestra varios proyectos (el sitio web, y quizá bibliotecas de acceso a datos o de pruebas). Cada uno tiene su `.csproj` y produce su propia `.dll`.
+
+**En `plan-dotnet`:** una solución, `PlanDotnet.slnx`, con un proyecto por semana. Desde .NET 10, las soluciones nuevas usan el formato `.slnx`, un XML corto y legible, en lugar del `.sln` clásico que ves en DiSí; Visual Studio 2026 abre los dos.
 
 ### Comandos del día
 
 | Comando | Qué hace |
 | --- | --- |
-| `dotnet --list-sdks` | SDKs instalados |
-| `dotnet new console -n Nombre` | Proyecto nuevo de consola en la carpeta `Nombre` |
-| `dotnet build` | Compila (Roslyn → IL en `bin/`) |
+| `dotnet --list-sdks` | Lista los SDKs instalados |
+| `dotnet new console -n Nombre` | Crea un proyecto de consola en la carpeta `Nombre`, a partir de la plantilla |
+| `dotnet new gitignore` | Crea el `.gitignore` estándar de .NET |
+| `dotnet new sln -n Nombre` | Crea una solución vacía |
+| `dotnet sln add Carpeta/Proyecto.csproj` | Agrega un proyecto a la solución |
+| `dotnet restore` | Resuelve y descarga los paquetes (corre solo con `build`) |
+| `dotnet build` | Compila en Debug; con `-c Release`, en Release |
 | `dotnet run` | Compila si hace falta y ejecuta |
 | `dotnet clean` | Borra lo compilado |
-| `dotnet new sln` y `dotnet sln add Semana01` | Crea una solución y le agrega el proyecto, para abrir todo `plan-dotnet` junto en Visual Studio |
 
-**Preguntas de repaso**
+### Preguntas de repaso
+
+Antes de contestar, cuenta cuántas partes tiene cada pregunta.
+
 - ¿Qué genera el compilador a partir de los top-level statements?
 - ¿Qué hay en `bin` y qué hay en `obj`? ¿Por qué no se suben a Git?
 - ¿Qué cambia entre un `.csproj` de .NET Framework y uno de .NET 10?
+
+### Tarjetas de repaso
+
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué es un proyecto de .NET?::Una carpeta con código fuente y un .csproj que dice cómo compilarlo; produce un ensamblado
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué es una plantilla de proyecto?::Un proyecto de ejemplo del SDK que dotnet new copia para crear uno nuevo
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué es XML?::Un formato de texto que organiza información con etiquetas <Nombre>…</Nombre> y atributos
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué dice Sdk="Microsoft.NET.Sdk" en el .csproj?::El tipo de proyecto; hereda del SDK las reglas de compilación. Una web usa Microsoft.NET.Sdk.Web
+#flashcards/csharp/s2-anatomia-proyecto ¿OutputType Exe vs. Library?::Exe es un programa que se arranca y tiene punto de entrada; Library es código para otros proyectos
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué es el TFM?::Target Framework Moniker: el apodo de la versión de .NET destino, como net10.0 o net48
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué hace una línea using?::Permite escribir Console en lugar de System.Console en ese archivo
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué hace ImplicitUsings?::Agrega los using más comunes a todos los archivos del proyecto
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué significa null?::Que no hay ningún valor; usarlo como si lo hubiera es un error común
+#flashcards/csharp/s2-anatomia-proyecto ¿Advertencia vs. error de compilación?::La advertencia avisa pero deja compilar; el error impide compilar
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué es una clase?::Un contenedor con nombre que agrupa métodos y datos; todo método vive en una
+#flashcards/csharp/s2-anatomia-proyecto ¿Por qué solo un archivo puede tener top-level statements?::Porque un programa solo puede tener un punto de entrada
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué hay en bin/Debug/net10.0?::La .dll con IL, el .exe lanzador, runtimeconfig.json, deps.json y el .pdb
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué es el .exe de un proyecto .NET moderno?::Un lanzador (apphost) que arranca el runtime y le pasa la .dll; el programa está en la .dll
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué guarda runtimeconfig.json?::La versión del runtime que necesita el programa; la lee el host al arrancar
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué guarda deps.json?::La lista de dependencias: qué otras .dll usa el programa y dónde encontrarlas
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué es un breakpoint?::Un punto de interrupción: una línea donde el depurador detiene el programa
+#flashcards/csharp/s2-anatomia-proyecto ¿Debug vs. Release?::Debug sin optimizar, para depurar; Release optimizado, para producción
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué es optimizar al compilar?::Reacomodar y simplificar el código para que corra más rápido sin cambiar el resultado
+#flashcards/csharp/s2-anatomia-proyecto ¿Qué es el .gitignore?::La lista de archivos y carpetas que Git no debe registrar
+#flashcards/csharp/s2-anatomia-proyecto ¿Por qué un archivo nuevo no compila en un proyecto de .NET Framework?::Porque el .csproj antiguo lista cada archivo; si no está listado, no se compila
 
 ---
 
