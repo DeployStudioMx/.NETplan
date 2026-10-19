@@ -133,6 +133,7 @@ Si aun así aparece un conflicto, no lo resuelvas a mano: avísame y lo arreglo 
 
 **En el celular, además:**
 - Desactiva el **Auto commit-and-sync** automático del plugin Git (déjalo en 0) y sincroniza solo a mano, al terminar de repasar. El 19 oct un respaldo automático subió versiones viejas de varias notas encima de las nuevas.
+- **Antes** de cada Pull o Commit-and-sync, **cierra todas las notas abiertas**. Si una nota está abierta mientras se descargan cambios, Obsidian puede volver a guardar encima la versión vieja que tenía en pantalla (pasó el 19 oct con `10 Teoria de CSharp`). Si después del sync aparece un cambio que no hiciste, descártalo con ↶.
 - Después de cada **Git: Pull**, **cierra Obsidian por completo y vuelve a abrirlo** antes de repasar. Así el plugin de tarjetas lee las notas nuevas y no escribe encima con las que tenía en memoria.
 
 ### Cómo elegir qué mazo repasar
