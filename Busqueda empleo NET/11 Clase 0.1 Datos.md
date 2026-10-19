@@ -320,23 +320,23 @@ Contéstalas en voz alta en menos de 30 segundos cada una:
 Formato del plugin Spaced Repetition de Obsidian: pregunta a la izquierda de `::`, respuesta a la derecha.
 
 
-#flashcards/fundamentos/0-1-datos ¿Qué es un bit?::La unidad mínima de información; vale 0 o 1
-#flashcards/fundamentos/0-1-datos ¿Cuántos bits tiene un byte?::8
-#flashcards/fundamentos/0-1-datos ¿Cuántas combinaciones dan n bits?::2ⁿ; el máximo sin signo es 2ⁿ − 1
-#flashcards/fundamentos/0-1-datos ¿Por qué un byte va de 0 a 255?::8 bits = 2⁸ = 256 combinaciones, contando desde 0
-#flashcards/fundamentos/0-1-datos ¿Rango de un byte con signo (sbyte)?::−128 a 127
-#flashcards/fundamentos/0-1-datos ¿Por qué las computadoras usan binario?::Distinguir dos estados (hay o no hay corriente) es muy confiable frente al ruido
-#flashcards/fundamentos/0-1-datos Valores de las 8 posiciones de un byte::128, 64, 32, 16, 8, 4, 2, 1
-#flashcards/fundamentos/0-1-datos `1011` en decimal::11
-#flashcards/fundamentos/0-1-datos 13 en binario::1101
-#flashcards/fundamentos/0-1-datos ¿Qué es un nibble?::4 bits, medio byte; equivale a 1 dígito hexadecimal
-#flashcards/fundamentos/0-1-datos ¿Cuántos dígitos hex ocupa un byte?::2, de 00 a FF
-#flashcards/fundamentos/0-1-datos `0xFF` en decimal::255
-#flashcards/fundamentos/0-1-datos `0x2A` en decimal::42
-#flashcards/fundamentos/0-1-datos ¿Qué es `#FF8000`?::Un color: rojo 255, verde 128, azul 0 (naranja)
-#flashcards/fundamentos/0-1-datos ¿Cuántos bytes tiene una IPv4?::4, por eso cada número va de 0 a 255
-#flashcards/fundamentos/0-1-datos ¿Máximo de un int de C#?::2,147,483,647 (32 bits con signo)
-#flashcards/fundamentos/0-1-datos ¿1 KB son 1,000 o 1,024 bytes?::1 KB = 1,000 y 1 KiB = 1,024; Windows dice KB cuando son KiB
+#flashcards/fundamentos/0-1-datos ¿Qué es un bit?::La unidad mínima de información; vale 0 o 1 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Cuántos bits tiene un byte?::8 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Cuántas combinaciones dan n bits?::2ⁿ; el máximo sin signo es 2ⁿ − 1 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Por qué un byte va de 0 a 255?::8 bits = 2⁸ = 256 combinaciones, contando desde 0 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Rango de un byte con signo (sbyte)?::−128 a 127 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Por qué las computadoras usan binario?::Distinguir dos estados (hay o no hay corriente) es muy confiable frente al ruido <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos Valores de las 8 posiciones de un byte::128, 64, 32, 16, 8, 4, 2, 1 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos `1011` en decimal::11 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos 13 en binario::1101 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Qué es un nibble?::4 bits, medio byte; equivale a 1 dígito hexadecimal <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Cuántos dígitos hex ocupa un byte?::2, de 00 a FF <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos `0xFF` en decimal::255 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos `0x2A` en decimal::42 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Qué es `#FF8000`?::Un color: rojo 255, verde 128, azul 0 (naranja) <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Cuántos bytes tiene una IPv4?::4, por eso cada número va de 0 a 255 <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿Máximo de un int de C#?::2,147,483,647 (32 bits con signo) <!--SR:!2026-10-16,1,230-->
+#flashcards/fundamentos/0-1-datos ¿1 KB son 1,000 o 1,024 bytes?::1 KB = 1,000 y 1 KiB = 1,024; Windows dice KB cuando son KiB <!--SR:!2026-10-16,1,230-->
 
 ---
 
