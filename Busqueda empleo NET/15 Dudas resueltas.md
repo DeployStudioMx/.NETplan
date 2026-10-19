@@ -106,17 +106,17 @@ Para **ejecutar** el programa no hace falta. Aun así, suele publicarse junto co
 
 ### Tarjetas de esta sesión
 
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Program.cs lo genera el compilador?::No; lo crea la plantilla de dotnet new console. Es tu código fuente; el compilador lo lee
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué agrega el compilador a los top-level statements?::La clase Program y el método Main que los envuelven, dentro del IL de la .dll
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué es un método?::Un bloque de instrucciones con nombre que hace una tarea; puede recibir parámetros y devolver un resultado
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué es el punto de entrada de un programa?::La primera instrucción que ejecuta el CLR al arrancar; en C# es el método Main
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Dónde empieza tu código en una app MVC de .NET Framework?::En Global.asax, en Application_Start; el proceso lo arranca IIS (w3wp.exe)
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Proyecto vs. solución?::El proyecto (.csproj) compila a una .dll; la solución (.sln/.slnx) agrupa varios proyectos y no produce nada propio
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué significa resolver paquetes?::Calcular versiones exactas y dependencias transitivas, descargarlas y escribir el resultado en obj/project.assets.json
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué es una dependencia transitiva?::Un paquete que necesita otro paquete que tú usas, aunque tú no lo pediste directamente
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué comando resuelve los paquetes?::dotnet restore; corre solo con dotnet build
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué guarda el .pdb?::La correspondencia entre el IL y tu código fuente (archivo, línea, variables locales)
-#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Para qué sirve el .pdb?::Para depurar con breakpoints y para que los stack traces muestren el número de línea
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Program.cs lo genera el compilador?::No; lo crea la plantilla de dotnet new console. Es tu código fuente; el compilador lo lee <!--SR:!2026-10-23,4,270-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué agrega el compilador a los top-level statements?::La clase Program y el método Main que los envuelven, dentro del IL de la .dll <!--SR:!2026-10-23,4,270-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué es un método?::Un bloque de instrucciones con nombre que hace una tarea; puede recibir parámetros y devolver un resultado <!--SR:!2026-10-20,1,230-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué es el punto de entrada de un programa?::La primera instrucción que ejecuta el CLR al arrancar; en C# es el método Main <!--SR:!2026-10-23,4,270-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Dónde empieza tu código en una app MVC de .NET Framework?::En Global.asax, en Application_Start; el proceso lo arranca IIS (w3wp.exe) <!--SR:!2026-10-20,1,230-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Proyecto vs. solución?::El proyecto (.csproj) compila a una .dll; la solución (.sln/.slnx) agrupa varios proyectos y no produce nada propio <!--SR:!2026-10-20,1,230-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué significa resolver paquetes?::Calcular versiones exactas y dependencias transitivas, descargarlas y escribir el resultado en obj/project.assets.json <!--SR:!2026-10-20,1,230-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué es una dependencia transitiva?::Un paquete que necesita otro paquete que tú usas, aunque tú no lo pediste directamente <!--SR:!2026-10-22,3,250-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué comando resuelve los paquetes?::dotnet restore; corre solo con dotnet build <!--SR:!2026-10-23,4,270-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Qué guarda el .pdb?::La correspondencia entre el IL y tu código fuente (archivo, línea, variables locales) <!--SR:!2026-10-20,1,230-->
+#flashcards/csharp/s2-anatomia-proyecto/dudas ¿Para qué sirve el .pdb?::Para depurar con breakpoints y para que los stack traces muestren el número de línea <!--SR:!2026-10-23,4,270-->
 
 ---
 

@@ -43,12 +43,12 @@ Primera lectura de la sección 2 (anatomía de un proyecto), antes del laborator
 
 ### Tarjetas de los errores
 
-#flashcards/csharp/s2-anatomia-proyecto/errores ¿Quién crea Program.cs?::La plantilla de dotnet new console; el compilador no lo genera
-#flashcards/csharp/s2-anatomia-proyecto/errores ¿Qué genera el compilador a partir de los top-level statements?::La clase Program y el método Main, dentro del IL de la .dll
-#flashcards/csharp/s2-anatomia-proyecto/errores ¿Qué hay en la carpeta obj?::Archivos intermedios de la compilación, como project.assets.json con los paquetes resueltos
-#flashcards/csharp/s2-anatomia-proyecto/errores ¿Por qué bin y obj no se suben a Git?::Porque se regeneran en cada build; subirlos solo agrega peso y conflictos
-#flashcards/csharp/s2-anatomia-proyecto/errores ¿Por qué el .csproj moderno es tan corto?::Es estilo SDK: incluye automáticamente todos los .cs de la carpeta
-#flashcards/csharp/s2-anatomia-proyecto/errores ¿Cómo se llama hoy .NET Core?::Desde .NET 5, simplemente .NET
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Quién crea Program.cs?::La plantilla de dotnet new console; el compilador no lo genera <!--SR:!2026-10-22,3,250-->
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Qué genera el compilador a partir de los top-level statements?::La clase Program y el método Main, dentro del IL de la .dll <!--SR:!2026-10-20,1,230-->
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Qué hay en la carpeta obj?::Archivos intermedios de la compilación, como project.assets.json con los paquetes resueltos <!--SR:!2026-10-22,3,250-->
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Por qué bin y obj no se suben a Git?::Porque se regeneran en cada build; subirlos solo agrega peso y conflictos <!--SR:!2026-10-20,1,230-->
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Por qué el .csproj moderno es tan corto?::Es estilo SDK: incluye automáticamente todos los .cs de la carpeta <!--SR:!2026-10-20,1,230-->
+#flashcards/csharp/s2-anatomia-proyecto/errores ¿Cómo se llama hoy .NET Core?::Desde .NET 5, simplemente .NET <!--SR:!2026-10-20,1,230-->
 
 ---
 
