@@ -559,6 +559,13 @@ Antes de contestar, cuenta cuántas partes tiene cada pregunta.
 
 ## 3. Variables y el sistema de tipos
 
+> **Definición para entrevista: ¿qué es un tipo?**
+> Un **tipo** define **qué clase de dato** es un valor: **qué valores puede tomar**, **cuánta memoria ocupa** y **qué operaciones se pueden hacer con él**. En C# todo dato tiene un tipo, y el compilador lo conoce **antes de ejecutar**, así que revisa que cada dato se use de acuerdo con su tipo.
+>
+> *Ejemplo:* `int` es un tipo para números enteros: acepta valores de −2,147,483,648 a 2,147,483,647, ocupa 4 bytes y permite sumar, restar o comparar, pero no poner en mayúsculas.
+>
+> *Si piden más:* en .NET los tipos se dividen en **tipos por valor** (la variable guarda el dato, como `int`) y **tipos por referencia** (la variable guarda la dirección del dato, como `string`). Las dos cosas se explican en esta sección (3.3 y 3.8).
+
 Esta sección va de abajo hacia arriba: primero dónde vive un dato, después qué es una variable y un tipo, y al final cada tipo básico, cómo se convierten entre sí, qué pasa cuando un número no cabe y cómo se muestra un dato en pantalla. Ningún término se usa antes de explicarlo. Si no has estudiado [[11 Clase 0.1 Datos]], léela antes: aquí se usan bits, bytes y binario.
 
 ### 3.1 Dónde vive un dato: la memoria
@@ -593,7 +600,7 @@ Tres detalles de escritura que verás en todo el código:
 
 ### 3.3 Qué es un tipo
 
-Los mismos bytes pueden significar cosas distintas. El byte `0100 0001` vale **65** si lo lees como número, y es la letra **A** si lo lees como letra (cada letra tiene asignado un número; lo verás en la clase 0.1 Texto). La memoria solo guarda bits: **no sabe** qué significan.
+Aquí se explica por qué la definición del inicio de la sección dice lo que dice. Los mismos bytes pueden significar cosas distintas. El byte `0100 0001` vale **65** si lo lees como número, y es la letra **A** si lo lees como letra (cada letra tiene asignado un número; lo verás en la clase 0.1 Texto). La memoria solo guarda bits: **no sabe** qué significan.
 
 El **tipo** de una variable dice tres cosas:
 
@@ -807,6 +814,7 @@ Antes de contestar, cuenta cuántas partes tiene cada pregunta.
 
 #flashcards/csharp/s3-tipos ¿Qué es una variable?::Un nombre para un grupo de casillas de memoria donde se guarda un dato
 #flashcards/csharp/s3-tipos ¿Qué significa el = en C#?::Asignar: guarda en la variable de la izquierda el valor de la derecha. Para comparar se usa ==
+#flashcards/csharp/s3-tipos ¿Qué es un tipo? (definición de entrevista)::Define qué clase de dato es un valor: qué valores puede tomar, cuánta memoria ocupa y qué operaciones permite; el compilador lo conoce antes de ejecutar
 #flashcards/csharp/s3-tipos ¿Qué dice el tipo de una variable?::Cuántos bytes ocupa, cómo se leen esos bytes y qué operaciones se permiten
 #flashcards/csharp/s3-tipos ¿Qué es el tipado estático?::El tipo de cada variable se decide al compilar y nunca cambia
 #flashcards/csharp/s3-tipos ¿Qué es el tipado fuerte?::No se guarda un dato de un tipo en otro, salvo conversión segura o pedida explícitamente

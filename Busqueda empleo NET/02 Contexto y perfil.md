@@ -30,6 +30,7 @@ actualizado: 2026-10-13
 
 ## Cómo aprende Alex
 - **No asumir vocabulario.** Cada término técnico se define antes de usarlo y se desglosa hasta los fundamentos (de la CPU hacia arriba), con analogías de la vida diaria y anclas a lo que sí conoce: las apps de DiSí y el [[05 Arbol de fundamentos]]. Ojo: trabaja con IIS y `web.config` pero no conocía sus conceptos; explicarlos antes de usarlos como ancla.
+- **Definición de entrevista primero** (2026-10-19): cada concepto clave empieza con una definición corta, lista para decirla en una entrevista, y después viene la explicación desde los fundamentos que la justifica.
 - **No conoce Node.js ni Next.js** (2026-10-13). Solo los tocó en la generación de PDFs con Puppeteer, implementada con IA; no sirven como ancla: no usarlos para explicar nada.
 - 2026-10-13, dudas sobre la sección 1 de [[10 Teoria de CSharp]]: qué son el SDK y el runtime, qué es una CLI, qué significa compilar, qué hace el CLR más allá de su definición, qué es y qué contiene una DLL. Respondidas al reescribir esa sección desde cero.
 - 2026-10-13, más dudas: qué es IIS, qué es el heap, qué es IntelliSense → [[15 Dudas resueltas]].
