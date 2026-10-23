@@ -230,9 +230,9 @@ Una fila por unidad. Se actualiza cuando estudias una unidad nueva y después de
 
 | Unidad | Mazo | Tarjetas | Estudiada | Primer repaso | Evaluaciones | Estado |
 | --- | --- | --- | --- | --- | --- | --- |
-| Teoría C#, sección 1 | `csharp/s1-plataforma-net` | 38 | 13 y 14 oct | 15 oct (planeado) | 13 oct: 6.9 · 22 oct: pendiente | En repaso |
+| Teoría C#, sección 1 | `csharp/s1-plataforma-net` | 38 | 13 y 14 oct | 15 oct (planeado) | 13 oct: 6.9 · 22 oct: pendiente (atrasada) | En repaso |
 | Teoría C#, sección 2 | `csharp/s2-anatomia-proyecto` | 38 (21 + 11 dudas + 6 errores) | 19 oct | 20 oct | 19 oct: 5.3 · 27 oct: pendiente | Día 0. Siguen: 20, 21, 23 y 27 oct |
-| Teoría C#, sección 3 | `csharp/s3-tipos` | 26 | En estudio | — | — | Día 0 al terminar la lectura; luego día 1, 2, 4 y 8 |
+| Teoría C#, sección 3 | `csharp/s3-tipos` | 26 | 23 oct | 24 oct | 31 oct: pendiente | Día 0. Siguen: 24, 25, 27 y 31 oct |
 | Clase 0.1 Datos | `fundamentos/0-1-datos` | 17 | Por confirmar | — | — | Por confirmar si ya se estudió |
 | Laboratorio 6 oct | `csharp/lab-primer-proyecto` | 11 | — | — | — | Sin estudiar |
 

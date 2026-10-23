@@ -1,10 +1,13 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-10-19
+actualizado: 2026-10-23
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-10-23
+- Alex terminó la sección 3 de [[10 Teoria de CSharp]] (día 0 de la unidad `csharp/s3-tipos`). Registro y fechas en [[13 Plan de memorizacion]]. Limpieza de pendientes ya cumplidos.
 
 ## 2026-10-19
 - Agregada al inicio de la sección 3 de [[10 Teoria de CSharp]] la definición de entrevista de "tipo", con una tarjeta nueva. Preferencia nueva de Alex: definición de entrevista primero, luego los fundamentos ([[02 Contexto y perfil]], regla 7 de [[CLAUDE]]).
@@ -73,13 +76,14 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - Creada la ruta a .NET senior (12 temas por peso, orden por trimestres de 2027, con el flujo completo de una aplicación de Program.cs a la base de datos) → [[07 Ruta a NET senior]]. Tema de mayor interés: entender el flujo y la estructura de una aplicación completa.
 
 ## Pendientes
+- [ ] Sección 3: dudas y respuestas a las 4 preguntas de repaso; día 1 el 24 oct, evaluación el 31 oct (junto con el examen acumulado) ([[13 Plan de memorizacion]])
 - [ ] Sección 2: día 1 el 20 oct (volcado de memoria + primer repaso del mazo `s2-anatomia-proyecto`), evaluación el 27 oct ([[13 Plan de memorizacion]])
 - [x] Definir por completo la configuración de las tarjetas en [[13 Plan de memorizacion]] (2026-10-15)
-- [ ] Instalar y configurar el plugin Spaced Repetition en la PC y en el celular y comprobar el árbol de mazos (66 tarjetas) ([[13 Plan de memorizacion]], pasos 1 a 3)
-- [ ] Hoy 15 oct: día 1 de la sección 1 (volcado de memoria, comparar, releer lo que faltó, primer repaso del mazo `s1-plataforma-net`) ([[13 Plan de memorizacion]])
-- [ ] Jue 22 oct: segunda evaluación de la sección 1 en [[14 Evaluaciones]]
+- [x] Instalar y configurar el plugin Spaced Repetition y comprobar los mazos ([[13 Plan de memorizacion]])
+- [x] Día 1 de la sección 1: primer repaso del mazo `s1-plataforma-net`
+- [ ] **Atrasada:** segunda evaluación de la sección 1 (era el 22 oct) en [[14 Evaluaciones]]
 - [ ] Confirmar si Alex ya estudió la clase de 0.1 Datos ([[11 Clase 0.1 Datos]]) para activar su mazo
-- [ ] Después: seguir con la sección 2 de [[10 Teoria de CSharp]]
+- [x] Sección 2 de [[10 Teoria de CSharp]] (19 oct)
 - [ ] Exámenes acumulados: 31 oct, 28 nov y 26 dic ([[13 Plan de memorizacion]])
 - [ ] Escribir en [[10 Teoria de CSharp]] la teoría de las semanas 2 a 5, cada una antes de que empiece (semana 2: antes del 13 oct)
 - [ ] Confirmar que las ~12 horas por semana son realistas
