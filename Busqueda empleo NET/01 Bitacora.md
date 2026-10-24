@@ -7,6 +7,7 @@ actualizado: 2026-10-24
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-24
+- En la PC de Alex, Smart App Control bloqueó el `.exe` lanzador de `Semana01`. Solución: `<UseAppHost>false</UseAppHost>` en el `.csproj`. Agregado a la tabla de errores de [[12 Clase Primer proyecto por CLI]].
 - Alex no tenía creado el repo `plan-dotnet` (tarea del 2 oct en [[04 Calendario dia por dia]]). Agregado a [[12 Clase Primer proyecto por CLI]] el laboratorio 0: qué es un repositorio, configurar Git, crear `plan-dotnet` público en la cuenta personal (README sí, .gitignore no) y clonarlo en `C:\Repos`. 4 tarjetas nuevas en `csharp/lab-primer-proyecto` ([[13 Plan de memorizacion]]).
 
 ## 2026-10-23
