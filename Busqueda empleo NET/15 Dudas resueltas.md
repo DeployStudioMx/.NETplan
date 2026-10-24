@@ -37,6 +37,25 @@ Con `Console.WriteLine(...)`: un método de la clase `Console` (la terminal) que
 #flashcards/csharp/lab-primer-proyecto/dudas ¿Cómo se imprime en la terminal en C#?::Console.WriteLine(...): escribe lo que recibe y salta de línea; Console.Write no salta
 #flashcards/csharp/lab-primer-proyecto/dudas ¿Qué diferencia hay entre Console.WriteLine(plazo) y Console.WriteLine("plazo")?::Sin comillas imprime el valor de la variable; con comillas imprime la palabra
 
+### ¿Qué es `checked`?
+
+> **Definición para entrevista:** `checked` es una palabra de C# que le pide al programa **revisar si una operación aritmética se desborda**. Si se desborda, **lanza una `OverflowException`** en lugar de seguir con un número equivocado. Sin `checked` (el comportamiento normal, `unchecked`), el número "da la vuelta" en silencio.
+
+1. Cada tipo tiene un tamaño fijo: el máximo de `int` es 2,147,483,647.
+2. Si un resultado no cabe, se **desborda**: los bits dan la vuelta y aparece el número más negativo (sección 3.11 de [[10 Teoria de CSharp]]).
+3. Por defecto C# no revisa, porque revisar cada operación cuesta tiempo.
+4. `checked` pide revisar: si hay desbordamiento, el programa se detiene con un error claro.
+
+**Analogía:** una calculadora de 3 dígitos. 999 + 1 muestra `000` en la "unchecked" y **ERROR** en la "checked". En un sistema de crédito conviene la del ERROR.
+
+**Dos formas:** `checked(expresión)` revisa una expresión; `checked { … }` revisa todas las instrucciones del bloque. Si se desborda, la terminal muestra `Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.` "Unhandled" significa que nadie atendió la excepción, así que el CLR detiene el programa.
+
+#flashcards/csharp/lab-primer-proyecto/dudas ¿Qué es checked? (definición de entrevista)::Pide revisar si una operación aritmética se desborda; si pasa, lanza OverflowException en vez de seguir con un número equivocado
+#flashcards/csharp/lab-primer-proyecto/dudas ¿Por qué C# no revisa el desbordamiento por defecto?::Porque revisar cada operación cuesta tiempo; el comportamiento normal es unchecked
+#flashcards/csharp/lab-primer-proyecto/dudas ¿checked(...) vs. checked { ... }?::checked(...) revisa una expresión; checked { ... } revisa todas las instrucciones del bloque
+#flashcards/csharp/lab-primer-proyecto/dudas ¿Qué significa "Unhandled exception"?::Excepción sin atender: nadie la manejó en el código, así que el CLR detiene el programa
+
+
 
 ---
 
