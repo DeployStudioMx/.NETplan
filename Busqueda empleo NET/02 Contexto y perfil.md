@@ -38,6 +38,7 @@ actualizado: 2026-10-13
 - 2026-10-19, dudas de la sección 2: si `Program.cs` lo genera el compilador, qué es un método, qué es `Main` y el punto de entrada, solución vs. proyecto, paquetes resueltos, el `.pdb` → [[15 Dudas resueltas]]. Evaluación: 5.3; el patrón de contestar solo la primera parte se repite ([[14 Evaluaciones]]).
 - 2026-10-24, laboratorio 2: 7.5, su mejor calificación; ya contesta todas las partes. Confunde todavía **momentos** (compilar vs. ejecutar) y **piezas** (SDK vs. TFM) ([[14 Evaluaciones]]).
 - 2026-10-24, dudas en el laboratorio 3: cómo imprimir en C#, qué es `checked` (no lo había entendido de la sección 3.11) → [[15 Dudas resueltas]].
+- **Sabe usar, no sabe explicar** (2026-10-24): en el laboratorio 3 usó `List<object>`, `foreach`, `switch` como expresión con patrones de tipo, tuplas y `ToString()`, pero no puede explicarlos. Al llegar a cada tema, explicarlo desde cero como si no lo conociera y conectarlo con su código ([[12 Clase Primer proyecto por CLI]]). Temas: sección 4 (`foreach`, `switch`), semana 2 (`object`, `ToString`), semana 3 (colecciones, genéricos, patrones de tipo, tuplas).
 - Usa las técnicas de estudio de [[11 Clase 0.1 Datos]] y el sistema de repaso de [[13 Plan de memorizacion]] para retener a largo plazo.
 
 ## Herramientas y repos del plan

@@ -7,6 +7,7 @@ actualizado: 2026-10-24
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-24
+- Revisión del `Program.cs` del laboratorio 3: Alex usó `List<object>`, `foreach`, `switch` con patrones, tuplas y `ToString()`; sabe usarlos pero no explicarlos ([[02 Contexto y perfil]]). Acordado: guardar esa versión aparte, reescribir el ejercicio 1 en simple, y en la sección 4 refactorizarlo hacia el ciclo ya sabiendo explicarlo. Agregados tuplas y patrones de tipo a la semana 3 de [[10 Teoria de CSharp]].
 - Duda en el laboratorio 3: qué es `checked` → [[15 Dudas resueltas]] (4 tarjetas en `lab-primer-proyecto/dudas`).
 - Duda en el laboratorio 3: cómo imprimir en C# → [[15 Dudas resueltas]] (2 tarjetas en `lab-primer-proyecto/dudas`).
 - Alex hizo los laboratorios 0 a 2 de [[12 Clase Primer proyecto por CLI]] (repo `plan-dotnet` creado con solución y proyecto). Laboratorio 2 calificado: 45/60 (7.5) en [[14 Evaluaciones]]; duda sobre `dotnet run` en [[15 Dudas resueltas]]. 6 tarjetas nuevas en `lab-primer-proyecto` ([[13 Plan de memorizacion]]).
@@ -83,6 +84,8 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - Creada la ruta a .NET senior (12 temas por peso, orden por trimestres de 2027, con el flujo completo de una aplicación de Program.cs a la base de datos) → [[07 Ruta a NET senior]]. Tema de mayor interés: entender el flujo y la estructura de una aplicación completa.
 
 ## Pendientes
+- [ ] Laboratorio 3: reescribir el ejercicio 1 en simple, hacer el calentamiento, probar `sizeof(string)` y los pasos 1 y 5 del ejercicio 2 ([[12 Clase Primer proyecto por CLI]])
+- [ ] Al llegar a la sección 4: refactorizar la ficha de tipos hacia `foreach`/`switch` explicando cada línea; en semana 2 y 3, explicar `object`, `ToString`, colecciones, patrones de tipo y tuplas desde cero ([[02 Contexto y perfil]])
 - [x] Bloqueo de Smart App Control resuelto por Alex (24 oct)
 - [ ] Sección 3: dudas y respuestas a las 4 preguntas de repaso; día 1 el 24 oct, evaluación el 31 oct (junto con el examen acumulado) ([[13 Plan de memorizacion]])
 - [ ] Sección 2: día 1 el 20 oct (volcado de memoria + primer repaso del mazo `s2-anatomia-proyecto`), evaluación el 27 oct ([[13 Plan de memorizacion]])

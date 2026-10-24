@@ -995,7 +995,7 @@ Cada sección se agrega aquí antes de que empiece su semana:
 | Semana | Teoría de C# |
 | --- | --- |
 | 2 | Clases y objetos, constructores, propiedades, valor vs. referencia, `struct`, `record` |
-| 3 | Interfaces, herencia, polimorfismo, clases abstractas, colecciones (`List<T>`, `Dictionary<K,V>`), genéricos |
+| 3 | Interfaces, herencia, polimorfismo, clases abstractas, colecciones (`List<T>`, `Dictionary<K,V>`), genéricos, patrones de tipo en `switch`, tuplas. **Alex ya los usa sin poder explicarlos: explicar desde cero y conectar con su ficha de tipos del laboratorio 3** |
 | 4 | LINQ, excepciones (`try/catch/finally`, excepciones propias), tipos que aceptan nulos |
 | 5 | `async/await`, `Task`, `HttpClient`, JSON con `System.Text.Json` |
 
