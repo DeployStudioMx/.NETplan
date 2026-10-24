@@ -1,12 +1,29 @@
 ---
 tags: [busqueda-empleo, dudas]
-actualizado: 2026-10-19
+actualizado: 2026-10-24
 ---
 > Dudas de Alex que surgen fuera de una clase o en una nota que no se debe modificar. Cada una enlaza a la nota de la que salió · registro de dudas en [[02 Contexto y perfil]] · se repasan con el [[13 Plan de memorizacion]] · los errores de las evaluaciones están en [[14 Evaluaciones]]
 
 # Dudas resueltas
 
 Lo más reciente arriba. Las dudas de la sección 1 de la teoría (SDK, runtime, CLI, compilar, CLR, DLL) se respondieron directo en [[10 Teoria de CSharp]].
+
+---
+
+## 2026-10-24 · Haciendo el laboratorio 2 de [[12 Clase Primer proyecto por CLI]]
+
+### ¿`dotnet run` también hace `build`?
+
+**Sí.** `dotnet run` hace tres pasos en orden:
+
+1. **Restore:** resuelve y descarga los paquetes, si hace falta (sección 2.5 de [[10 Teoria de CSharp]]).
+2. **Build:** compila, pero solo lo que cambió desde la última vez. A esto se le llama **compilación incremental**: si no tocaste nada, este paso es casi instantáneo.
+3. **Ejecutar:** arranca el programa.
+
+Por eso, después de borrar `bin` y `obj`, un solo `dotnet run` los volvió a crear. `dotnet build` hace solo los pasos 1 y 2, sin ejecutar.
+
+#flashcards/csharp/lab-primer-proyecto/dudas ¿Qué pasos hace dotnet run?::Restore, build (solo lo que cambió) y ejecutar
+#flashcards/csharp/lab-primer-proyecto/dudas ¿Qué es la compilación incremental?::Compilar solo lo que cambió desde la última vez; si nada cambió, el build es casi instantáneo
 
 ---
 

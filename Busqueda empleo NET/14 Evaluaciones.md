@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, evaluaciones]
-actualizado: 2026-10-19
+actualizado: 2026-10-24
 ---
 > Registro de cada vez que Alex contesta preguntas de repaso o de entrevista y Claude lo califica · los conceptos débiles entran al [[13 Plan de memorizacion]] · dudas en [[15 Dudas resueltas]] · perfil en [[02 Contexto y perfil]] · avance en [[01 Bitacora]]
 
@@ -12,8 +12,48 @@ Cada evaluación registra la calificación, lo que faltó y una tarjeta por cada
 
 | Fecha | Tema | Calificación | Conceptos débiles |
 | --- | --- | --- | --- |
+| 2026-10-24 | [[12 Clase Primer proyecto por CLI]], laboratorio 2 | **45 / 60 (7.5)** | `TargetFramework` no es la versión del SDK; `Main` se genera al compilar, no al ejecutar; qué guarda el `.pdb` |
 | 2026-10-19 | [[10 Teoria de CSharp]], sección 2 (repaso) | **16 / 30 (5.3)** | Qué genera el compilador (no es `Program.cs`), qué hay en `obj`, por qué `bin` y `obj` no van a Git |
 | 2026-10-13 | [[10 Teoria de CSharp]], sección 1 (repaso) | **55 / 80 (6.9)** | Código máquina por arquitectura, qué trae el SDK y qué va en producción, qué hace el host vs. el CLR, qué contiene una DLL nativa y el manifiesto |
+
+---
+
+## 2026-10-24 · Laboratorio 2: explorar el proyecto
+
+Preguntas del laboratorio 2 de [[12 Clase Primer proyecto por CLI]], contestadas después de crear `Semana01`.
+
+### Respuestas de Alex (textuales)
+
+1. Dice net10.0 y es la version del SDK
+2. No veo el metodo main en program.cs porque dotnet lo crea al ejecutar la aplicacion.
+3. Semana 01.deps.json lista las dependencias del proyecto. Semana01.dll es el ensamblado del proyecto. Semana01.exe es el lanzador del proyecto. Semana01.pdb contiene los breakpoint y stacktrace del proyecto. Semana01.runtimeconfig.json tiene las instrucciones de que runtime se requiere para el proyecto y dependencias
+4. Aparecio la carpeta Release
+5. se volvieron a crear porque el run compila  vuelve a generarlos, tengo la duda si run ejecuta ademas build internamente
+6. No aparecen porque el gitignore que se creo con la base ne dotnet excluye todo lo que los repositorios dotnet deben excluir.
+
+### Calificación
+
+| # | Pregunta | Calif. | Qué estuvo bien | Qué faltó o se corrige |
+| --- | --- | --- | --- | --- |
+| 1 | ¿Qué dice `TargetFramework` y qué significa? | 5/10 | Leíste bien el valor: `net10.0` | **Corrección:** no es la versión del SDK. Es el **TFM**: la versión de .NET **para la que compilas**, que decide qué bibliotecas tienes y qué runtime necesitará el programa. El SDK es otra cosa: tienes el SDK 10.0.401, y con él podrías compilar un proyecto con `net8.0` |
+| 2 | ¿Dónde está `Main` y por qué no lo ves? | 4/10 | Que `Main` existe aunque no esté escrito | **Corrección:** no se crea **al ejecutar**, sino **al compilar** (`dotnet build`): Roslyn agrega la clase `Program` y el método `Main` dentro del IL de la `.dll`. Al ejecutar, el CLR solo **busca** ese `Main` que ya está en la `.dll` |
+| 3 | Archivos de `bin/Debug/net10.0` y para qué sirve cada uno | 8/10 | `.dll`, `.exe` y `deps.json`, exactos | El `.pdb` no **contiene** breakpoints ni stack traces: contiene la **correspondencia entre el IL y tus líneas de código**, y eso es lo que **permite** usar breakpoints y que el stack trace diga el número de línea. Las dependencias están en `deps.json`, no en `runtimeconfig.json`: este solo dice qué versión del runtime se necesita |
+| 4 | ¿Qué carpeta apareció con `-c Release`? | 10/10 | `bin/Release` (con su subcarpeta `net10.0`) | — |
+| 5 | ¿Qué pasó al borrar `bin` y `obj` y hacer `dotnet run`? ¿Por qué? | 9/10 | Se regeneraron porque `run` compila | Tu duda es correcta: `dotnet run` hace **restore + build + ejecutar** ([[15 Dudas resueltas]]). Por eso también se regeneró `obj` |
+| 6 | ¿Aparecen `bin` y `obj` en `git status`? ¿Por qué? | 9/10 | El `.gitignore` de .NET los excluye | Para la respuesta completa, nombra la regla: el `.gitignore` contiene las líneas `bin/` y `obj/` |
+
+**Total: 45 / 60 → 7.5 de 10.** Es tu mejor calificación hasta ahora (6.9 y 5.3 en las anteriores).
+
+**Lo bueno:** **contestaste todas las partes** de cada pregunta. El patrón de contestar a medias no apareció esta vez.
+
+**Lo que hay que fijar:** dos confusiones de **momento** y de **pieza**: cuándo se genera `Main` (al compilar, no al ejecutar) y qué es `net10.0` (el TFM, no el SDK). Son las mismas ideas que la pregunta 1 de la evaluación del 19 oct, así que van como tarjetas de error.
+
+### Tarjetas de los errores
+
+#flashcards/csharp/lab-primer-proyecto/errores ¿TargetFramework net10.0 es la versión del SDK?::No; es el TFM, la versión de .NET para la que compilas. El SDK es la herramienta (por ejemplo, 10.0.401)
+#flashcards/csharp/lab-primer-proyecto/errores ¿Cuándo se genera el método Main de los top-level statements?::Al compilar (dotnet build): Roslyn lo agrega al IL de la .dll. Al ejecutar, el CLR solo lo busca
+#flashcards/csharp/lab-primer-proyecto/errores ¿Qué contiene exactamente el .pdb?::La correspondencia entre el IL y tus líneas de código; eso permite breakpoints y números de línea en el stack trace
+#flashcards/csharp/lab-primer-proyecto/errores ¿Dónde están las dependencias del programa: deps.json o runtimeconfig.json?::En deps.json; runtimeconfig.json solo dice qué versión del runtime se necesita
 
 ---
 
