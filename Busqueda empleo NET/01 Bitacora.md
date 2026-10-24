@@ -7,7 +7,7 @@ actualizado: 2026-10-24
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-24
-- En la PC de Alex, Smart App Control bloqueó el `.exe` lanzador de `Semana01`. Solución: `<UseAppHost>false</UseAppHost>` en el `.csproj`. Agregado a la tabla de errores de [[12 Clase Primer proyecto por CLI]].
+- En la PC de Alex (`Desarrollo2`), Smart App Control bloqueó el lanzador y después la propia `Semana01.dll` (sin firma digital). `UseAppHost=false` no basta: hay que desactivar Smart App Control en una PC personal, o usar la PC personal o GitHub Codespaces si es equipo de DiSí. Tabla de errores corregida en [[12 Clase Primer proyecto por CLI]]. Pendiente: Alex confirma si la PC es suya.
 - Alex no tenía creado el repo `plan-dotnet` (tarea del 2 oct en [[04 Calendario dia por dia]]). Agregado a [[12 Clase Primer proyecto por CLI]] el laboratorio 0: qué es un repositorio, configurar Git, crear `plan-dotnet` público en la cuenta personal (README sí, .gitignore no) y clonarlo en `C:\Repos`. 4 tarjetas nuevas en `csharp/lab-primer-proyecto` ([[13 Plan de memorizacion]]).
 
 ## 2026-10-23
@@ -80,6 +80,7 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - Creada la ruta a .NET senior (12 temas por peso, orden por trimestres de 2027, con el flujo completo de una aplicación de Program.cs a la base de datos) → [[07 Ruta a NET senior]]. Tema de mayor interés: entender el flujo y la estructura de una aplicación completa.
 
 ## Pendientes
+- [ ] Decidir dónde programar: desactivar Smart App Control (si la PC es personal), otra PC personal o GitHub Codespaces ([[12 Clase Primer proyecto por CLI]])
 - [ ] Sección 3: dudas y respuestas a las 4 preguntas de repaso; día 1 el 24 oct, evaluación el 31 oct (junto con el examen acumulado) ([[13 Plan de memorizacion]])
 - [ ] Sección 2: día 1 el 20 oct (volcado de memoria + primer repaso del mazo `s2-anatomia-proyecto`), evaluación el 27 oct ([[13 Plan de memorizacion]])
 - [x] Definir por completo la configuración de las tarjetas en [[13 Plan de memorizacion]] (2026-10-15)

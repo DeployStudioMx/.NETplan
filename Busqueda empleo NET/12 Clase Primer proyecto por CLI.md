@@ -237,7 +237,7 @@ Haz lo mismo del ejercicio 2 con `byte`: guarda 255 y súmale 1. ¿Qué número 
 | `git clone` dice `Repository not found` | Git usa otra cuenta guardada | `cmdkey /delete:git:https://github.com` y vuelve a clonar |
 | `dotnet new gitignore` dice que el archivo ya existe | GitHub creó un `.gitignore` al crear el repo | Bórralo (`del .gitignore`) y vuelve a correr el comando |
 | `dotnet sln add` dice que no existe el archivo de solución | Falta crear la solución antes de agregarle proyectos | Corre `dotnet new sln -n PlanDotnet` y repite el `sln add` |
-| Windows (**Smart App Control**) bloquea el programa al ejecutar | El `.exe` lanzador recién compilado no tiene firma digital | Agrega `<UseAppHost>false</UseAppHost>` dentro de `<PropertyGroup>` del `.csproj`, luego `dotnet clean` y `dotnet run`: el programa lo arranca `dotnet.exe`, que sí está firmado |
+| Windows (**Smart App Control**) bloquea el programa: "no podemos confirmar quién publicó Semana01.dll" o `FileLoadException` | Smart App Control bloquea todo `.exe` y `.dll` sin firma digital, incluido lo que compilas tú. No se arregla desde el proyecto | En una PC **personal**: Seguridad de Windows → Control de aplicaciones y navegador → Smart App Control → **Desactivado** (en muchas versiones ya no se puede reactivar sin reinstalar Windows). En una PC **de la empresa**: no lo cambies; usa tu PC personal o GitHub Codespaces |
 | Visual Studio no abre el `.slnx` | Versión de Visual Studio antigua | Actualiza Visual Studio 2026 desde su Installer |
 
 ---
