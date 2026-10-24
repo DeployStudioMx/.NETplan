@@ -7,6 +7,7 @@ actualizado: 2026-10-24
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-10-24
+- Duda en el laboratorio 3: cómo imprimir en C# → [[15 Dudas resueltas]] (2 tarjetas en `lab-primer-proyecto/dudas`).
 - Alex hizo los laboratorios 0 a 2 de [[12 Clase Primer proyecto por CLI]] (repo `plan-dotnet` creado con solución y proyecto). Laboratorio 2 calificado: 45/60 (7.5) en [[14 Evaluaciones]]; duda sobre `dotnet run` en [[15 Dudas resueltas]]. 6 tarjetas nuevas en `lab-primer-proyecto` ([[13 Plan de memorizacion]]).
 - En la PC de Alex (`Desarrollo2`), Smart App Control bloqueó el lanzador y después la propia `Semana01.dll` (sin firma digital). `UseAppHost=false` no basta: hay que desactivar Smart App Control en una PC personal, o usar la PC personal o GitHub Codespaces si es equipo de DiSí. Tabla de errores corregida en [[12 Clase Primer proyecto por CLI]]. Resuelto por Alex el mismo día.
 - Alex no tenía creado el repo `plan-dotnet` (tarea del 2 oct en [[04 Calendario dia por dia]]). Agregado a [[12 Clase Primer proyecto por CLI]] el laboratorio 0: qué es un repositorio, configurar Git, crear `plan-dotnet` público en la cuenta personal (README sí, .gitignore no) y clonarlo en `C:\Repos`. 4 tarjetas nuevas en `csharp/lab-primer-proyecto` ([[13 Plan de memorizacion]]).

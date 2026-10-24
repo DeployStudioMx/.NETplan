@@ -25,6 +25,19 @@ Por eso, después de borrar `bin` y `obj`, un solo `dotnet run` los volvió a cr
 #flashcards/csharp/lab-primer-proyecto/dudas ¿Qué pasos hace dotnet run?::Restore, build (solo lo que cambió) y ejecutar
 #flashcards/csharp/lab-primer-proyecto/dudas ¿Qué es la compilación incremental?::Compilar solo lo que cambió desde la última vez; si nada cambió, el build es casi instantáneo
 
+### ¿Cómo imprimo algo en C#?
+
+Con `Console.WriteLine(...)`: un método de la clase `Console` (la terminal) que escribe lo que le pases entre paréntesis y salta a la siguiente línea. Explicado en la sección 3.12 de [[10 Teoria de CSharp]].
+
+- Texto fijo entre comillas dobles: `Console.WriteLine("Hola");`
+- Una variable, sin comillas: `Console.WriteLine(plazo);`. Con comillas imprimiría la palabra "plazo".
+- Texto con variables, con interpolación: `Console.WriteLine($"Plazo: {plazo} meses");`. Dentro de las llaves cabe cualquier expresión, y `{valor,-12}` alinea en 12 caracteres.
+- `Console.Write(...)` escribe sin saltar de línea; `Console.WriteLine()` vacío deja una línea en blanco.
+
+#flashcards/csharp/lab-primer-proyecto/dudas ¿Cómo se imprime en la terminal en C#?::Console.WriteLine(...): escribe lo que recibe y salta de línea; Console.Write no salta
+#flashcards/csharp/lab-primer-proyecto/dudas ¿Qué diferencia hay entre Console.WriteLine(plazo) y Console.WriteLine("plazo")?::Sin comillas imprime el valor de la variable; con comillas imprime la palabra
+
+
 ---
 
 ## 2026-10-19 · Leyendo la sección 2 de [[10 Teoria de CSharp]]
