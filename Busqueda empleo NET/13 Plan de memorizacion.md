@@ -70,10 +70,10 @@ flashcards
 │   │   ├── errores                 6
 │   │   └── dudas                  11
 │   ├── s3-tipos                   26
-│   └── lab-primer-proyecto        11
+│   └── lab-primer-proyecto        15
 └── fundamentos
     └── 0-1-datos                  17
-                         Total:   130
+                         Total:   134
 ```
 
 Si los números no coinciden, avísame con una captura antes de repasar.
@@ -234,7 +234,7 @@ Una fila por unidad. Se actualiza cuando estudias una unidad nueva y después de
 | Teoría C#, sección 2 | `csharp/s2-anatomia-proyecto` | 38 (21 + 11 dudas + 6 errores) | 19 oct | 20 oct | 19 oct: 5.3 · 27 oct: pendiente | Día 0. Siguen: 20, 21, 23 y 27 oct |
 | Teoría C#, sección 3 | `csharp/s3-tipos` | 26 | 23 oct | 24 oct | 31 oct: pendiente | Día 0. Siguen: 24, 25, 27 y 31 oct |
 | Clase 0.1 Datos | `fundamentos/0-1-datos` | 17 | Por confirmar | — | — | Por confirmar si ya se estudió |
-| Laboratorio 6 oct | `csharp/lab-primer-proyecto` | 11 | — | — | — | Sin estudiar |
+| Laboratorio 6 oct | `csharp/lab-primer-proyecto` | 15 | — | — | — | Sin estudiar |
 
 ## Historia para recordar el recorrido completo
 

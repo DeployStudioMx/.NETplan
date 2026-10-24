@@ -1,10 +1,13 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-10-23
+actualizado: 2026-10-24
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-10-24
+- Alex no tenía creado el repo `plan-dotnet` (tarea del 2 oct en [[04 Calendario dia por dia]]). Agregado a [[12 Clase Primer proyecto por CLI]] el laboratorio 0: qué es un repositorio, configurar Git, crear `plan-dotnet` público en la cuenta personal (README sí, .gitignore no) y clonarlo en `C:\Repos`. 4 tarjetas nuevas en `csharp/lab-primer-proyecto` ([[13 Plan de memorizacion]]).
 
 ## 2026-10-23
 - Alex terminó la sección 3 de [[10 Teoria de CSharp]] (día 0 de la unidad `csharp/s3-tipos`). Registro y fechas en [[13 Plan de memorizacion]]. Limpieza de pendientes ya cumplidos.
