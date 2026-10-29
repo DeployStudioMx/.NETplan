@@ -1,10 +1,13 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-10-24
+actualizado: 2026-10-29
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-10-29
+- A pedido de Alex, reescritas las secciones 4 y 5 de [[10 Teoria de CSharp]] desde los fundamentos, con definición de entrevista primero. Sección 4: operadores (división entera, residuo, atajos), comparación, lógicos y cortocircuito, `if` y ámbito, ternario, `switch` clásico y expresión con patrones, los cuatro ciclos con prueba de escritorio, `break` y `continue`; `foreach` y `switch` conectados con su ficha de tipos. Sección 5: posiciones decimales en binario, por qué 0.1 no es exacto, punto flotante e IEEE 754, cómo guarda `decimal`, división entre cero, redondeo bancario vs. `AwayFromZero`. Nuevos mazos `csharp/s4-control-flujo` (22) y `csharp/s5-double-decimal` (14) en [[13 Plan de memorizacion]]; PDFs regenerados.
 
 ## 2026-10-24
 - Revisión del `Program.cs` del laboratorio 3: Alex usó `List<object>`, `foreach`, `switch` con patrones, tuplas y `ToString()`; sabe usarlos pero no explicarlos ([[02 Contexto y perfil]]). Acordado: guardar esa versión aparte, reescribir el ejercicio 1 en simple, y en la sección 4 refactorizarlo hacia el ciclo ya sabiendo explicarlo. Agregados tuplas y patrones de tipo a la semana 3 de [[10 Teoria de CSharp]].

@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, teoria, csharp]
-actualizado: 2026-10-19
+actualizado: 2026-10-29
 ---
 > Relacionadas: cubre la brecha "Fundamentos de C# y .NET" de [[02 Contexto y perfil]] · se lee al inicio de cada día de código del [[04 Calendario dia por dia]] · se apoya en el nivel 0 del [[05 Arbol de fundamentos]] (bits, bytes, memoria) · términos nuevos a [[08 Glosario]] · decisiones en [[01 Bitacora]] · Versión en PDF: [[10 Teoria de CSharp.pdf]]
 
@@ -15,7 +15,7 @@ El [[05 Arbol de fundamentos]] explica la computadora y la web, pero no el lengu
 | Día | Lectura (20 min) | Código (70 min) |
 | --- | --- | --- |
 | Mar 6 oct | 1. Qué es .NET (ampliada, ~35 min; si no alcanza, termínala antes del miércoles) · 2. Anatomía de un proyecto (ampliada) · 3. Tipos (ampliada) | Primer proyecto por CLI, tipos, desbordamiento → laboratorio en [[12 Clase Primer proyecto por CLI]] |
-| Mié 7 oct | 4. Control de flujo · 5. `double` vs. `decimal` | Ciclos y tabla de pagos |
+| Mié 7 oct | 4. Control de flujo (ampliada) · 5. `double` vs. `decimal` (ampliada) | Ciclos y tabla de pagos |
 | Jue 8 oct | 6. Métodos · 7. Convenciones | `CalcularInteres` y commit de los 5 ejercicios |
 
 Al terminar cada sección, contesta en voz alta sus preguntas de repaso sin mirar. Si no puedes, vuelve a leerla antes de programar.
@@ -843,78 +843,469 @@ Antes de contestar, cuenta cuántas partes tiene cada pregunta.
 
 ## 4. Control de flujo
 
-Una **expresión** produce un valor (`monto * tasa`); una **instrucción** ejecuta una acción (`if`, `for`, una asignación).
+> **Definición para entrevista: ¿qué es el control de flujo?**
+> Es el conjunto de instrucciones que deciden **qué partes del código se ejecutan y cuántas veces**. Sin ellas, un programa corre de arriba hacia abajo, una línea tras otra, siempre igual. Con ellas puede **decidir** (`if`, `switch`) y **repetir** (`for`, `while`, `foreach`).
+>
+> *Ejemplo:* "si el score es mayor a 700, aprueba; si no, rechaza" es una decisión; "calcula el interés de cada uno de los 12 meses" es una repetición.
 
-### Operadores
+Esta sección va de abajo hacia arriba: primero cómo se calculan y comparan valores (los operadores), después cómo se decide y al final cómo se repite. Usa lo de las secciones 1 a 3: variables, tipos, `bool`, expresiones, bloques y excepciones.
 
-| Tipo | Operadores | Nota |
+### 4.1 El punto de partida: de arriba hacia abajo
+
+Tu `Program.cs` se ejecuta **en orden**: primero la línea 1, luego la 2, luego la 3. A eso se le llama **ejecución secuencial**. Con eso puedes calcular un pago, pero no puedes:
+- **decidir:** hacer una cosa u otra según un dato;
+- **repetir:** hacer lo mismo varias veces sin copiar las líneas.
+
+Para decidir y repetir se necesitan **condiciones**, y las condiciones se escriben con **operadores**.
+
+### 4.2 Operadores aritméticos: calcular
+
+Un **operador** es un símbolo que hace una operación con uno o dos valores y produce un resultado. Recuerda que una **expresión** es cualquier combinación que produce un valor (sección 3.11): `plazo * 2` es una expresión con el operador `*`.
+
+| Operador | Qué hace | Ejemplo | Resultado |
+| --- | --- | --- | --- |
+| `+` | Suma | `10 + 3` | `13` |
+| `-` | Resta | `10 - 3` | `7` |
+| `*` | Multiplica | `10 * 3` | `30` |
+| `/` | Divide | `10 / 3` | `3` (¡ojo, abajo!) |
+| `%` | **Residuo** de la división | `10 % 3` | `1` |
+
+**La trampa de la división entera.** Si los **dos** valores son enteros (`int`), el resultado también es `int`, y un `int` no tiene decimales: `/` **descarta la parte decimal**, sin redondear. `7 / 2` da `3`, no `3.5`. Para obtener `3.5`, al menos uno de los dos tiene que ser un tipo con decimales:
+
+```csharp
+int a = 7 / 2;            // 3: entero entre entero da entero
+double b = 7.0 / 2;       // 3.5: 7.0 es un literal double (sección 3.9)
+double c = (double)7 / 2; // 3.5: el cast convierte 7 a double antes de dividir (sección 3.10)
+decimal d = 7m / 2;       // 3.5: con decimal, para dinero
+```
+
+**El residuo `%`** es lo que sobra de una división entera: `10 % 3` es `1` porque 10 = 3 × 3 + **1**. Es el mismo residuo del método de divisiones de [[11 Clase 0.1 Datos]]. Sirve, por ejemplo, para saber si un número es par: `numero % 2 == 0`.
+
+**Orden de las operaciones.** Igual que en matemáticas: primero `*`, `/` y `%`; después `+` y `-`. Los paréntesis van primero. `2 + 3 * 4` es `14`; `(2 + 3) * 4` es `20`. Ante la duda, pon paréntesis: hacen el código más claro.
+
+**Atajos para modificar una variable.** Los vas a usar todo el tiempo en los ciclos:
+
+| Escribes | Es lo mismo que | Significa |
 | --- | --- | --- |
-| Comparación | `==` `!=` `<` `>` `<=` `>=` | Devuelven `bool` |
-| Lógicos | `&&` `\|\|` `!` | `&&` y `\|\|` son de **cortocircuito**: si la izquierda ya decide, la derecha no se evalúa |
-| Ternario | `condicion ? a : b` | Un `if` que produce un valor |
-| Aritméticos | `+` `-` `*` `/` `%` | Entre dos `int`, `/` **descarta los decimales**: `7 / 2` da `3` |
+| `saldo -= abono;` | `saldo = saldo - abono;` | Réstale `abono` a `saldo` y guarda el resultado en `saldo` |
+| `total += interes;` | `total = total + interes;` | Súmale `interes` a `total` |
+| `mes++;` | `mes = mes + 1;` | Aumenta `mes` en 1 (se llama **incremento**) |
+| `mes--;` | `mes = mes - 1;` | Disminuye `mes` en 1 (**decremento**) |
 
-El cortocircuito sirve para proteger: en `cliente != null && cliente.Activo`, si `cliente` es nulo nunca se evalúa `cliente.Activo`.
+### 4.3 Operadores de comparación: preguntar
 
-### Decisiones
+Comparan dos valores y siempre producen un `bool`: `true` o `false` (sección 3.6).
 
-- **`if / else if / else`:** para condiciones generales.
-- **`switch` (instrucción):** para elegir entre valores fijos. Cada `case` termina en `break`.
-- **`switch` expresión** (C# 8+): produce un valor y admite patrones.
+| Operador | Pregunta | Ejemplo con `score = 650` | Resultado |
+| --- | --- | --- | --- |
+| `==` | ¿Son iguales? | `score == 650` | `true` |
+| `!=` | ¿Son distintos? | `score != 700` | `true` |
+| `<` | ¿Es menor? | `score < 600` | `false` |
+| `>` | ¿Es mayor? | `score > 600` | `true` |
+| `<=` | ¿Es menor o igual? | `score <= 650` | `true` |
+| `>=` | ¿Es mayor o igual? | `score >= 700` | `false` |
+
+Recuerda la diferencia de la sección 3.2: **`=` guarda** un valor y **`==` compara** dos valores.
+
+A una expresión que produce `true` o `false` se le llama **condición**. Todas las decisiones y los ciclos de esta sección dependen de una condición.
+
+### 4.4 Operadores lógicos: combinar condiciones
+
+Sirven para unir varias condiciones en una:
+
+| Operador | Se lee | Da `true` cuando… | Ejemplo |
+| --- | --- | --- | --- |
+| `&&` | "y" | **las dos** son `true` | `score >= 650 && ingresos > 30000m` |
+| `\|\|` | "o" | **al menos una** es `true` | `esCliente \|\| tieneAval` |
+| `!` | "no" | la condición es `false` (la invierte) | `!aprobado` |
+
+La **tabla de verdad** muestra todos los casos posibles:
+
+| A | B | `A && B` | `A \|\| B` |
+| --- | --- | --- | --- |
+| `true` | `true` | `true` | `true` |
+| `true` | `false` | `false` | `true` |
+| `false` | `true` | `false` | `true` |
+| `false` | `false` | `false` | `false` |
+
+#### Cortocircuito
+
+> **Definición para entrevista: ¿qué es el cortocircuito?**
+> Es que `&&` y `||` **dejan de evaluar en cuanto ya saben el resultado**: si en `A && B` la parte `A` es `false`, el resultado ya es `false` y `B` **nunca se ejecuta**; si en `A || B` la parte `A` es `true`, el resultado ya es `true` y `B` tampoco se ejecuta.
+
+Sirve para **proteger** la parte de la derecha. Dividir un entero entre cero lanza una excepción (`DivideByZeroException`). Con el cortocircuito lo evitas:
+
+```csharp
+if (pagos != 0 && monto / pagos > 5000)
+```
+
+Si `pagos` vale 0, la parte izquierda ya es `false`, así que la división **nunca se hace**. Si invirtieras el orden (`monto / pagos > 5000 && pagos != 0`), la división se haría primero y el programa tronaría.
+
+### 4.5 Decidir con `if`, `else if` y `else`
+
+> **Definición para entrevista: ¿qué es un `if`?**
+> Es la instrucción que ejecuta un bloque de código **solo si una condición es verdadera**. Con `else` indicas qué hacer si no lo es, y con `else if` encadenas varias condiciones, que se revisan en orden hasta que una se cumple.
+
+```csharp
+int score = 650;
+
+if (score >= 700)
+{
+    Console.WriteLine("Bajo riesgo");
+}
+else if (score >= 600)
+{
+    Console.WriteLine("Riesgo medio");   // esta es la que se ejecuta con 650
+}
+else
+{
+    Console.WriteLine("Alto riesgo");
+}
+```
+
+Cómo se lee:
+1. La condición va **entre paréntesis** y debe producir un `bool`.
+2. Lo que se ejecuta va en un **bloque**: las instrucciones entre llaves `{ }` (sección 3.11).
+3. Las condiciones se revisan **en orden, de arriba hacia abajo**, y se ejecuta **solo el primer bloque** cuya condición sea verdadera. Con `score = 750` se cumplen las dos primeras condiciones, pero solo se ejecuta la primera.
+4. `else` no lleva condición: es "en cualquier otro caso". Es opcional.
+
+**Por eso el orden importa:** si pusieras `score >= 600` antes que `score >= 700`, un score de 750 caería en "Riesgo medio".
+
+**Sangría:** las líneas de dentro del bloque van **corridas hacia la derecha** (4 espacios). Al compilador no le importa, pero a las personas sí: muestra a simple vista qué está dentro de qué.
+
+#### Ámbito: dónde existe una variable
+
+> **Definición para entrevista: ¿qué es el ámbito (scope)?**
+> Es la parte del código donde una variable **existe** y se puede usar. En C#, una variable declarada dentro de un bloque `{ }` existe solo dentro de ese bloque.
+
+```csharp
+if (score >= 700)
+{
+    string mensaje = "Aprobado";
+    Console.WriteLine(mensaje);   // bien: estamos dentro del bloque
+}
+Console.WriteLine(mensaje);       // error de compilación: aquí mensaje ya no existe
+```
+
+Si necesitas la variable después del bloque, declárala **antes** de él.
+
+### 4.6 El operador ternario: un `if` que produce un valor
+
+Cuando un `if` solo sirve para elegir entre dos valores, hay una forma corta:
+
+```csharp
+string resultado = score >= 650 ? "Aprobado" : "Rechazado";
+```
+
+Se lee: "¿`score >= 650`? Si sí, `"Aprobado"`; si no, `"Rechazado"`". Se llama **ternario** porque tiene tres partes: condición, valor si es verdadera y valor si es falsa. Úsalo solo para casos así de simples; para algo más largo, un `if` se lee mejor.
+
+### 4.7 Decidir con `switch`
+
+> **Definición para entrevista: ¿qué es un `switch`?**
+> Es una instrucción que compara **un valor** contra **varios casos** y ejecuta el que coincide. Es más claro que una cadena larga de `else if` cuando todas las condiciones preguntan por el mismo valor. En C# moderno también existe como **expresión**: en lugar de ejecutar instrucciones, **produce un valor**.
+
+**La forma clásica (instrucción):**
+
+```csharp
+int plazo = 12;
+
+switch (plazo)
+{
+    case 6:
+        Console.WriteLine("Plazo corto");
+        break;
+    case 12:
+    case 18:
+        Console.WriteLine("Plazo estándar");   // 12 y 18 comparten el mismo bloque
+        break;
+    default:
+        Console.WriteLine("Plazo especial");
+        break;
+}
+```
+
+- `switch (plazo)`: el valor que se va a comparar.
+- Cada **`case`** es un valor posible. Si coincide, se ejecutan sus instrucciones.
+- **`break`** termina el `switch`. En C# es obligatorio al final de cada caso: si lo olvidas, no compila.
+- **`default`** es "cualquier otro valor", como el `else`.
+
+**La forma moderna (expresión, desde C# 8):** produce un valor que puedes guardar en una variable. Fíjate en las diferencias: el valor va **antes** de la palabra `switch`, cada caso usa `=>` ("produce") y se separan con comas.
 
 ```csharp
 string nivel = score switch
 {
     >= 700 => "Bajo riesgo",
     >= 600 => "Riesgo medio",
-    _      => "Alto riesgo"     // _ es "cualquier otro caso"
+    _      => "Alto riesgo"
 };
 ```
 
-Esos `>= 700` son **patrones relacionales**. Así se ven las reglas de dictaminación en C# moderno.
+- **Patrón:** cada caso de la izquierda es un **patrón**, una "forma" contra la que se compara el valor. `>= 700` es un **patrón relacional**: "si el valor es mayor o igual a 700".
+- **`_`** (guion bajo) es el patrón "cualquier otra cosa", como `default`.
+- Los casos se revisan **en orden**, igual que los `else if`.
 
-### Ciclos
+Así se ven las reglas de dictaminación en C# moderno.
 
-| Ciclo | Cuándo |
-| --- | --- |
-| `for` | Sabes cuántas vueltas: un plazo de 12 meses |
-| `while` | Repites mientras se cumpla una condición, y puede que nunca entre |
-| `do / while` | Igual, pero entra al menos una vez (por ejemplo, pedir un dato hasta que sea válido) |
-| `foreach` | Recorres cada elemento de una colección o un string |
+**En tu ficha de tipos del laboratorio 3** usaste un `switch` expresión con otro tipo de patrón: `int => sizeof(int)`. Ese es un **patrón de tipo**: en lugar de preguntar "¿el valor es mayor a 700?", pregunta "¿el valor **es de tipo** `int`?". Para entenderlo a fondo hace falta saber qué es `object`, y eso es de la semana 2; los patrones de tipo, de la semana 3.
 
-`break` sale del ciclo; `continue` salta a la siguiente vuelta. Una variable declarada dentro de un bloque `{ }` solo existe dentro de él: es su **ámbito** (scope).
+### 4.8 Repetir: los ciclos
 
-**Preguntas de repaso**
+> **Definición para entrevista: ¿qué es un ciclo (loop)?**
+> Es una instrucción que **repite un bloque de código** mientras se cumpla una condición o una vez por cada elemento de un grupo. Cada repetición se llama **iteración** (o vuelta). C# tiene cuatro: `for`, `while`, `do/while` y `foreach`.
+
+#### `for`: cuando sabes cuántas vueltas
+
+```csharp
+for (int mes = 1; mes <= 3; mes++)
+{
+    Console.WriteLine($"Pago del mes {mes}");
+}
+```
+
+Entre los paréntesis hay **tres partes**, separadas por `;`:
+
+| Parte | En el ejemplo | Cuándo se ejecuta |
+| --- | --- | --- |
+| 1. Inicio | `int mes = 1` | **Una sola vez**, antes de empezar |
+| 2. Condición | `mes <= 3` | **Antes de cada vuelta**: si es `false`, el ciclo termina |
+| 3. Paso | `mes++` | **Al final de cada vuelta** |
+
+Seguir un ciclo a mano, línea por línea, se llama **hacer una prueba de escritorio**. Es la mejor forma de entenderlo:
+
+| Vuelta | `mes` al empezar | ¿`mes <= 3`? | Imprime | `mes++` deja |
+| --- | --- | --- | --- | --- |
+| 1 | 1 | `true` | Pago del mes 1 | 2 |
+| 2 | 2 | `true` | Pago del mes 2 | 3 |
+| 3 | 3 | `true` | Pago del mes 3 | 4 |
+| — | 4 | `false` | (termina) | — |
+
+#### `while`: mientras se cumpla una condición
+
+```csharp
+decimal saldo = 1000m;
+int meses = 0;
+
+while (saldo > 0)
+{
+    saldo -= 300m;
+    meses++;
+}
+// meses vale 4: 1000 → 700 → 400 → 100 → −200
+```
+
+Revisa la condición **antes** de cada vuelta. Si la primera vez ya es `false`, el bloque **nunca** se ejecuta. Úsalo cuando **no sabes** cuántas vueltas habrá: "¿cuántos meses tardo en pagar?".
+
+**Cuidado con el ciclo infinito:** si dentro del bloque nada hace que la condición llegue a ser `false` (por ejemplo, si olvidas `saldo -= 300m`), el ciclo no termina nunca. En la terminal se detiene con **Ctrl + C**.
+
+#### `do / while`: al menos una vez
+
+```csharp
+int intentos = 0;
+do
+{
+    intentos++;
+    Console.WriteLine($"Intento {intentos}");
+} while (intentos < 3);
+```
+
+Igual que `while`, pero revisa la condición **al final**, así que el bloque se ejecuta **al menos una vez**. Es el ciclo natural para "pide un dato hasta que sea válido": primero lo pides y después revisas.
+
+#### `foreach`: uno por uno
+
+Primero una palabra: una **colección** es un grupo de valores guardados juntos, como una lista de montos. Un `string` también es una colección: un grupo de `char` en orden (sección 3.6).
+
+```csharp
+string rfc = "ABC123";
+
+foreach (char letra in rfc)
+{
+    Console.WriteLine(letra);   // imprime A, B, C, 1, 2 y 3, uno por línea
+}
+```
+
+Se lee: "**para cada** `char`, al que llamaré `letra`, **en** `rfc`, haz esto". En cada vuelta, la variable `letra` toma el siguiente elemento, y el ciclo termina solo cuando ya no quedan. No necesitas contar ni saber cuántos elementos hay.
+
+**En tu ficha de tipos** usaste `foreach (object tipo in tipos)`: es exactamente esto, pero recorriendo una **lista** (`List<object>`) en lugar de un texto. Las listas son de la semana 3.
+
+#### Cuál usar
+
+| Ciclo | Úsalo cuando… | Ejemplo en DiSí |
+| --- | --- | --- |
+| `for` | Sabes cuántas vueltas | Los 12 pagos de un crédito |
+| `while` | No sabes cuántas; repites mientras algo se cumpla | Meses hasta liquidar un saldo |
+| `do / while` | Igual, pero debe ejecutarse al menos una vez | Pedir un dato hasta que sea válido |
+| `foreach` | Recorres cada elemento de una colección | Cada cliente de una cartera, cada letra de un RFC |
+
+#### `break` y `continue`
+
+- **`break`**: sale del ciclo **de inmediato**, aunque la condición siga siendo verdadera. "Encontré lo que buscaba, ya no sigas".
+- **`continue`**: se salta **el resto de esta vuelta** y pasa a la siguiente. "Este no me interesa, sigue con el próximo".
+
+### Preguntas de repaso
+
+Antes de contestar, cuenta cuántas partes tiene cada pregunta.
+
 - ¿Qué es el cortocircuito y para qué te sirve?
 - ¿Cuánto da `7 / 2` y cómo obtienes `3.5`?
 - ¿Cuándo eliges `while` y cuándo `do / while`?
+- ¿Qué hace cada una de las tres partes de un `for` y cuándo se ejecuta cada una?
+
+### Tarjetas de repaso
+
+#flashcards/csharp/s4-control-flujo ¿Qué es el control de flujo? (definición de entrevista)::Las instrucciones que deciden qué partes del código se ejecutan y cuántas veces: decidir (if, switch) y repetir (for, while, foreach)
+#flashcards/csharp/s4-control-flujo ¿Cuánto da 7 / 2 con int y por qué?::3; entero entre entero da entero y se descarta la parte decimal
+#flashcards/csharp/s4-control-flujo ¿Cómo obtienes 3.5 de 7 entre 2?::Que al menos un operando tenga decimales: 7.0 / 2, (double)7 / 2 o 7m / 2
+#flashcards/csharp/s4-control-flujo ¿Qué hace el operador %?::Da el residuo de la división entera: 10 % 3 es 1
+#flashcards/csharp/s4-control-flujo ¿Qué significan saldo -= abono y mes++?::saldo = saldo - abono; mes = mes + 1 (incremento)
+#flashcards/csharp/s4-control-flujo ¿Qué es una condición?::Una expresión que produce true o false
+#flashcards/csharp/s4-control-flujo ¿A && B vs. A || B?::&& es true solo si las dos son true; || es true si al menos una es true
+#flashcards/csharp/s4-control-flujo ¿Qué es el cortocircuito? (definición de entrevista)::&& y || dejan de evaluar en cuanto saben el resultado; la parte derecha puede no ejecutarse
+#flashcards/csharp/s4-control-flujo ¿Para qué sirve el cortocircuito?::Para proteger la parte derecha: pagos != 0 && monto / pagos > 5000 nunca divide entre cero
+#flashcards/csharp/s4-control-flujo ¿Qué se ejecuta en un if / else if / else?::Solo el primer bloque cuya condición sea verdadera, revisando en orden
+#flashcards/csharp/s4-control-flujo ¿Qué es el ámbito (scope)?::La parte del código donde existe una variable; declarada en un bloque, solo existe en ese bloque
+#flashcards/csharp/s4-control-flujo ¿Qué es el operador ternario?::Un if que produce un valor: condición ? valorSiTrue : valorSiFalse
+#flashcards/csharp/s4-control-flujo ¿Qué es un switch? (definición de entrevista)::Compara un valor contra varios casos y ejecuta el que coincide; como expresión, produce un valor
+#flashcards/csharp/s4-control-flujo ¿Para qué es break en un switch clásico?::Termina el caso; en C# es obligatorio al final de cada case
+#flashcards/csharp/s4-control-flujo ¿Qué es un patrón relacional?::Un caso de switch que compara con <, >, <=, >=, como >= 700
+#flashcards/csharp/s4-control-flujo ¿Qué significa _ en un switch expresión?::Cualquier otro caso, como default
+#flashcards/csharp/s4-control-flujo ¿Qué es un ciclo? (definición de entrevista)::Una instrucción que repite un bloque mientras se cumpla una condición o por cada elemento de un grupo
+#flashcards/csharp/s4-control-flujo ¿Las tres partes de un for y cuándo se ejecutan?::Inicio una vez al empezar; condición antes de cada vuelta; paso al final de cada vuelta
+#flashcards/csharp/s4-control-flujo ¿while vs. do/while?::while revisa antes y puede no ejecutarse nunca; do/while revisa al final y se ejecuta al menos una vez
+#flashcards/csharp/s4-control-flujo ¿Qué hace foreach?::Recorre una colección elemento por elemento, sin contar
+#flashcards/csharp/s4-control-flujo ¿Qué es una prueba de escritorio?::Seguir el código a mano, vuelta por vuelta, anotando el valor de cada variable
+#flashcards/csharp/s4-control-flujo ¿break vs. continue en un ciclo?::break sale del ciclo; continue salta al inicio de la siguiente vuelta
 
 ---
 
 ## 5. `double` vs. `decimal`: por qué el dinero va en `decimal`
 
-`double` guarda los números en **binario**. Igual que 1/3 no se puede escribir exacto en decimal (0.3333…), 0.1 no se puede escribir exacto en binario: queda como 0.1000000000000000055… Al sumar esas pequeñas diferencias, `0.1 + 0.2` no da exactamente `0.3`. Es el estándar **IEEE 754** y pasa en casi todos los lenguajes, JavaScript incluido.
+> **Definición para entrevista: ¿`double` o `decimal`?**
+> **`double`** guarda los números en **binario** con **punto flotante** (el estándar IEEE 754): es rápido, pero muchos decimales comunes, como 0.1, no se pueden guardar exactos, así que trabaja con **aproximaciones**. **`decimal`** guarda los números en **base 10**, con 28 a 29 dígitos exactos: es más lento y ocupa más memoria, pero 0.1 es exactamente 0.1. **Para dinero, siempre `decimal`**, porque una diferencia de centavos acumulada en miles de operaciones es un descuadre.
+>
+> *Ejemplo:* con `double`, `0.1 + 0.2` da `0.30000000000000004`; con `decimal`, da exactamente `0.3`.
 
-`decimal` guarda los números en **base 10**, así que 0.1 es exactamente 0.1. Es más lento y ocupa el doble, pero en dinero un centavo de diferencia en 10,000 créditos es un descuadre.
+Esta sección explica por qué pasa eso, desde cómo se escriben las fracciones en binario. Usa lo de [[11 Clase 0.1 Datos]] (binario y posiciones) y la sección 3.6 (exacto vs. aproximado).
+
+### 5.1 Las posiciones también existen después del punto
+
+En decimal, cada posición **a la izquierda** del punto vale 10 veces más (unidades, decenas, centenas). **A la derecha** del punto, cada posición vale **10 veces menos**:
+
+**0.375** = 3 × 1/10 + 7 × 1/100 + 5 × 1/1000
+
+En binario es igual, pero con potencias de 2: a la derecha del punto, cada posición vale **la mitad** que la anterior.
+
+| Posición después del punto | 1.ª | 2.ª | 3.ª | 4.ª |
+| --- | --- | --- | --- | --- |
+| Vale | 1/2 = 0.5 | 1/4 = 0.25 | 1/8 = 0.125 | 1/16 = 0.0625 |
+
+Algunos números quedan **exactos** en binario:
+- 0.5 = `0.1` en binario (una mitad);
+- 0.25 = `0.01` (un cuarto);
+- 0.75 = `0.11` (una mitad más un cuarto).
+
+### 5.2 Por qué 0.1 no se puede guardar exacto
+
+Intenta escribir **0.1** sumando mitades, cuartos, octavos…: 1/16 + 1/32 + 1/256 + 1/512 + … Nunca llegas exacto. En binario, 0.1 es `0.000110011001100110011…`, con el grupo `0011` repitiéndose **para siempre**.
+
+Es lo mismo que te pasa en decimal con **1/3** = 0.33333…: no se puede escribir exacto con un número finito de dígitos. La regla:
+- En **decimal**, solo quedan exactas las fracciones cuyo denominador se arma con 2 y 5 (1/2, 1/4, 1/5, 1/10…).
+- En **binario**, solo las fracciones cuyo denominador es una **potencia de 2** (1/2, 1/4, 1/8…).
+
+**0.1 = 1/10**, y 10 no es potencia de 2. Por eso 0.1, 0.2 y 0.3, que en decimal son "redondos", en binario tienen infinitos dígitos.
+
+### 5.3 Qué hace `double`: punto flotante
+
+`double` tiene 8 bytes, así que **no puede guardar infinitos dígitos**: guarda los primeros (unos 15 a 17 dígitos decimales) y **redondea** el resto. Por eso, para `double`, 0.1 en realidad es 0.1000000000000000055511151231257827…
+
+¿Por qué se llama **punto flotante**? Porque guarda el número como en **notación científica**: unos dígitos y un exponente que dice dónde va el punto. 1500 es 1.5 × 10³ y 0.0015 es 1.5 × 10⁻³: los mismos dígitos, con el punto "flotando" a otro lugar. `double` hace lo mismo, pero en base 2. Así puede guardar números enormes y diminutos en solo 8 bytes, a cambio de no ser exacto.
+
+Esta forma de guardar números es un estándar llamado **IEEE 754**. Lo usan casi todos los lenguajes de programación, y los procesadores lo calculan directamente en su hardware, así que es **muy rápido**.
+
+Cuando sumas dos aproximaciones, los pequeños errores se acumulan:
+
+```csharp
+double a = 0.1 + 0.2;
+Console.WriteLine(a);            // 0.30000000000000004
+Console.WriteLine(a == 0.3);     // False
+```
+
+**Por eso nunca se comparan dos `double` con `==`.** Se revisa si la diferencia entre ellos es muy pequeña, por ejemplo menor a 0.000001.
+
+### 5.4 Qué hace `decimal`: base 10
+
+`decimal` guarda el número de otra forma: como un **entero muy grande** (de 96 bits) más una **escala**, que dice entre qué potencia de 10 dividirlo. 0.1 se guarda como "1, dividido entre 10¹"; 15250.50 como "1525050, dividido entre 10²". Como la división es **entre potencias de 10**, cualquier número con decimales finitos (como cualquier monto en pesos y centavos) queda **exacto**.
+
+```csharp
+decimal b = 0.1m + 0.2m;
+Console.WriteLine(b);            // 0.3
+Console.WriteLine(b == 0.3m);    // True
+```
+
+El costo:
+- **Más memoria:** 16 bytes, el doble que `double`.
+- **Más lento:** el procesador no lo calcula directo en su hardware; .NET lo hace con instrucciones normales.
+- **No es magia:** 1/3 sigue sin ser exacto en `decimal` (0.3333…, cortado a 28 dígitos). Lo que garantiza es que **lo que escribes en decimal se guarda tal cual**, que es justo lo que necesitan los montos.
+
+### 5.5 Resumen
 
 | | `double` | `decimal` |
 | --- | --- | --- |
-| Base | 2 | 10 |
-| Precisión | ~15–17 dígitos | 28–29 dígitos |
+| Cómo guarda | Binario, punto flotante (IEEE 754) | Entero + escala en base 10 |
+| Bytes | 8 | 16 |
+| Dígitos | ~15 a 17, aproximados | 28 a 29, exactos |
+| Velocidad | Muy rápido (hardware) | Más lento |
 | `0.1 + 0.2 == 0.3` | `false` | `true` |
-| Dividir entre cero | Da `Infinity` | Lanza `DivideByZeroException` |
-| Uso | Medidas, ciencia, gráficas | Montos, tasas, intereses |
+| Literal | `0.1` | `0.1m` |
+| Dividir entre cero | No truena: da `Infinity` (infinito) o `NaN` (*Not a Number*, "no es un número", con 0.0 / 0) | Lanza `DivideByZeroException` |
+| Úsalo para | Medidas, ciencia, gráficas, estadística | **Montos, tasas, intereses**: todo lo que sea dinero |
 
-**Para la tabla de pagos del miércoles:**
+### 5.6 Redondear
 
-- La cuota fija de un crédito (sistema francés) es `cuota = P · i / (1 − (1 + i)^−n)`, donde `P` es el monto, `i` la tasa **mensual** (anual / 12) y `n` el número de meses. Cada mes, interés = saldo × i; abono a capital = cuota − interés; nuevo saldo = saldo − abono.
-- `Math.Pow` solo trabaja con `double`. Tendrás que decidir dónde convertir entre `double` y `decimal`, y justificarlo.
-- **Redondeo:** `Math.Round(x, 2)` usa por defecto el *redondeo bancario* (`MidpointRounding.ToEven`): 2.125 → 2.12. Muchos sistemas financieros esperan `MidpointRounding.AwayFromZero`: 2.125 → 2.13. Averigua cuál usa DiSí; es una gran pregunta de entrevista.
+> **Definición para entrevista: ¿qué es el redondeo bancario?**
+> Es redondear los **puntos medios** (los valores que están justo a la mitad, como 2.125 a dos decimales) **hacia el dígito par más cercano**: 2.125 → 2.12 y 2.135 → 2.14. Se usa porque, al redondear miles de cantidades, la mitad de las veces sube y la mitad baja, y así no se acumula un error hacia arriba. Es el redondeo que usa por defecto `Math.Round` en .NET.
 
-**Preguntas de repaso**
+`Math.Round(valor, decimales)` redondea a los decimales que le pidas. El caso interesante es el **punto medio**, cuando el dígito que se va a quitar es exactamente un 5:
+
+| Valor | `Math.Round(x, 2)` (por defecto: al par, `MidpointRounding.ToEven`) | `Math.Round(x, 2, MidpointRounding.AwayFromZero)` (el de la escuela) |
+| --- | --- | --- |
+| `2.125m` | `2.12` | `2.13` |
+| `2.135m` | `2.14` | `2.14` |
+| `2.126m` | `2.13` | `2.13` (no es punto medio: los dos coinciden) |
+
+`MidpointRounding` es un valor que le dice a `Math.Round` qué regla usar en los puntos medios. **AwayFromZero** ("alejándose del cero") es el redondeo que aprendiste en la escuela: el 5 siempre sube.
+
+**En entrevista y en DiSí:** muchos sistemas financieros y regulatorios esperan el de la escuela (`AwayFromZero`) en los montos que ve el cliente. Averigua cuál usa DiSí en sus tablas de amortización: es una gran pregunta para una entrevista y un error clásico de cuadre.
+
+### 5.7 Para la tabla de pagos del miércoles
+
+- La cuota fija de un crédito (sistema francés) es `cuota = P · i / (1 − (1 + i)^−n)`, donde `P` es el monto, `i` la tasa **mensual** (la anual entre 12) y `n` el número de meses. Cada mes: interés = saldo × i; abono a capital = cuota − interés; nuevo saldo = saldo − abono.
+- Elevar a una potencia (el `^−n`) se hace con `Math.Pow(base, exponente)`, que **solo trabaja con `double`**. Tendrás que decidir dónde convertir entre `double` y `decimal` (sección 3.10) y justificar por qué ahí.
+- Decide también cómo vas a redondear cada pago y por qué.
+
+### Preguntas de repaso
+
+Antes de contestar, cuenta cuántas partes tiene cada pregunta.
+
 - ¿Por qué `0.1 + 0.2` no da `0.3` con `double`?
 - ¿Qué ganas y qué pierdes al usar `decimal`?
 - ¿Qué es el redondeo bancario?
+
+### Tarjetas de repaso
+
+#flashcards/csharp/s5-double-decimal ¿double o decimal? (definición de entrevista)::double: binario, punto flotante, rápido pero aproximado. decimal: base 10, 28-29 dígitos exactos, más lento. Dinero siempre en decimal
+#flashcards/csharp/s5-double-decimal ¿Cuánto da 0.1 + 0.2 con double?::0.30000000000000004
+#flashcards/csharp/s5-double-decimal ¿Por qué 0.1 no es exacto en binario?::Porque 1/10 no tiene denominador potencia de 2; en binario es 0.000110011… infinito, como 1/3 en decimal
+#flashcards/csharp/s5-double-decimal ¿Qué fracciones son exactas en binario?::Las que tienen denominador potencia de 2: 1/2, 1/4, 1/8…
+#flashcards/csharp/s5-double-decimal ¿Qué es punto flotante?::Guardar un número como dígitos más un exponente que dice dónde va el punto, como la notación científica
+#flashcards/csharp/s5-double-decimal ¿Qué es IEEE 754?::El estándar de punto flotante que usa double; lo calculan los procesadores en hardware
+#flashcards/csharp/s5-double-decimal ¿Por qué no se comparan dos double con ==?::Porque son aproximaciones; se revisa si su diferencia es muy pequeña
+#flashcards/csharp/s5-double-decimal ¿Cómo guarda un número decimal?::Como un entero de 96 bits más una escala (potencia de 10 entre la que se divide)
+#flashcards/csharp/s5-double-decimal ¿Qué pierdes al usar decimal?::Memoria (16 bytes vs. 8) y velocidad (no lo calcula el hardware directamente)
+#flashcards/csharp/s5-double-decimal ¿Qué pasa al dividir entre cero con double y con decimal?::double da Infinity o NaN sin tronar; decimal lanza DivideByZeroException
+#flashcards/csharp/s5-double-decimal ¿Qué es NaN?::Not a Number: el resultado de double para operaciones sin sentido, como 0.0 / 0
+#flashcards/csharp/s5-double-decimal ¿Qué es el redondeo bancario? (definición de entrevista)::Redondear los puntos medios al dígito par: 2.125 → 2.12, 2.135 → 2.14. Es el default de Math.Round
+#flashcards/csharp/s5-double-decimal ¿Qué es MidpointRounding.AwayFromZero?::El redondeo de la escuela: en el punto medio el 5 siempre sube (2.125 → 2.13)
+#flashcards/csharp/s5-double-decimal ¿Con qué tipo trabaja Math.Pow?::Solo con double
 
 ---
 
