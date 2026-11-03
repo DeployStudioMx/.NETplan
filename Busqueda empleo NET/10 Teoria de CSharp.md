@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, teoria, csharp]
-actualizado: 2026-10-29
+actualizado: 2026-11-03
 ---
 > Relacionadas: cubre la brecha "Fundamentos de C# y .NET" de [[02 Contexto y perfil]] · se lee al inicio de cada día de código del [[04 Calendario dia por dia]] · se apoya en el nivel 0 del [[05 Arbol de fundamentos]] (bits, bytes, memoria) · términos nuevos a [[08 Glosario]] · decisiones en [[01 Bitacora]] · Versión en PDF: [[10 Teoria de CSharp.pdf]]
 
@@ -16,7 +16,7 @@ El [[05 Arbol de fundamentos]] explica la computadora y la web, pero no el lengu
 | --- | --- | --- |
 | Mar 6 oct | 1. Qué es .NET (ampliada, ~35 min; si no alcanza, termínala antes del miércoles) · 2. Anatomía de un proyecto (ampliada) · 3. Tipos (ampliada) | Primer proyecto por CLI, tipos, desbordamiento → laboratorio en [[12 Clase Primer proyecto por CLI]] |
 | Mié 7 oct | 4. Control de flujo (ampliada) · 5. `double` vs. `decimal` (ampliada) | Ciclos y tabla de pagos |
-| Jue 8 oct | 6. Métodos · 7. Convenciones | `CalcularInteres` y commit de los 5 ejercicios |
+| Jue 8 oct | 6. Métodos (ampliada) · 7. Convenciones (ampliada) | `CalcularInteres` y commit de los 5 ejercicios |
 
 Al terminar cada sección, contesta en voz alta sus preguntas de repaso sin mirar. Si no puedes, vuelve a leerla antes de programar.
 
@@ -1311,56 +1311,319 @@ Antes de contestar, cuenta cuántas partes tiene cada pregunta.
 
 ## 6. Métodos
 
-Un método es un bloque de código con nombre que recibe datos, hace algo y opcionalmente devuelve un resultado. Sirve para no repetir código y para que cada pieza tenga una sola responsabilidad.
+> **Definición para entrevista: ¿qué es un método?**
+> Es un **bloque de código con nombre** que agrupa instrucciones para hacer **una tarea**. Puede **recibir datos** (parámetros) y puede **devolver un resultado**. No se ejecuta solo: se ejecuta cada vez que alguien lo **llama** por su nombre. Sirve para no repetir código, para que cada pieza haga una sola cosa y para que el nombre explique qué hace.
+>
+> *Ejemplo:* `Console.WriteLine("Hola")` es una llamada al método `WriteLine`: recibe un texto y lo escribe en la terminal.
 
-### Firma
+Esta sección va de abajo hacia arriba: por qué existen los métodos, cómo se escriben y se llaman, cada parte de su firma, cómo reciben los datos y qué es la sobrecarga. Usa lo de las secciones 1 a 5: variables, tipos y bloques. Ya viste una definición corta en la sección 2.3; esta es la completa.
+
+### 6.1 El problema: código repetido
+
+Imagina que en tu programa calculas el IVA de un monto en tres lugares distintos:
 
 ```csharp
-static string Saludar(string nombre, bool formal = false)
+decimal ivaFactura = subtotalFactura * 0.16m;
+// ... 50 líneas después
+decimal ivaNota = subtotalNota * 0.16m;
+// ... 80 líneas después
+decimal ivaRecibo = subtotalRecibo * 0.16m;
+```
+
+Si un día la tasa cambia, o descubres un error en el cálculo, tienes que **encontrar y corregir los tres lugares**. Si se te olvida uno, el programa da resultados distintos para la misma operación. Este problema tiene nombre en todos lados: el principio **DRY** (*Don't Repeat Yourself*, "no te repitas").
+
+Un método resuelve esto: escribes el cálculo **una sola vez**, le pones un nombre y lo usas donde lo necesites. Si hay que corregirlo, se corrige en un solo lugar.
+
+### 6.2 Declarar y llamar
+
+Con un método se hacen dos cosas distintas:
+
+- **Declararlo** es escribir la receta: su nombre, qué recibe, qué devuelve y sus instrucciones. Declararlo **no lo ejecuta**.
+- **Llamarlo** (o **invocarlo**) es usar la receta: escribir su nombre con paréntesis. Cada llamada lo ejecuta una vez.
+
+```csharp
+// Llamadas: aquí se usa el método
+decimal ivaFactura = CalcularIva(1000m);   // 160
+decimal ivaNota = CalcularIva(250m);       // 40
+
+// Declaración: aquí se define el método (una sola vez)
+static decimal CalcularIva(decimal subtotal)
 {
-    return formal ? $"Buen día, {nombre}" : $"Hola, {nombre}";
+    return subtotal * 0.16m;
+}
+```
+
+**Qué pasa al llamar, paso a paso**, con `CalcularIva(1000m)`:
+
+1. El programa **salta** a la primera instrucción del método.
+2. El valor `1000m` se **copia** en el parámetro `subtotal`.
+3. Se ejecutan las instrucciones del método.
+4. `return` **termina** el método y **devuelve** el resultado (`160`) al lugar desde donde lo llamaron.
+5. El programa **regresa** a donde estaba y sigue: ese `160` se guarda en `ivaFactura`.
+
+Cada llamada recibe su propio espacio en el **stack**, la zona de memoria para las llamadas en curso ([[15 Dudas resueltas]], "¿Qué es el heap?"). Ahí viven sus parámetros y variables mientras el método corre, y se liberan solas cuando termina. Por eso, cuando un programa falla, el **stack trace** muestra la lista de métodos que estaban en curso: es literalmente lo que había en el stack.
+
+### 6.3 La firma, parte por parte
+
+```csharp
+static decimal CalcularIva(decimal subtotal)
+{
+    return subtotal * 0.16m;
 }
 ```
 
 | Parte | En el ejemplo | Qué es |
 | --- | --- | --- |
-| Modificador | `static` | Pertenece al tipo, no a un objeto. Por ahora todos tus métodos serán `static`; en la semana 2 verás por qué |
-| Tipo de retorno | `string` | Lo que devuelve; `void` si no devuelve nada |
-| Nombre | `Saludar` | PascalCase, con un verbo |
-| Parámetros | `string nombre, bool formal = false` | Datos de entrada, cada uno con su tipo |
+| Modificador | `static` | Dentro de una clase, dice que el método **pertenece a la clase**, no a un objeto (los objetos son de la semana 2). En un método escrito en `Program.cs` (sección 6.8), `static` además le **impide usar las variables del código principal**: solo trabaja con lo que recibe por parámetros, y eso hace que se entienda solo. Por eso, por ahora, todos tus métodos llevarán `static` |
+| Tipo de retorno | `decimal` | El **tipo del resultado** que devuelve. Si no devuelve nada, se escribe **`void`** ("vacío") |
+| Nombre | `CalcularIva` | En PascalCase y empezando con un **verbo**, porque un método hace algo (sección 7) |
+| Parámetros | `decimal subtotal` | Los datos que necesita, entre paréntesis, cada uno con su **tipo y nombre**. Si no necesita ninguno, los paréntesis van vacíos: `()` |
+| Cuerpo | `{ return subtotal * 0.16m; }` | Las instrucciones, en un bloque |
 
-- **Parámetro opcional:** `formal = false` tiene un valor por defecto; puedes llamar a `Saludar("Alex")`.
-- **Argumento con nombre:** `Saludar(nombre: "Alex", formal: true)` hace legible una llamada con muchos parámetros.
-- **Paso por valor:** el método recibe una **copia** del valor. Si cambia un parámetro `int`, la variable de quien lo llamó no cambia. `ref`, `out` e `in` cambian eso; ya usaste `out` en `TryParse`.
-- **Cuerpo de expresión:** si el método es una sola expresión, puedes escribir `=> expresion;` en lugar de `{ return expresion; }`.
+**`return`** hace dos cosas a la vez: **termina** el método y **entrega** el valor que va después de él. Reglas:
+- Si el tipo de retorno **no es `void`**, el método **debe** devolver un valor de ese tipo **en todos los caminos posibles**. Si un `if` deja algún caso sin `return`, no compila (error CS0161: "no todas las rutas de código devuelven un valor").
+- Si es **`void`**, no devuelve nada. Puedes usar `return;` solo, para salir antes, pero no es obligatorio.
 
-### Dónde viven los métodos con top-level statements
+```csharp
+static void ImprimirEncabezado(string titulo)   // void: no devuelve nada
+{
+    Console.WriteLine("==========");
+    Console.WriteLine(titulo);
+}
+```
 
-En `Program.cs` con top-level statements puedes declarar **funciones locales** debajo del código principal. Cuando el archivo crezca, lo normal es moverlas a una clase `static` propia en otro archivo, por ejemplo `Calculadora.cs`.
+### 6.4 Parámetros y argumentos
 
-### Sobrecarga (overloading)
+Dos palabras que se confunden mucho, y que suelen preguntar en entrevistas:
 
-Varios métodos con el **mismo nombre** y **distinta lista de parámetros** (distinto número, tipo u orden). El compilador elige cuál llamar según los argumentos. El tipo de retorno **no** cuenta para distinguirlos. `Console.WriteLine` tiene más de 15 sobrecargas: una para `int`, otra para `string`, otra para `decimal`…
+| | **Parámetro** | **Argumento** |
+| --- | --- | --- |
+| Qué es | La **variable** que el método declara para recibir un dato | El **valor** que le pasas al llamarlo |
+| Dónde aparece | En la **declaración**: `CalcularIva(decimal subtotal)` | En la **llamada**: `CalcularIva(1000m)` |
+| En el ejemplo | `subtotal` | `1000m` |
 
-**Preguntas de repaso**
+**Analogía:** en un formulario, el parámetro es el **campo** ("Nombre: ____") y el argumento es lo que **escribes** en él ("Alex").
+
+### 6.5 Cómo recibe los datos: por valor
+
+> **Definición para entrevista: ¿qué es el paso por valor?**
+> Es que el método recibe **una copia** del argumento. Si el método cambia su parámetro, **la variable original de quien lo llamó no cambia**. En C# es la forma normal de pasar argumentos.
+
+```csharp
+int plazo = 12;
+Duplicar(plazo);
+Console.WriteLine(plazo);   // sigue siendo 12
+
+static void Duplicar(int numero)
+{
+    numero = numero * 2;    // cambia la copia, no plazo
+}
+```
+
+`numero` es una caja **nueva**, en el espacio del stack de esa llamada, con una copia del 12. Al duplicarla, `plazo` ni se entera. Y cuando el método termina, `numero` desaparece.
+
+Si quieres que el método **sí** pueda cambiar la variable original, se usan palabras especiales:
+
+| Palabra | Qué hace | Dónde ya lo viste |
+| --- | --- | --- |
+| `ref` | El parámetro **es** la variable original, no una copia: si el método la cambia, cambia la original | — |
+| `out` | Como `ref`, pero el método **está obligado** a asignarle un valor; sirve para devolver más de un resultado | En `int.TryParse(texto, out int n)` (sección 3.10) |
+| `in` | Se pasa la original, pero el método **no puede** cambiarla; se usa para no copiar datos grandes | — |
+
+Lo normal es pasar por valor y **devolver** el resultado con `return`. Usa `ref` y `out` solo cuando de verdad haga falta.
+
+**Un matiz para la semana 2:** con un tipo **por referencia** (como `string`), lo que se copia es la **dirección** del dato (sección 3.8), no el dato. Qué consecuencias tiene eso es justo el tema de valor vs. referencia.
+
+### 6.6 Parámetros opcionales y argumentos con nombre
+
+**Parámetro opcional:** tiene un **valor por defecto**, que se usa si quien llama no lo pasa.
+
+```csharp
+static decimal CalcularIva(decimal subtotal, decimal tasa = 0.16m)
+{
+    return subtotal * tasa;
+}
+
+CalcularIva(1000m);           // usa tasa = 0.16 → 160
+CalcularIva(1000m, 0.08m);    // tasa de frontera → 80
+```
+
+Los opcionales van **al final** de la lista de parámetros.
+
+**Argumento con nombre:** al llamar, puedes escribir el nombre del parámetro antes del valor. Hace legible una llamada con muchos datos:
+
+```csharp
+CalcularIva(subtotal: 1000m, tasa: 0.08m);
+```
+
+### 6.7 Cuerpo de expresión: la forma corta
+
+Si el método solo devuelve **una expresión**, puedes cambiar las llaves y el `return` por `=>` ("produce"):
+
+```csharp
+static decimal CalcularIva(decimal subtotal) => subtotal * 0.16m;
+```
+
+Hace exactamente lo mismo que la versión con llaves. Úsalo solo cuando el método es de una línea; si crece, regrésalo a llaves.
+
+### 6.8 Dónde se escriben los métodos
+
+**Con top-level statements** (tu `Program.cs`), los métodos se escriben en el mismo archivo, normalmente **debajo** del código principal, como en el ejemplo de la sección 6.2. Técnicamente se llaman **funciones locales**: como el compilador mete todo tu código dentro de `Main` (sección 2.3), estos métodos quedan **dentro** de `Main`.
+
+**Cuando el archivo crece**, lo normal es moverlos a **su propia clase**, en otro archivo. Por ejemplo, un archivo `Calculadora.cs` en la misma carpeta del proyecto:
+
+```csharp
+static class Calculadora
+{
+    public static decimal CalcularIva(decimal subtotal) => subtotal * 0.16m;
+}
+```
+
+- `static class` es una clase que solo agrupa métodos `static`. Las clases son el tema de la semana 2.
+- **`public`** ("público") permite que el método se use **desde otros archivos**. Sin `public`, solo se podría usar dentro de `Calculadora`.
+
+Y desde `Program.cs` se llama con el nombre de la clase, un punto y el nombre del método:
+
+```csharp
+decimal iva = Calculadora.CalcularIva(1000m);
+```
+
+Es exactamente la misma forma que `Console.WriteLine`: `Console` es la clase y `WriteLine` es el método.
+
+### 6.9 Sobrecarga
+
+> **Definición para entrevista: ¿qué es la sobrecarga (overloading)?**
+> Es tener **varios métodos con el mismo nombre** pero **distinta lista de parámetros**: distinto número de parámetros, distintos tipos o distinto orden. El compilador elige cuál ejecutar según los argumentos de cada llamada. **El tipo de retorno no cuenta** para distinguirlos.
+
+```csharp
+static decimal CalcularIva(decimal subtotal) => subtotal * 0.16m;
+static decimal CalcularIva(decimal subtotal, decimal tasa) => subtotal * tasa;   // otro número de parámetros
+static decimal CalcularIva(int subtotal) => subtotal * 0.16m;                     // otro tipo de parámetro
+```
+
+Al compilar, `CalcularIva(1000m)` usa la primera; `CalcularIva(1000m, 0.08m)`, la segunda; `CalcularIva(1000)`, la tercera.
+
+**¿Por qué no cuenta el tipo de retorno?** Porque en una llamada como `CalcularIva(1000m);`, que no guarda el resultado en ninguna variable, el compilador no tendría forma de saber cuál de las dos quieres. Por eso, para el compilador, lo que identifica a un método es su **nombre más la lista de tipos de sus parámetros**. Dos métodos que solo difieren en lo que devuelven no compilan.
+
+**Ya lo usas:** `Console.WriteLine` tiene más de 15 sobrecargas: una recibe `int`, otra `string`, otra `decimal`, otra `bool`… Por eso le puedes pasar cualquiera de esos tipos.
+
+### Preguntas de repaso
+
+Antes de contestar, cuenta cuántas partes tiene cada pregunta.
+
 - ¿Qué partes tiene la firma de un método?
+- ¿Qué diferencia hay entre un parámetro y un argumento?
 - ¿Por qué cambiar un parámetro `int` dentro de un método no cambia la variable original?
 - ¿Puedes tener dos métodos que solo difieran en el tipo de retorno? ¿Por qué?
+
+### Tarjetas de repaso
+
+#flashcards/csharp/s6-metodos ¿Qué es un método? (definición de entrevista)::Un bloque de código con nombre que hace una tarea; puede recibir parámetros y devolver un resultado; se ejecuta al llamarlo
+#flashcards/csharp/s6-metodos ¿Qué es el principio DRY?::Don't Repeat Yourself: escribir cada lógica una sola vez para corregirla en un solo lugar
+#flashcards/csharp/s6-metodos ¿Declarar vs. llamar un método?::Declararlo es escribir su receta (no lo ejecuta); llamarlo es usarlo con su nombre y paréntesis
+#flashcards/csharp/s6-metodos ¿Qué hace return?::Termina el método y entrega el valor que va después de él
+#flashcards/csharp/s6-metodos ¿Qué significa void?::Que el método no devuelve ningún valor
+#flashcards/csharp/s6-metodos ¿Qué pasa si un método no void deja un camino sin return?::No compila (error CS0161)
+#flashcards/csharp/s6-metodos ¿Qué partes tiene la firma de un método?::Modificador, tipo de retorno, nombre y parámetros (cada uno con tipo y nombre)
+#flashcards/csharp/s6-metodos ¿Parámetro vs. argumento?::El parámetro es la variable en la declaración; el argumento es el valor que pasas al llamar
+#flashcards/csharp/s6-metodos ¿Qué es el paso por valor? (definición de entrevista)::El método recibe una copia del argumento; cambiar el parámetro no cambia la variable original
+#flashcards/csharp/s6-metodos ¿ref vs. out?::Los dos pasan la variable original; con out el método está obligado a asignarle un valor
+#flashcards/csharp/s6-metodos ¿Qué es un parámetro opcional?::Uno con valor por defecto, que se usa si no se pasa; va al final de la lista
+#flashcards/csharp/s6-metodos ¿Qué es un argumento con nombre?::Escribir el nombre del parámetro al llamar: CalcularIva(subtotal: 1000m)
+#flashcards/csharp/s6-metodos ¿Qué es un cuerpo de expresión en un método?::La forma corta => expresión; en lugar de llaves y return
+#flashcards/csharp/s6-metodos ¿Qué es una función local en top-level statements?::Un método declarado en Program.cs; queda dentro del Main que genera el compilador
+#flashcards/csharp/s6-metodos ¿Qué hace public en un método?::Permite usarlo desde otros archivos o clases
+#flashcards/csharp/s6-metodos ¿Qué es la sobrecarga? (definición de entrevista)::Varios métodos con el mismo nombre y distinta lista de parámetros; el compilador elige según los argumentos
+#flashcards/csharp/s6-metodos ¿Por qué el tipo de retorno no distingue sobrecargas?::Porque en una llamada que no guarda el resultado el compilador no podría saber cuál usar
+#flashcards/csharp/s6-metodos ¿Qué es el stack trace?::La lista de métodos que estaban en curso (en el stack) cuando ocurrió un error
 
 ---
 
 ## 7. Convenciones de estilo
 
-Un reclutador lee tu código antes que tu CV. Estas son las de Microsoft:
+> **Definición para entrevista: ¿qué son las convenciones de estilo?**
+> Son **acuerdos sobre cómo escribir y nombrar el código** para que cualquier persona del equipo lo lea igual de fácil. **No cambian si el código compila ni lo que hace**: cambian qué tan rápido lo entiende otra persona. En .NET, la referencia son las convenciones de Microsoft.
 
-| Qué | Convención | Ejemplo |
+**Por qué importan tanto:** el código se **lee** muchas más veces de las que se escribe: lo leen tus compañeros, tú mismo dentro de seis meses y, en tu búsqueda de empleo, **el reclutador que abre tu repositorio antes que tu CV**. Un código con nombres claros y formato consistente dice "esta persona trabaja con cuidado" antes de que alguien lea una sola línea con atención.
+
+### 7.1 Las formas de escribir un nombre
+
+Un nombre en C# no puede tener espacios. Para juntar varias palabras hay distintas formas, y cada una tiene un uso:
+
+| Forma | Cómo se escribe | Ejemplo |
 | --- | --- | --- |
-| Clases, métodos, propiedades, constantes | PascalCase | `CalcularInteres`, `MesesPorAnio` |
-| Variables locales y parámetros | camelCase | `tasaAnual`, `montoTotal` |
-| Campos privados | `_camelCase` | `_saldo` |
-| Interfaces | `I` + PascalCase | `ICredito` (semana 3) |
-| Llaves | En su propia línea (estilo Allman) | |
-| Nombres | Que digan qué son, sin abreviar | `tasaMensual`, no `tm` |
+| **PascalCase** | Cada palabra empieza con mayúscula | `CalcularInteres`, `MesesPorAnio` |
+| **camelCase** | Como PascalCase, pero la primera palabra en minúscula | `tasaAnual`, `montoTotal` |
+| **_camelCase** | camelCase con un guion bajo al inicio | `_saldo` |
+
+Se llaman así por la forma de las mayúsculas: "Pascal" por el lenguaje de programación Pascal, y "camel" (camello) por las jorobas que forman las mayúsculas en medio.
+
+### 7.2 Qué forma lleva cada cosa
+
+Algunos de estos elementos todavía no los has visto; la columna de la derecha dice qué son, en una línea:
+
+| Qué | Forma | Ejemplo | Qué es |
+| --- | --- | --- | --- |
+| Clases | PascalCase | `Calculadora` | Contenedor de métodos y datos (sección 2.3) |
+| Métodos | PascalCase | `CalcularIva` | Sección 6 |
+| Constantes | PascalCase | `MesesPorAnio` | Sección 3.5 |
+| Variables locales y parámetros | camelCase | `tasaAnual`, `subtotal` | Sección 3.2 y 6.4 |
+| Propiedades | PascalCase | `Saldo` | Un dato de un objeto que se lee y escribe de forma controlada (semana 2) |
+| Campos privados | _camelCase | `_saldo` | Una variable que pertenece a un objeto y solo se usa dentro de su clase (semana 2) |
+| Interfaces | `I` + PascalCase | `ICredito` | Un "contrato" de métodos que una clase promete tener (semana 3) |
+
+La regla fácil: **lo que se ve desde fuera** (clases, métodos, propiedades) va en **PascalCase**; **lo que vive dentro** de un método (variables y parámetros) va en **camelCase**.
+
+### 7.3 Nombres que se explican solos
+
+- **Que digan qué son, sin abreviar:** `tasaMensual`, no `tm` ni `tasaMen`. El autocompletado de Visual Studio escribe por ti, así que un nombre largo no cuesta.
+- **Métodos con verbo:** un método **hace** algo: `CalcularIva`, `ValidarRfc`, `ImprimirTabla`.
+- **Variables `bool` como pregunta de sí o no:** `estaAprobado`, `tieneAval`, `fueEnviado`. Al leer `if (tieneAval)` la condición se entiende sola.
+- **Sin prefijos de tipo:** no `flgEnviado`, `strNombre` ni `intPlazo`. Esa costumbre (llamada **notación húngara**) venía de editores que no mostraban el tipo de cada variable; hoy Visual Studio te lo dice al pasar el mouse, así que el prefijo solo estorba. Es lo que se te marcó en el laboratorio 3.
+- **Un solo idioma:** las palabras de C# (`if`, `return`, `int`) están en inglés y no se tocan. Para tus nombres puedes usar español o inglés, pero **no los mezcles** en el mismo proyecto (`CalcularTotal` y `GetSaldo` juntos se ven descuidados). En empresas mexicanas es común nombrar en español los conceptos del negocio (`Credito`, `Amortizacion`); para un portafolio que leerán reclutadores de otros países, el inglés abre más puertas. Elige uno y sé consistente.
+
+### 7.4 Formato
+
+| Regla | Cómo |
+| --- | --- |
+| **Llaves en su propia línea** (estilo Allman, el de .NET) | La `{` abajo del `if`, del `for` o de la firma del método, no al final de la línea |
+| **Sangría de 4 espacios** por cada nivel de bloque | Lo de dentro de un `if` va 4 espacios más a la derecha que el `if` |
+| **Una instrucción por línea** | No `a = 1; b = 2;` en la misma línea |
+| **Una línea en blanco** entre bloques que hacen cosas distintas | Separa "leer datos" de "calcular" de "imprimir" |
+| **`var` solo cuando el tipo es obvio** | `var saldo = 1000m;` está bien (se ve que es `decimal`); `var x = Calcular();` no, porque no se sabe qué devuelve |
+
+**No lo hagas a mano:** en Visual Studio, **Ctrl + K** y luego **Ctrl + D** ("Formatear documento") aplica la sangría y las llaves de todo el archivo. Desde la terminal, `dotnet format` hace lo mismo con todo el proyecto.
+
+### 7.5 Comentarios
+
+- **Comenta el *por qué*, no el *qué*.** El código ya dice qué hace; el comentario explica lo que no se ve:
+  - Malo: `// multiplica por 0.16` (eso ya se lee en el código).
+  - Bueno: `// IVA general; en zona fronteriza se usa 0.08 (ver CalcularIva con tasa)`.
+- **Si necesitas un comentario para explicar un nombre, mejor cambia el nombre.** `int d; // días de atraso` → `int diasDeAtraso;`.
+- **Borra el código comentado** que ya no usas. Para recuperarlo está Git.
+
+### Preguntas de repaso
+
+Antes de contestar, cuenta cuántas partes tiene cada pregunta.
+
+- ¿Qué forma de nombre (PascalCase o camelCase) llevan un método, una variable local y una constante?
+- ¿Por qué `flgEnviado` no sigue las convenciones y cómo lo nombrarías?
+- ¿Qué debe explicar un buen comentario?
+
+### Tarjetas de repaso
+
+#flashcards/csharp/s7-convenciones ¿Qué son las convenciones de estilo? (definición de entrevista)::Acuerdos sobre cómo escribir y nombrar el código para que todos lo lean igual; no cambian si compila
+#flashcards/csharp/s7-convenciones ¿PascalCase vs. camelCase?::PascalCase: cada palabra con mayúscula (CalcularIva); camelCase: igual pero la primera en minúscula (tasaAnual)
+#flashcards/csharp/s7-convenciones ¿Qué va en PascalCase en C#?::Clases, métodos, propiedades y constantes
+#flashcards/csharp/s7-convenciones ¿Qué va en camelCase en C#?::Variables locales y parámetros
+#flashcards/csharp/s7-convenciones ¿Cómo se nombran los campos privados?::_camelCase, como _saldo
+#flashcards/csharp/s7-convenciones ¿Cómo se nombran las interfaces?::Con I + PascalCase, como ICredito
+#flashcards/csharp/s7-convenciones ¿Cómo se nombra una variable bool?::Como pregunta de sí o no: estaAprobado, tieneAval, fueEnviado
+#flashcards/csharp/s7-convenciones ¿Qué es la notación húngara y por qué se evita?::Poner el tipo como prefijo (strNombre, flgEnviado); el editor ya muestra el tipo, así que solo estorba
+#flashcards/csharp/s7-convenciones ¿Qué estilo de llaves usa .NET?::Allman: la llave de apertura en su propia línea
+#flashcards/csharp/s7-convenciones ¿Cuándo usar var según Microsoft?::Cuando el tipo es obvio por lo que está a la derecha del =
+#flashcards/csharp/s7-convenciones ¿Cómo se formatea un archivo en Visual Studio?::Ctrl + K, Ctrl + D; o dotnet format desde la terminal
+#flashcards/csharp/s7-convenciones ¿Qué debe explicar un buen comentario?::El por qué, no el qué; el código ya dice qué hace
 
 ---
 

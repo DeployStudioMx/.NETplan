@@ -1,10 +1,13 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-10-29
+actualizado: 2026-11-03
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-11-03
+- A pedido de Alex, reescritas las secciones 6 y 7 de [[10 Teoria de CSharp]] desde los fundamentos, con definición de entrevista primero. Sección 6: DRY, declarar vs. llamar (y qué pasa en el stack), firma parte por parte, `return` y `void`, parámetro vs. argumento, paso por valor y `ref`/`out`/`in`, opcionales y con nombre, cuerpo de expresión, funciones locales vs. clase `static` en otro archivo, sobrecarga. Sección 7: PascalCase y camelCase, qué forma lleva cada cosa, nombres (verbos, `bool` como pregunta, sin notación húngara, un solo idioma), formato y comentarios. Mazos nuevos `csharp/s6-metodos` (18) y `csharp/s7-convenciones` (12) en [[13 Plan de memorizacion]]; PDFs regenerados. Con esto, las 7 secciones de la semana 1 quedan reescritas.
 
 ## 2026-10-29
 - A pedido de Alex, reescritas las secciones 4 y 5 de [[10 Teoria de CSharp]] desde los fundamentos, con definición de entrevista primero. Sección 4: operadores (división entera, residuo, atajos), comparación, lógicos y cortocircuito, `if` y ámbito, ternario, `switch` clásico y expresión con patrones, los cuatro ciclos con prueba de escritorio, `break` y `continue`; `foreach` y `switch` conectados con su ficha de tipos. Sección 5: posiciones decimales en binario, por qué 0.1 no es exacto, punto flotante e IEEE 754, cómo guarda `decimal`, división entre cero, redondeo bancario vs. `AwayFromZero`. Nuevos mazos `csharp/s4-control-flujo` (22) y `csharp/s5-double-decimal` (14) en [[13 Plan de memorizacion]]; PDFs regenerados.
