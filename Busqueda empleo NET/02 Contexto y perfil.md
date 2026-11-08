@@ -11,7 +11,7 @@ actualizado: 2026-11-08
 - Stack: ASP.NET MVC / .NET Framework sobre IIS, SQL Server. Además, un servicio de generación de PDFs con Next.js y Puppeteer, implementado con IA (no domina esa tecnología).
 
 ## Proyectos en DiSí (para CV y guion de entrevista)
-Redactados como logros en [[17 CV]].
+Redactados como logros en [[17 CV]]. **Escala real (Alex, 2026-11-08):** no son módulos sueltos sino productos y áreas completas. El **onboarding** es su trabajo más destacado (tres generaciones hasta una experiencia muy intuitiva). La **originación** es la automatización de toda el área de dictaminación (onboarding, referencias, análisis con Ekatena e innumerables módulos de riesgo). El **crédito revolvente** fue el producto completo (cálculos diarios, alta de créditos y todas sus reglas). La **cobranza** incluye correos y WhatsApp diarios, agenda de llamadas a cada contacto del socio, y visitas presenciales y virtuales. Según Alex, esto es apenas el 20% de lo que ha hecho.
 - Reestructuración del workflow de la empresa
 - Dashboard de gestión de cobranza (APIs de Twilio y Kobra)
 - Crédito revolvente completo: cálculos, gestión interna y lado del cliente

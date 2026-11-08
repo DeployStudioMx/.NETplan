@@ -7,6 +7,7 @@ actualizado: 2026-11-08
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-11-08
+- CV v1.1: Alex corrige la escala de su trabajo en DiSí (productos y áreas completas, no módulos). Reescritos el resumen y los 4 logros principales en [[17 CV]]; escala registrada en [[02 Contexto y perfil]]. Siguiente paso: inventario de su trabajo en el repositorio disinet, sin datos confidenciales, con el prompt que le dio Claude.
 - Creado [[17 CV]]: decisiones de formato (una columna, sin foto, apto para ATS, español primero), reglas de contenido y borrador v1 con huecos `[X]` para los números de cada proyecto. Usa las palabras clave de [[16 Vacantes]].
 - Primer sondeo de vacantes C# / .NET en CDMX (LinkedIn público, Get on Board y lo que muestran los buscadores de OCC, Indeed, Computrabajo y Glassdoor) en [[16 Vacantes]]: sueldos, modalidad (42% mencionan remoto, 26% híbrido), inglés (87%), tecnologías más pedidas, empate con su stack y 12 vacantes candidatas, con lo que implica para el CV y el plan. Resumen en [[02 Contexto y perfil]]; enlace desde [[09 Registro de aplicaciones]].
 - Revisado el CV de 2024: diseño de Canva en dos columnas que los ATS leen en desorden, error en el correo (`gamil.com`), falta DiSí y los puntos describen tareas en lugar de logros. Pendiente que Alex mande números de sus proyectos para redactar el nuevo.
