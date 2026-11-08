@@ -131,6 +131,8 @@ Vacantes con sueldo publicado encontradas fuera de LinkedIn: Desarrollador Micro
 
 ### 8. Qué significa para el CV
 
+Aplicado en [[17 CV]].
+
 1. **Palabras clave que tienes y el mercado pide:** C#, REST/APIs, SQL Server, Entity Framework, JavaScript, Git, Scrum. Deben aparecer en el resumen y en los logros, no solo en la lista de habilidades, porque los ATS buscan esas palabras.
 2. **Tus integraciones son tu mejor carta:** "APIs" aparece en 75% de las vacantes. Twilio, Kobra, Ekatena, Google Maps y WhatsApp deben estar escritas como **integraciones de APIs REST**, con resultado. Tienes que poder explicarlas en entrevista: el plan cubre HTTP y APIs en las semanas 4 y 5.
 3. **No poner lo que todavía no puedes defender:** .NET Core, Web API, Azure, Docker y pruebas entran al CV **cuando los practiques** en `SolicitudesApi`, que además será la evidencia.

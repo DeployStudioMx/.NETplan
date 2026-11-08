@@ -44,6 +44,7 @@ Empezó en una sesión de Cowork (30 sep – 5 oct 2026) y se trasladó a este r
 | [[14 Evaluaciones]] | Calificaciones de Alex por pregunta, conceptos débiles y tarjetas de errores | En cada evaluación (resumen + detalle) |
 | [[15 Dudas resueltas]] | Dudas fuera de clase o de notas que no se deben tocar, con su respuesta y tarjetas | En cada duda nueva |
 | [[16 Vacantes]] | Sondeos del mercado de vacantes C# / .NET: sueldos, modalidad, inglés, tecnologías más pedidas, empate con el perfil de Alex y vacantes candidatas | Una sección nueva por sondeo, con fecha |
+| [[17 CV]] | Fuente de verdad del CV: decisiones de formato (una columna, sin foto, apto para ATS), reglas de contenido, borrador vigente, datos que faltan e historial de versiones | En cada cambio del CV, con fila en el historial |
 | `calendario_datos.py` | Contenido día por día del calendario | Fuente de verdad del calendario |
 | `calendario_render.py` | Genera el PDF y el `.md` del calendario | `pip install reportlab` y `python calendario_render.py` |
 | `clase_pdf.py` | Genera el `.pdf` de una nota de clase o de teoría (dibuja los diagramas Mermaid) | Requiere `pandoc` y Chrome: `python clase_pdf.py "11 Clase 0.1 Datos"` |

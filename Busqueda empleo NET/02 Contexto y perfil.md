@@ -11,6 +11,7 @@ actualizado: 2026-11-08
 - Stack: ASP.NET MVC / .NET Framework sobre IIS, SQL Server. Además, un servicio de generación de PDFs con Next.js y Puppeteer, implementado con IA (no domina esa tecnología).
 
 ## Proyectos en DiSí (para CV y guion de entrevista)
+Redactados como logros en [[17 CV]].
 - Reestructuración del workflow de la empresa
 - Dashboard de gestión de cobranza (APIs de Twilio y Kobra)
 - Crédito revolvente completo: cálculos, gestión interna y lado del cliente

@@ -38,6 +38,7 @@ Busqueda empleo NET/
 ├── 14 Evaluaciones.md                   ← calificaciones, conceptos débiles y tarjetas de errores
 ├── 15 Dudas resueltas.md                ← dudas fuera de clase, con respuesta y tarjetas
 ├── 16 Vacantes.md                       ← sondeos del mercado: sueldos, modalidad, tecnologías y vacantes que empatan
+├── 17 CV.md                             ← fuente de verdad del CV: decisiones de formato, borrador y versiones
 ├── calendario_datos.py                  ← contenido día por día del calendario (fuente)
 ├── calendario_render.py                 ← genera 04 Calendario .md + .pdf
 ├── clase_pdf.py                         ← genera el .pdf de una nota de clase (pandoc + Chrome)
@@ -51,7 +52,7 @@ Busqueda empleo NET/
 | Cuando pasa esto… | Se modifican estos archivos (todos, en el mismo momento) |
 | --- | --- |
 | Cualquier cambio en la memoria del proyecto | El dato va **en su nodo** (el archivo afectado de esta tabla), enlazado con `[[ ]]` a sus notas relacionadas; `01 Bitacora` solo lleva una entrada fechada que enlaza a ese nodo. Nunca todo en un solo `.md` |
-| Cambia un dato de perfil (salario, experiencia, CV, brechas, cómo aprende, dudas nuevas) | `02 Contexto y perfil` + `01 Bitacora` |
+| Cambia un dato de perfil (salario, experiencia, CV, brechas, cómo aprende, dudas nuevas) | `02 Contexto y perfil` + `01 Bitacora`; si afecta al CV, también `17 CV` (borrador e historial de versiones) |
 | Cambia el plan | `03 Plan para huir de DiSi.md` + `.pdf` (y el original en Claude Docs si la sesión lo permite); si cambian días, horas o tareas también el calendario; + `01 Bitacora` |
 | Cambia el calendario (días, horas, tareas) | Editar `calendario_datos.py` y correr `python calendario_render.py` (regenera `04` `.md` + `.pdf`); si cambia el resumen semanal, `03 Plan` `.md` + `.pdf`; + `01 Bitacora` |
 | Cambia el árbol de fundamentos | `05 Arbol de fundamentos.md` + `.pdf` (+ `05 diagrama arbol.png` si cambia el diagrama); + `01 Bitacora` |
@@ -90,6 +91,7 @@ Busqueda empleo NET/
 - [[14 Evaluaciones]] — calificaciones y conceptos débiles
 - [[15 Dudas resueltas]] — dudas fuera de clase
 - [[16 Vacantes]] — sondeos del mercado de vacantes .NET
+- [[17 CV]] — CV: formato, borrador y versiones
 
 ## Originales en Claude Docs
 | Nota | Enlace |
