@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, indice]
-actualizado: 2026-10-13
+actualizado: 2026-11-08
 ---
 # Búsqueda de empleo .NET — Índice
 
@@ -37,6 +37,7 @@ Busqueda empleo NET/
 ├── 13 Plan de memorizacion.md / .pdf    ← sistema de repaso a largo plazo (tarjetas, rutina, exámenes acumulados)
 ├── 14 Evaluaciones.md                   ← calificaciones, conceptos débiles y tarjetas de errores
 ├── 15 Dudas resueltas.md                ← dudas fuera de clase, con respuesta y tarjetas
+├── 16 Vacantes.md                       ← sondeos del mercado: sueldos, modalidad, tecnologías y vacantes que empatan
 ├── calendario_datos.py                  ← contenido día por día del calendario (fuente)
 ├── calendario_render.py                 ← genera 04 Calendario .md + .pdf
 ├── clase_pdf.py                         ← genera el .pdf de una nota de clase (pandoc + Chrome)
@@ -61,6 +62,7 @@ Busqueda empleo NET/
 | Surge una duda | Se responde en la nota de origen o, si no se debe tocar, en `15 Dudas resueltas` (con tarjetas); se registra en `02 Contexto y perfil`; + `01 Bitacora` |
 | Cambia el sistema de repaso | `13 Plan de memorizacion.md` y regenerar su `.pdf`; + `01 Bitacora` |
 | Alex estudia una unidad nueva (sección, clase o laboratorio) | Sus tarjetas llevan al inicio de cada línea la etiqueta de su mazo `#flashcards/<área>/<unidad>`; se agrega a la tabla de mazos y al registro de unidades de `13 Plan de memorizacion` (y su `.pdf`); errores y dudas de esa unidad van en sus submazos `…/errores` y `…/dudas`; + `01 Bitacora` |
+| Se hace un sondeo de vacantes | Sección nueva, con fecha, arriba en `16 Vacantes`; si cambian las brechas o la pretensión, también `02 Contexto y perfil`; + `01 Bitacora` |
 | Cambia la ruta a senior | `07 Ruta a NET senior.md` + `.pdf` (+ su diagrama); + `01 Bitacora` |
 | Se crea un documento nuevo | `NN Nombre.md` (+ `.pdf` y `NN diagrama ….png` si aplica) con el siguiente número libre; agregarlo al árbol, a las notas de este índice y a `CLAUDE.md`; + `01 Bitacora` |
 | Cambian las reglas de trabajo | Este índice + `CLAUDE.md` + `01 Bitacora` |
@@ -87,6 +89,7 @@ Busqueda empleo NET/
 - [[13 Plan de memorizacion]] · [[13 Plan de memorizacion.pdf|PDF]] — cómo repasar para no olvidar
 - [[14 Evaluaciones]] — calificaciones y conceptos débiles
 - [[15 Dudas resueltas]] — dudas fuera de clase
+- [[16 Vacantes]] — sondeos del mercado de vacantes .NET
 
 ## Originales en Claude Docs
 | Nota | Enlace |

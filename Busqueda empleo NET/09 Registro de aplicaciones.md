@@ -10,4 +10,6 @@ Una fila por vacante. Se llena los viernes de búsqueda del [[04 Calendario dia 
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | | | | | | | | |
 
+Las vacantes candidatas de cada sondeo del mercado están en [[16 Vacantes]]: pasa aquí las que decidas solicitar.
+
 Las preguntas que no supiste contestar se repasan en la revisión del domingo y se anotan en [[01 Bitacora]].

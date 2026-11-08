@@ -1,6 +1,6 @@
 ---
 tags: [busqueda-empleo, perfil]
-actualizado: 2026-10-13
+actualizado: 2026-11-08
 ---
 # Contexto y perfil
 
@@ -40,6 +40,9 @@ actualizado: 2026-10-13
 - 2026-10-24, dudas en el laboratorio 3: cómo imprimir en C#, qué es `checked` (no lo había entendido de la sección 3.11) → [[15 Dudas resueltas]].
 - **Sabe usar, no sabe explicar** (2026-10-24): en el laboratorio 3 usó `List<object>`, `foreach`, `switch` como expresión con patrones de tipo, tuplas y `ToString()`, pero no puede explicarlos. Al llegar a cada tema, explicarlo desde cero como si no lo conociera y conectarlo con su código ([[12 Clase Primer proyecto por CLI]]). Temas: sección 4 (`foreach`, `switch`), semana 2 (`object`, `ToString`), semana 3 (colecciones, genéricos, patrones de tipo, tuplas).
 - Usa las técnicas de estudio de [[11 Clase 0.1 Datos]] y el sistema de repaso de [[13 Plan de memorizacion]] para retener a largo plazo.
+
+## Lo que dice el mercado
+- Sondeo del 2026-11-08 en [[16 Vacantes]]: la pretensión de 30k netos está en la mediana de un .NET mid en CDMX. El **inglés** es el filtro más grande (87% de las vacantes lo piden). Lo más pedido que falta: CI/CD, Azure, .NET Core, IA, AWS, microservicios, React/Angular, Web API y pruebas; casi todo lo cubre el plan entre las semanas 6 y 11. Su stack actual (.NET Framework, MVC, jQuery) es lo que menos se menciona (6 a 8%).
 
 ## Herramientas y repos del plan
 - IDE: Visual Studio 2026 con .NET 10 LTS; sugerencias de Copilot apagadas durante el plan.

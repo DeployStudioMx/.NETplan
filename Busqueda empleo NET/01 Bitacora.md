@@ -1,10 +1,14 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-11-03
+actualizado: 2026-11-08
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-11-08
+- Primer sondeo de vacantes C# / .NET en CDMX (LinkedIn público, Get on Board y lo que muestran los buscadores de OCC, Indeed, Computrabajo y Glassdoor) en [[16 Vacantes]]: sueldos, modalidad (42% mencionan remoto, 26% híbrido), inglés (87%), tecnologías más pedidas, empate con su stack y 12 vacantes candidatas, con lo que implica para el CV y el plan. Resumen en [[02 Contexto y perfil]]; enlace desde [[09 Registro de aplicaciones]].
+- Revisado el CV de 2024: diseño de Canva en dos columnas que los ATS leen en desorden, error en el correo (`gamil.com`), falta DiSí y los puntos describen tareas en lugar de logros. Pendiente que Alex mande números de sus proyectos para redactar el nuevo.
 
 ## 2026-11-03
 - A pedido de Alex, reescritas las secciones 6 y 7 de [[10 Teoria de CSharp]] desde los fundamentos, con definición de entrevista primero. Sección 6: DRY, declarar vs. llamar (y qué pasa en el stack), firma parte por parte, `return` y `void`, parámetro vs. argumento, paso por valor y `ref`/`out`/`in`, opcionales y con nombre, cuerpo de expresión, funciones locales vs. clase `static` en otro archivo, sobrecarga. Sección 7: PascalCase y camelCase, qué forma lleva cada cosa, nombres (verbos, `bool` como pregunta, sin notación húngara, un solo idioma), formato y comentarios. Mazos nuevos `csharp/s6-metodos` (18) y `csharp/s7-convenciones` (12) en [[13 Plan de memorizacion]]; PDFs regenerados. Con esto, las 7 secciones de la semana 1 quedan reescritas.
@@ -104,7 +108,8 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - [ ] Exámenes acumulados: 31 oct, 28 nov y 26 dic ([[13 Plan de memorizacion]])
 - [ ] Escribir en [[10 Teoria de CSharp]] la teoría de las semanas 2 a 5, cada una antes de que empiece (semana 2: antes del 13 oct)
 - [ ] Confirmar que las ~12 horas por semana son realistas
-- [ ] Reescribir CV con logros medibles
+- [ ] Reescribir CV con logros medibles: Alex manda números de cada proyecto de DiSí, fechas de entrada y ascenso, nivel de inglés y si está titulado; usar las palabras clave de [[16 Vacantes]]
+- [ ] Decidir con Alex qué hacer con las brechas que el plan no cubre: inglés, framework de front end, nube e IA ([[16 Vacantes]])
 - [ ] Preparar guion de proyectos de DiSí
 - [ ] Simulacro de entrevista técnica (diagnóstico)
 - [ ] Estudiar el árbol de fundamentos (niveles 0 a 7), semanas 1 a 7
