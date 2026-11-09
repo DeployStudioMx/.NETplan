@@ -8,10 +8,10 @@ actualizado: 2026-11-08
 - Desarrollador Mid Senior en DiSí Operaciones (fintech/SOFOM, crédito a PyMEs), ~3 años; ascenso a inicios de 2026.
 - Radica en CDMX.
 - Pretensión salarial: 30k MXN netos (aclarar siempre bruto/neto y nómina vs. honorarios).
-- Stack: ASP.NET MVC / .NET Framework sobre IIS, SQL Server. Además, un servicio de generación de PDFs con Next.js y Puppeteer, implementado con IA (no domina esa tecnología).
+- Stack en DiSí: ASP.NET MVC 5 y .NET Framework 4.8 sobre IIS, con **Oracle y PL/SQL** (corregido el 2026-11-09; antes decía SQL Server, que fue en Probiomed). Además, un servicio de generación de PDFs con Next.js y Puppeteer, implementado con IA (no domina esa tecnología).
 
 ## Proyectos en DiSí (para CV y guion de entrevista)
-Redactados como logros en [[17 CV]]. **Escala real (Alex, 2026-11-08):** no son módulos sueltos sino productos y áreas completas. El **onboarding** es su trabajo más destacado (tres generaciones hasta una experiencia muy intuitiva). La **originación** es la automatización de toda el área de dictaminación (onboarding, referencias, análisis con Ekatena e innumerables módulos de riesgo). El **crédito revolvente** fue el producto completo (cálculos diarios, alta de créditos y todas sus reglas). La **cobranza** incluye correos y WhatsApp diarios, agenda de llamadas a cada contacto del socio, y visitas presenciales y virtuales. Según Alex, esto es apenas el 20% de lo que ha hecho.
+Redactados como logros en [[17 CV]]. **Escala real (Alex, 2026-11-08):** no son módulos sueltos sino productos y áreas completas. El **onboarding** es su trabajo más destacado (tres generaciones hasta una experiencia muy intuitiva). La **originación** es la automatización de toda el área de dictaminación (onboarding, referencias, análisis con Ekatena e innumerables módulos de riesgo). El **crédito revolvente** fue el producto completo (cálculos diarios, alta de créditos y todas sus reglas). La **cobranza** incluye correos y WhatsApp diarios, agenda de llamadas a cada contacto del socio, y visitas presenciales y virtuales. Según Alex, esto es apenas el 20% de lo que ha hecho. **Inventario del código (2026-11-09):** es el desarrollador principal full stack de DisiNet, con 9 áreas que cubren el ciclo completo del crédito; resumen y estrategia de entrevista en [[17 CV]].
 - Reestructuración del workflow de la empresa
 - Dashboard de gestión de cobranza (APIs de Twilio y Kobra)
 - Crédito revolvente completo: cálculos, gestión interna y lado del cliente

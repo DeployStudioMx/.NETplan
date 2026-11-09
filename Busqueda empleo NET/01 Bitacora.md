@@ -1,10 +1,13 @@
 ---
 tags: [busqueda-empleo, bitacora]
-actualizado: 2026-11-08
+actualizado: 2026-11-09
 ---
 # Bitácora
 
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
+
+## 2026-11-09
+- Alex trajo el inventario de su trabajo en disinet (9 áreas, conteos del código, sin datos confidenciales). No se guarda completo en el repo; su resumen y la estrategia de entrevista están en [[17 CV]]. CV v2: desarrollador principal de la plataforma de crédito, 8 logros por área, 2 páginas. Corregida la base de datos de DiSí a Oracle PL/SQL en [[02 Contexto y perfil]].
 
 ## 2026-11-08
 - CV v1.1: Alex corrige la escala de su trabajo en DiSí (productos y áreas completas, no módulos). Reescritos el resumen y los 4 logros principales en [[17 CV]]; escala registrada en [[02 Contexto y perfil]]. Siguiente paso: inventario de su trabajo en el repositorio disinet, sin datos confidenciales, con el prompt que le dio Claude.
@@ -112,7 +115,7 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - [ ] Confirmar que las ~12 horas por semana son realistas
 - [ ] CV: Alex contesta "Datos que faltan" de [[17 CV]] (números por proyecto, fechas en DiSí, nivel de inglés, título, usuario de GitHub) para pasar del borrador v1 a la v2
 - [ ] Decidir con Alex qué hacer con las brechas que el plan no cubre: inglés, framework de front end, nube e IA ([[16 Vacantes]])
-- [ ] Preparar guion de proyectos de DiSí
+- [ ] Preparar guion de proyectos de DiSí: una explicación de 2 minutos por logro del CV, con la tabla "Defensa en entrevista" de [[17 CV]]
 - [ ] Simulacro de entrevista técnica (diagnóstico)
 - [ ] Estudiar el árbol de fundamentos (niveles 0 a 7), semanas 1 a 7
 - [ ] Conectar Google Calendar vía API y agendar bloques de estudio (semana 8)
