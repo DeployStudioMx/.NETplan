@@ -5,7 +5,9 @@ actualizado: 2026-11-08
 # Contexto y perfil
 
 ## Situación actual
-- Desarrollador Mid Senior en DiSí Operaciones (fintech/SOFOM, crédito a PyMEs), ~3 años; ascenso a inicios de 2026.
+- Desarrollador Mid en DiSí Operaciones (fintech/SOFOM, crédito a PyMEs) desde el **2 de abril de 2024**; entró como Junior y fue ascendido a inicios de 2026. Antes: Probiomed (ene 2023 – ene 2024). Más de 3 años de experiencia en total.
+- Ingeniero en Mecatrónica por la UNAM (2017–2022), **titulado con cédula**.
+- **Inglés: A2 (básico).** Es la brecha más grande frente al mercado ([[16 Vacantes]]: 87% de las vacantes lo piden).
 - Radica en CDMX.
 - Pretensión salarial: 30k MXN netos (aclarar siempre bruto/neto y nómina vs. honorarios).
 - Stack en DiSí: ASP.NET MVC 5 y .NET Framework 4.8 sobre IIS, con **Oracle y PL/SQL** (corregido el 2026-11-09; antes decía SQL Server, que fue en Probiomed). Además, un servicio de generación de PDFs con Next.js y Puppeteer, implementado con IA (no domina esa tecnología).

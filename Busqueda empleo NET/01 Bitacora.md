@@ -7,6 +7,7 @@ actualizado: 2026-11-09
 Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la memoria del proyecto.
 
 ## 2026-11-09
+- CV v3 terminado en [[17 CV]], con [[17 CV.docx]] y [[17 CV.pdf]] (2 páginas, una columna, apto para ATS). Datos de Alex: entrada a DiSí el 2 abr 2024, titulado con cédula, inglés A2, sin GitHub por ahora, Probiomed solo como fechas. Perfil actualizado en [[02 Contexto y perfil]]. Hecho en Word y no en Claude Docs, porque esos documentos viven en la cuenta de la organización de DiSí.
 - Alex trajo el inventario de su trabajo en disinet (9 áreas, conteos del código, sin datos confidenciales). No se guarda completo en el repo; su resumen y la estrategia de entrevista están en [[17 CV]]. CV v2: desarrollador principal de la plataforma de crédito, 8 logros por área, 2 páginas. Corregida la base de datos de DiSí a Oracle PL/SQL en [[02 Contexto y perfil]].
 
 ## 2026-11-08
@@ -113,8 +114,9 @@ Registro fechado, lo más reciente arriba. Se actualiza cada vez que cambia la m
 - [ ] Exámenes acumulados: 31 oct, 28 nov y 26 dic ([[13 Plan de memorizacion]])
 - [ ] Escribir en [[10 Teoria de CSharp]] la teoría de las semanas 2 a 5, cada una antes de que empiece (semana 2: antes del 13 oct)
 - [ ] Confirmar que las ~12 horas por semana son realistas
-- [ ] CV: Alex contesta "Datos que faltan" de [[17 CV]] (números por proyecto, fechas en DiSí, nivel de inglés, título, usuario de GitHub) para pasar del borrador v1 a la v2
-- [ ] Decidir con Alex qué hacer con las brechas que el plan no cubre: inglés, framework de front end, nube e IA ([[16 Vacantes]])
+- [x] CV v3 listo para postular ([[17 CV]], 2026-11-09)
+- [ ] Primeras postulaciones: vacantes en español que no exijan inglés, de [[16 Vacantes]]; registrarlas en [[09 Registro de aplicaciones]]
+- [ ] **Prioridad:** decidir con Alex un plan de inglés (está en A2 y el 87% de las vacantes lo piden), y qué hacer con las otras brechas que el plan no cubre: framework de front end y nube ([[16 Vacantes]])
 - [ ] Preparar guion de proyectos de DiSí: una explicación de 2 minutos por logro del CV, con la tabla "Defensa en entrevista" de [[17 CV]]
 - [ ] Simulacro de entrevista técnica (diagnóstico)
 - [ ] Estudiar el árbol de fundamentos (niveles 0 a 7), semanas 1 a 7

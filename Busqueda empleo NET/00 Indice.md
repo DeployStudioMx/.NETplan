@@ -38,10 +38,11 @@ Busqueda empleo NET/
 ├── 14 Evaluaciones.md                   ← calificaciones, conceptos débiles y tarjetas de errores
 ├── 15 Dudas resueltas.md                ← dudas fuera de clase, con respuesta y tarjetas
 ├── 16 Vacantes.md                       ← sondeos del mercado: sueldos, modalidad, tecnologías y vacantes que empatan
-├── 17 CV.md                             ← fuente de verdad del CV: decisiones de formato, borrador y versiones
+├── 17 CV.md / .docx / .pdf              ← CV: decisiones, texto vigente y versiones (el .docx y el .pdf los genera cv_docx.js)
 ├── calendario_datos.py                  ← contenido día por día del calendario (fuente)
 ├── calendario_render.py                 ← genera 04 Calendario .md + .pdf
 ├── clase_pdf.py                         ← genera el .pdf de una nota de clase (pandoc + Chrome)
+├── cv_docx.js                           ← genera 17 CV.docx (paquete npm docx); luego se exporta a PDF
 ├── CLAUDE.md                            ← reglas para cualquier sesión de Claude
 ├── README.md                            ← portada del repositorio
 └── .gitignore
@@ -91,7 +92,7 @@ Busqueda empleo NET/
 - [[14 Evaluaciones]] — calificaciones y conceptos débiles
 - [[15 Dudas resueltas]] — dudas fuera de clase
 - [[16 Vacantes]] — sondeos del mercado de vacantes .NET
-- [[17 CV]] — CV: formato, borrador y versiones
+- [[17 CV]] · [[17 CV.pdf|PDF]] — CV: formato, texto vigente y versiones
 
 ## Originales en Claude Docs
 | Nota | Enlace |
